@@ -1,0 +1,16 @@
+name: projectname
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  # add your dependencies here
+  # for dev purposes
+  - ipykernel
+  - pre-commit
+  - pylint
+  - pytest
+  - pip
+  # only if can't install with conda
+  # - pip:
+  #     -

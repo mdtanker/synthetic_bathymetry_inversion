@@ -1,0 +1,107 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "projectname"
+version = "0.0.1"
+authors = [
+  { name = "Matt Tankersley", email = "matt.d.tankersley@gmail.com" },
+]
+description = "1 sentence description of project here."
+keywords = ["python", "", "", ""]
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+
+[project.urls]
+Documentation = "https://github.com/mdtanker/package_name#readme"
+Issues = "https://github.com/mdtanker/package_name/issues"
+Source = "https://github.com/mdtanker/package_name"
+
+[tool.ruff]
+lint.select = [
+  "E", "F", "W", # flake8
+  "B",           # flake8-bugbear
+  "I",           # isort
+  "ARG",         # flake8-unused-arguments
+  "C4",          # flake8-comprehensions
+  "EM",          # flake8-errmsg
+  "ICN",         # flake8-import-conventions
+  "ISC",         # flake8-implicit-str-concat
+  "G",           # flake8-logging-format
+  "PGH",         # pygrep-hooks
+  "PIE",         # flake8-pie
+  "PL",          # pylint
+  "PT",          # flake8-pytest-style
+  "PTH",         # flake8-use-pathlib
+  "RET",         # flake8-return
+  "RUF",         # Ruff-specific
+  "SIM",         # flake8-simplify
+  "T20",         # flake8-print
+  "UP",          # pyupgrade
+  "YTT",         # flake8-2020
+  "EXE",         # flake8-executable
+  "NPY",         # NumPy specific rules
+  "PD",          # pandas-vet
+]
+lint.ignore = [
+  "PLR",    # Design related pylint codes
+  "G004",   # Logging with f-strings
+  "PD901",  # Bad variable name warning
+  "PD003", # Changes .isna to .isnull
+  "PD004", # Changes .notna to .notnull
+  "PD011", # Changes .values() to .to_numpy()
+  "ISC001", # Implicit string concatenation
+]
+src = ["src"]
+lint.unfixable = [
+  "T20",  # Removes print statements
+  "F841", # Removes unused variables
+  "PD003", # Changes .isna to .isnull
+  "PD004", # Changes .notna to .notnull
+  "PD011", # Changes .values() to .to_numpy()
+]
+# exclude = ["docs/index.md", "CHANGELOG.md"]
+line-length = 88 # Set the maximum line length to 88.
+lint.flake8-unused-arguments.ignore-variadic-names = true
+lint.isort.required-imports = ["from __future__ import annotations"]
+# Uncomment if using a _compat.typing backport
+extend-include = ["*.ipynb"]
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["T20"]
+"*.ipynb" = ["E402", "B018", "T201", "C408", "E712",]
+
+[tool.ruff.lint.flake8-pytest-style]
+mark-parentheses = true
+
+[tool.pylint]
+py-version = "3.9"
+# ignore-patterns = [".*.md",]
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
+similarities.min-similarity-lines = 5
+messages_control.disable = [
+  "design",
+  "fixme",
+  "line-too-long",
+  "missing-module-docstring",
+  "wrong-import-position",
+  "cyclic-import",
+]
