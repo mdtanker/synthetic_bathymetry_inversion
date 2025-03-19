@@ -3,13 +3,13 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "projectname"
+name = "synthetic_bathymetry_inversion"
 version = "0.0.1"
 authors = [
   { name = "Matt Tankersley", email = "matt.d.tankersley@gmail.com" },
 ]
-description = "1 sentence description of project here."
-keywords = ["python", "", "", ""]
+description = "Synthetic gravity inversions for sub-ice shelf bathymetry"
+keywords = ["python", "gravity", "inversion", "bathymetry"]
 requires-python = ">=3.9"
 classifiers = [
   "Development Status :: 1 - Planning",
@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -31,9 +32,9 @@ readme = "README.md"
 license = {file = "LICENSE"}
 
 [project.urls]
-Documentation = "https://github.com/mdtanker/package_name#readme"
-Issues = "https://github.com/mdtanker/package_name/issues"
-Source = "https://github.com/mdtanker/package_name"
+Documentation = "https://github.com/mdtanker/synthetic_bathymetry_inversion#readme"
+Issues = "https://github.com/mdtanker/synthetic_bathymetry_inversion/issues"
+Source = "https://github.com/mdtanker/synthetic_bathymetry_inversion"
 
 [tool.ruff]
 lint.select = [

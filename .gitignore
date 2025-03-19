@@ -1,3 +1,14 @@
+# output results
+results/*
+!results/.gitkeep
+
+# temp files
+tmp_outputs/*
+!tmp_outputs/.gitkeep
+
+# vs code
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

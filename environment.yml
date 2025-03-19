@@ -1,10 +1,20 @@
-name: projectname
+name: synthetic_bathymetry_inversion
 channels:
   - conda-forge
   - nodefaults
 dependencies:
   - python=3.12
   # add your dependencies here
+  - polartoolkit>=0.8
+  - invert4geom>=0.11
+  - pyogrio
+  - esmpy
+  - xesmf
+  - cmocean
+  - jupyterlab_execute_time
+  - adjusttext
+  - boule
+  - shapely
   # for dev purposes
   - ipykernel
   - pre-commit
@@ -12,5 +22,5 @@ dependencies:
   - pytest
   - pip
   # only if can't install with conda
-  # - pip:
-  #     -
+  - pip:
+      - kneebow
