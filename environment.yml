@@ -5,8 +5,10 @@ channels:
 dependencies:
   - python=3.12
   # add your dependencies here
-  - polartoolkit>=0.8
-  - invert4geom>=0.11
+  # - polartoolkit>=0.9 # install locally
+  # - invert4geom>=0.13 # install locally
+  - geopandas
+  - pygmt
   - pyogrio
   - esmpy
   - xesmf

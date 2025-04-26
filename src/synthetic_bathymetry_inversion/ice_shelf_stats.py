@@ -1460,12 +1460,13 @@ def add_shelves_to_ensembles(
     legend_cols: int = 2,
     legend_loc: str = "center left",
     legend_bbox_to_anchor: tuple[float, float] = (1.3, 0.5),
+    seperate_inverted_shelves: bool = True,
+    fontsize: float = 8,
 ):
     gdf = ice_shelves.copy()
 
     if shelves_to_label is None:
         shelves_to_label = gdf.NAME.unique().tolist()
-    # print(gdf)
 
     if ax is None:
         _fig, ax = plt.subplots(figsize=(8, 6))
@@ -1487,45 +1488,75 @@ def add_shelves_to_ensembles(
 
     for ind, row in gdf.iterrows():
         if col_to_add_to_label is not None:
-            if len(col_to_add_to_label) > 1:
+            if isinstance(col_to_add_to_label, list | tuple):
                 vals = [f"{round(row[x])}" for x in col_to_add_to_label]
                 add_to_label = f": {"/".join(vals)} m"
-
-                # add_to_label = f": {round(row[col_to_add_to_label[0]])} m"
-                # add_to_label = f": {round(row[col_to_add_to_label])} m"
-
-                # add_to_label = f": {[f'{round(row[x])}/' for x in col_to_add_to_label]} m"
-            else:
+            elif isinstance(col_to_add_to_label, str):
                 add_to_label = f": {round(row[col_to_add_to_label])} m"
         else:
             add_to_label = ""
-        # plot inverted shelves as red stars and red labels
-        if row.NAME in inverted_shelves:
-            ax.scatter(
-                row[x],
-                row[y],
-                color="r",
-                marker="*",
-                s=60,
-                linewidths=.8,
-                edgecolor="white",
-                label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
-                clip_on=False,
-                zorder=10,
-            )
-            texts.append(
-                ax.text(
+        if seperate_inverted_shelves:
+            # plot inverted shelves as red stars and red labels
+            if row.NAME in inverted_shelves:
+                ax.scatter(
                     row[x],
                     row[y],
-                    f"{ind+1}",
-                    fontsize=10,
                     color="r",
-                    fontweight="normal",
-                    path_effects=[
-                        patheffects.withStroke(linewidth=2, foreground="white")
-                    ],
+                    marker="*",
+                    s=60,
+                    linewidths=.8,
+                    edgecolor="white",
+                    label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
+                    clip_on=False,
+                    zorder=10,
                 )
-            )
+                texts.append(
+                    ax.text(
+                        row[x],
+                        row[y],
+                        f"{ind+1}",
+                        fontsize=fontsize+2,
+                        color="r",
+                        fontweight="normal",
+                        path_effects=[
+                            patheffects.withStroke(linewidth=2, foreground="white")
+                        ],
+                    )
+                )
+            else:
+                # plot other shelves as black dots and black labels
+                if row.NAME in shelves_to_label:
+                    ax.scatter(
+                        row[x],
+                        row[y],
+                        color="black",
+                        s=6,
+                        label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
+                        clip_on=False,
+                        zorder=10,
+                    )
+                    texts.append(
+                        ax.text(
+                            row[x],
+                            row[y],
+                            f"{ind+1}",
+                            fontsize=fontsize,
+                            color="black",
+                            fontweight="normal",
+                            path_effects=[
+                                patheffects.withStroke(linewidth=1.5, foreground="white")
+                            ],
+                        )
+                    )
+                else:
+                    ax.scatter(
+                        row[x],
+                        row[y],
+                        color="black",
+                        s=6,
+                        clip_on=False,
+                        zorder=10,
+                    )
         else:
             # plot other shelves as black dots and black labels
             if row.NAME in shelves_to_label:
@@ -1543,7 +1574,7 @@ def add_shelves_to_ensembles(
                         row[x],
                         row[y],
                         f"{ind+1}",
-                        fontsize=8,
+                        fontsize=fontsize,
                         color="black",
                         fontweight="normal",
                         path_effects=[
@@ -1560,7 +1591,6 @@ def add_shelves_to_ensembles(
                     clip_on=False,
                     zorder=10,
                 )
-
     adjust_text(
         texts,
         arrowprops={"arrowstyle": '-', "color": 'k', "lw": 0.8},

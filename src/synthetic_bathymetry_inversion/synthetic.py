@@ -115,7 +115,6 @@ def load_synthetic_model(
             fig_height=10,
             title="Bathymetry",
             hist=True,
-            cbar_yoffset=1,
             cmap="rain",
             reverse_cpt=True,
             cbar_label="elevation (m)",
@@ -129,7 +128,6 @@ def load_synthetic_model(
                 fig_height=10,
                 title="Basement",
                 hist=True,
-                cbar_yoffset=1,
                 cmap="rain",
                 reverse_cpt=True,
                 cbar_label="elevation (m)",
@@ -137,7 +135,7 @@ def load_synthetic_model(
                 origin_shift="xshift",
                 robust=True,
                 scalebar=True,
-                scale_position="n-.05/-.03",
+                scalebar_position="n-.05/-.035",
             )
 
         fig.show()
@@ -262,7 +260,6 @@ def load_synthetic_model(
             fig_height=10,
             title="Bathymetry gravity",
             hist=True,
-            cbar_yoffset=1,
             cbar_label="mGal",
             robust=True,
         )
@@ -274,7 +271,6 @@ def load_synthetic_model(
                 fig_height=10,
                 title="Basement gravity",
                 hist=True,
-                cbar_yoffset=1,
                 cbar_label="mGal",
                 fig=fig,
                 origin_shift="xshift",
@@ -287,7 +283,6 @@ def load_synthetic_model(
             fig_height=10,
             title="Combined gravity",
             hist=True,
-            cbar_yoffset=1,
             cbar_label="mGal",
             fig=fig,
             origin_shift="xshift",
@@ -301,7 +296,6 @@ def load_synthetic_model(
                 grav_grid.noise_free_disturbance,
                 grav_grid.disturbance,
                 fig_height=10,
-                plot=True,
                 grid1_name="Gravity",
                 grid2_name=f"with {gravity_noise} mGal noise",
                 title="Difference",
