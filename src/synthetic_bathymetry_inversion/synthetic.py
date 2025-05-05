@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import math
+
 import geopandas as gpd
 import numpy as np
 import pandas as pd
 import pygmt
+import scipy
+import shapely
 import verde as vd
 import xarray as xr
 from invert4geom import synthetic as inv_synthetic
@@ -12,10 +15,9 @@ from invert4geom import uncertainty
 from invert4geom import utils as inv_utils
 from polartoolkit import fetch, maps, profiles, utils
 from shapely.geometry import LineString
-import shapely
-import scipy
 
 from synthetic_bathymetry_inversion import logger
+
 
 def load_synthetic_model(
     spacing: float = 1e3,
@@ -241,7 +243,7 @@ def load_synthetic_model(
         #     noise=gravity_noise,
         # )
         # df = vd.grid_to_table(cont.rename("disturbance")).reset_index(drop=True)
-        # grav_df = pd.merge(  # noqa: PD015
+        # grav_df = pd.merge(
         #     grav_df.drop(columns=["disturbance"], errors="ignore"),
         #     df,
         #     on=["easting", "northing"],
@@ -833,9 +835,9 @@ def min_distance_linspace(
     """
     if num == 0:
         return []
-    half_range = (stop-start)/2
-    first_n_odd_numbers = [2*i + 1 for i in range(num)]
-    return [start+(half_range/num) * x for x in first_n_odd_numbers]
+    half_range = (stop - start) / 2
+    first_n_odd_numbers = [2 * i + 1 for i in range(num)]
+    return [start + (half_range / num) * x for x in first_n_odd_numbers]
 
 
 def average_consecutive_difference(numbers):
@@ -844,7 +846,7 @@ def average_consecutive_difference(numbers):
     """
     if len(numbers) < 2:
         return np.nan
-    differences = [numbers[i+1] - numbers[i] for i in range(len(numbers) - 1)]
+    differences = [numbers[i + 1] - numbers[i] for i in range(len(numbers) - 1)]
     return sum(differences) / len(differences)
 
 
@@ -876,22 +878,41 @@ def rotated_airborne_survey(
     region.
     """
     if mask is not None:
-        assert isinstance(mask, shapely.geometry.multipolygon.MultiPolygon | shapely.geometry.polygon.Polygon), "mask must be a shapely polygon"
+        assert isinstance(
+            mask,
+            shapely.geometry.multipolygon.MultiPolygon
+            | shapely.geometry.polygon.Polygon,
+        ), "mask must be a shapely polygon"
     if proximity_mask is not None:
-        assert isinstance(proximity_mask, shapely.geometry.multipolygon.MultiPolygon | shapely.geometry.polygon.Polygon), "proximity_mask must be a shapely polygon"
+        assert isinstance(
+            proximity_mask,
+            shapely.geometry.multipolygon.MultiPolygon
+            | shapely.geometry.polygon.Polygon,
+        ), "proximity_mask must be a shapely polygon"
     if survey_spacing_mask is not None:
-        assert isinstance(survey_spacing_mask, shapely.geometry.multipolygon.MultiPolygon | shapely.geometry.polygon.Polygon), "survey_spacing_mask must be a shapely polygon"
+        assert isinstance(
+            survey_spacing_mask,
+            shapely.geometry.multipolygon.MultiPolygon
+            | shapely.geometry.polygon.Polygon,
+        ), "survey_spacing_mask must be a shapely polygon"
 
-    assert isinstance(survey_polygon, shapely.geometry.multipolygon.MultiPolygon | shapely.geometry.polygon.Polygon), "polygon must be a shapely polygon"
+    assert isinstance(
+        survey_polygon,
+        shapely.geometry.multipolygon.MultiPolygon | shapely.geometry.polygon.Polygon,
+    ), "polygon must be a shapely polygon"
 
     if line_spacing is not None and line_numbers is not None:
-        raise ValueError("line_spacing and line_numbers cannot both be set")
+        msg = "line_spacing and line_numbers cannot both be set"
+        raise ValueError(msg)
     if line_spacing is None and line_numbers is None:
-        raise ValueError("line_spacing or line_numbers must be set")
+        msg = "line_spacing or line_numbers must be set"
+        raise ValueError(msg)
     if tie_spacing is not None and tie_numbers is not None:
-        raise ValueError("tie_spacing and tie_numbers cannot both be set")
+        msg = "tie_spacing and tie_numbers cannot both be set"
+        raise ValueError(msg)
     if tie_spacing is None and tie_numbers is None:
-        raise ValueError("tie_spacing or tie_numbers must be set")
+        msg = "tie_spacing or tie_numbers must be set"
+        raise ValueError(msg)
 
     # center of region
     center = (survey_polygon.centroid.x, survey_polygon.centroid.y)
@@ -920,6 +941,7 @@ def rotated_airborne_survey(
             az = _azimuth(bbox[0], bbox[3])
 
         return az
+
     angle = azimuth(survey_polygon)
     logger.info("polygon rotated by %s degrees", angle)
 
@@ -971,7 +993,9 @@ def rotated_airborne_survey(
         ties_reg_mid = np.mean(region_for_survey_spacing[:2])
         ties_across_coords += ties_reg_mid - ties_mid
     elif tie_numbers is not None:
-        ties_across_coords = min_distance_linspace(*region_for_survey_spacing[:2], tie_numbers)
+        ties_across_coords = min_distance_linspace(
+            *region_for_survey_spacing[:2], tie_numbers
+        )
     if len(ties_across_coords) == 0:
         df_ties = pd.DataFrame(columns=["easting", "northing", "line"])
     else:
@@ -1008,7 +1032,9 @@ def rotated_airborne_survey(
         lines_reg_mid = np.mean(region_for_survey_spacing[2:])
         lines_across_coords += lines_reg_mid - lines_mid
     elif line_numbers is not None:
-        lines_across_coords = min_distance_linspace(*region_for_survey_spacing[2:], line_numbers)
+        lines_across_coords = min_distance_linspace(
+            *region_for_survey_spacing[2:], line_numbers
+        )
 
     if len(lines_across_coords) == 0:
         df_lines = pd.DataFrame(columns=["easting", "northing", "line"])
@@ -1031,7 +1057,9 @@ def rotated_airborne_survey(
         # give each line a number starting at 0 in increments of 10
         df_lines["line"] = np.nan
         for i, j in enumerate(df_lines.northing.unique()):
-            df_lines["line"] = np.where(df_lines.northing == j, i + 1 * 10, df_lines.line)
+            df_lines["line"] = np.where(
+                df_lines.northing == j, i + 1 * 10, df_lines.line
+            )
 
     # merge dataframes
     df = pd.concat([df_ties, df_lines])
@@ -1049,8 +1077,8 @@ def rotated_airborne_survey(
     )
 
     # convert points into lines
-    lines = df.groupby(['line'])['geometry'].apply(lambda x: LineString(x.tolist()))
-    lines = gpd.GeoDataFrame(lines, geometry='geometry')
+    lines = df.groupby(["line"])["geometry"].apply(lambda x: LineString(x.tolist()))
+    lines = gpd.GeoDataFrame(lines, geometry="geometry")
     lines["line"] = lines.index
 
     # rotate lines about the center of the survey region
@@ -1080,14 +1108,14 @@ def rotated_airborne_survey(
     )
 
     # calculate flight distance using along line spacing
-    flight_kms = (len(df)*along_line_spacing)/1e3
+    flight_kms = (len(df) * along_line_spacing) / 1e3
 
     if mask is not None:
         # mask to shape file
         df["inside"] = df.within(mask)
 
         # recalculate flight distance
-        distance_outside_mask = (len(df[~df.inside])*along_line_spacing)/1e3
+        distance_outside_mask = (len(df[~df.inside]) * along_line_spacing) / 1e3
         flight_kms -= distance_outside_mask
 
         df = df[df.inside]
@@ -1114,8 +1142,8 @@ def rotated_airborne_survey(
     # Calculate some stats of the survey
     ###
     ###
-    tie_spacing = average_consecutive_difference(ties_across_coords)/1e3
-    line_spacing = average_consecutive_difference(lines_across_coords)/1e3
+    tie_spacing = average_consecutive_difference(ties_across_coords) / 1e3
+    line_spacing = average_consecutive_difference(lines_across_coords) / 1e3
 
     if len(lines_across_coords) > 1 and len(ties_across_coords) > 1:
         survey_spacing = np.mean([line_spacing, tie_spacing])
@@ -1133,10 +1161,13 @@ def rotated_airborne_survey(
         spacing=100,
     )
     grid = vd.make_xarray_grid(coords, np.ones_like(coords[0]), data_names="z").z
-    min_dist = inv_utils.dist_nearest_points(
-        df,
-        grid,
-    ).min_dist/1e3
+    min_dist = (
+        inv_utils.dist_nearest_points(
+            df,
+            grid,
+        ).min_dist
+        / 1e3
+    )
 
     # clip to survey polygon
     min_dist = utils.mask_from_shp(
@@ -1169,8 +1200,9 @@ def rotated_airborne_survey(
         if line_numbers is not None:
             title = f"{line_numbers} lines, {tie_numbers} ties"
         elif line_spacing is not None:
-            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"
-        else: title = None
+            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"  # noqa: E501
+        else:
+            title = None
         # fig = maps.basemap(
         #     simple_basemap=True,
         #     simple_basemap_version="measures-v2",
@@ -1185,8 +1217,14 @@ def rotated_airborne_survey(
             min_dist,
             cmap="dense",
             hist=True,
-            cpt_lims=(0, utils.get_min_max(min_dist, robust=True,)[1]),
-            cbar_label=f"distance to nearest datapoint, median {round(median_proximity,2)} (km)",
+            cpt_lims=(
+                0,
+                utils.get_min_max(
+                    min_dist,
+                    robust=True,
+                )[1],
+            ),
+            cbar_label=f"distance to nearest datapoint, median {round(median_proximity,2)} (km)",  # noqa: E501
             simple_basemap=True,
             simple_basemap_version="measures-v2",
             region=region,
@@ -1205,14 +1243,14 @@ def rotated_airborne_survey(
         # )
         if len(ties_across_coords) > 0:
             fig.plot(
-                df[df.line>=1000][["easting", "northing"]],
+                df[df.line >= 1000][["easting", "northing"]],
                 style="p.5p",
                 fill="blue",
                 label="tie lines",
             )
         if len(lines_across_coords) > 0:
             fig.plot(
-                df[df.line<1000][["easting", "northing"]],
+                df[df.line < 1000][["easting", "northing"]],
                 style="p.5p",
                 fill="red",
                 label="flight lines",
@@ -1228,8 +1266,8 @@ def rotated_airborne_survey(
 
     # add survey info to attrs
     df.attrs = {
-        "number_ties": len(df[df.line>=1000].line.unique()),
-        "number_lines": len(df[df.line<1000].line.unique()),
+        "number_ties": len(df[df.line >= 1000].line.unique()),
+        "number_lines": len(df[df.line < 1000].line.unique()),
         "tie_spacing": tie_spacing,
         "line_spacing": line_spacing,
         "survey_spacing": survey_spacing,
@@ -1331,15 +1369,29 @@ def filter_flight_lines(
         # n_pad = int(pad_dist / data_spacing)
 
         # add pad points to distance values
-        lower_pad = np.arange(distance.min() - pad_dist, distance.min(), data_spacing,)
-        upper_pad = np.arange(distance.max(), distance.max() + pad_dist, data_spacing,)
+        lower_pad = np.arange(
+            distance.min() - pad_dist,
+            distance.min(),
+            data_spacing,
+        )
+        upper_pad = np.arange(
+            distance.max(),
+            distance.max() + pad_dist,
+            data_spacing,
+        )
         vals = np.concatenate((lower_pad, upper_pad))
         new_dist = pd.DataFrame({distance_column: vals})
 
         # pad the line, fill padded values in data with nearest value
-        padded = pd.concat([line.reset_index(),new_dist],).sort_values(by=distance_column).set_index("index")
-        padded = padded.fillna(method='ffill').fillna(method='bfill').reset_index()
-        padded = padded.rename(columns={"index":"true_index"})
+        padded = (
+            pd.concat(
+                [line.reset_index(), new_dist],
+            )
+            .sort_values(by=distance_column)
+            .set_index("index")
+        )
+        padded = padded.fillna(method="ffill").fillna(method="bfill").reset_index()
+        padded = padded.rename(columns={"index": "true_index"})
 
         # filter the padded data
         filtered = pygmt.filter1d(
@@ -1347,7 +1399,7 @@ def filter_flight_lines(
             end=True,
             time_col=0,
             filter_type=filt_type,
-        ).rename(columns={0:distance_column, 1:data_column})
+        ).rename(columns={0: distance_column, 1: data_column})
 
         # un-pad the data
         filtered["index"] = padded.true_index
@@ -1358,6 +1410,7 @@ def filter_flight_lines(
         df.loc[df[line_column] == i, data_column] = filtered[data_column]
 
     return df[data_column]
+
 
 def scipy_interp1d(
     df,

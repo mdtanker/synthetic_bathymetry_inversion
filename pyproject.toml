@@ -87,7 +87,7 @@ lint.isort.required-imports = ["from __future__ import annotations"]
 extend-include = ["*.ipynb"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
-"*.ipynb" = ["E402", "B018", "T201", "C408", "E712",]
+"*.ipynb" = ["E501", "B007", "E402", "B018", "T201", "C408", "E712",]
 
 [tool.ruff.lint.flake8-pytest-style]
 mark-parentheses = true

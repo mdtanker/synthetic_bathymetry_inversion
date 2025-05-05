@@ -1,4 +1,4 @@
-from __future__ import annotations # pylint: disable=too-many-lines
+from __future__ import annotations  # pylint: disable=too-many-lines
 
 import typing
 
@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pygmt
+import scipy as sp
 import shapely
 import verde as vd
 import xarray as xr
@@ -16,7 +17,6 @@ from invert4geom import utils as invert4geom_utils
 from matplotlib import patheffects
 from polartoolkit import fetch, maps, profiles, utils
 from tqdm.autonotebook import tqdm
-import scipy as sp
 
 from synthetic_bathymetry_inversion import logger
 
@@ -76,7 +76,7 @@ def combine_offshore_onshore_points(
         treat grid cells of grounded ice as points rather than using bedmap points, by
         default False
     spacing : float, optional
-        samping spacing to use for converted IBCSO multibeam polygons to points, by
+        sampling spacing to use for converted IBCSO multibeam polygons to points, by
         default 1e3
 
     Returns
@@ -240,7 +240,8 @@ def combine_offshore_onshore_points(
         points = dataid_df
 
     else:
-        raise ValueError("version must be either 'bedmap' or 'bedmachine'")
+        msg = "version must be either 'bedmap' or 'bedmachine'"
+        raise ValueError(msg)
 
     # add column indicating if points are offshore
     total_ibcso_points["onshore"] = False
@@ -308,7 +309,7 @@ def get_ice_shelves():
     ] = "Fox_East"
 
     # calculate area in sq km of each ice shelf
-    ice_shelves["area_km"] = round(ice_shelves.area / (1000**2),2)
+    ice_shelves["area_km"] = round(ice_shelves.area / (1000**2), 2)
 
     # sort by area
     ice_shelves = ice_shelves.sort_values(by="area_km", ascending=False).reset_index(
@@ -416,10 +417,13 @@ def constraints_and_min_distances_single(
 
     # calculate minimum distance between each grid cell and the nearest point
     try:
-        min_dist = invert4geom_utils.normalized_mindist(
-            bed_points,
-            grid=grid,
-        )/1e3
+        min_dist = (
+            invert4geom_utils.normalized_mindist(
+                bed_points,
+                grid=grid,
+            )
+            / 1e3
+        )
     except ValueError as e:
         logger.error(e)
         logger.error("issue with calculating minimum distance for %s", gdf.NAME)
@@ -467,10 +471,11 @@ def constraints_and_min_distances(
     ice_shelves : gpd.GeoDataFrame
         ice shelf shapefiles, output from `get_ice_shelves`
     buffer : float, optional
-        buffer zone in meters around ice shelf bounding box to include points in, by default 20e3
+        buffer zone in meters around ice shelf bounding box to include points in, by
+        default 20e3
     spacing : float, optional
-        grid spacing in meters to use for computing minimum distances and converted polygons to
-        points, by default 100
+        grid spacing in meters to use for computing minimum distances and converted
+        polygons to points, by default 100
     bedmap_version : str, optional
         which bedmap points to include, either "bedmap1", "bedmap2", "bedmap3", or
         "all", by default "all"
@@ -541,7 +546,9 @@ def load_constraints_and_min_distances(
         gdf.loc[i, "median_constraint_distance"] = min_dist.median().values
         gdf.loc[i, "mean_constraint_distance"] = min_dist.mean().values
         gdf.loc[i, "max_constraint_distance"] = min_dist.max().values
-        gdf.loc[i, "constraint_proximity_skewness"] = sp.stats.skew(min_dist.values.ravel(), nan_policy="omit")
+        gdf.loc[i, "constraint_proximity_skewness"] = sp.stats.skew(
+            min_dist.values.ravel(), nan_policy="omit"
+        )
 
         if plot:
             fname = file_path + row.NAME if save_plot else None
@@ -591,10 +598,13 @@ def add_single_constraint(
         grid = vd.make_xarray_grid(coords, np.ones_like(coords[0]), data_names="z").z
 
         # calculate minimum distance between each grid cell and the nearest point
-        min_dist = invert4geom_utils.normalized_mindist(
-            constraints_df,
-            grid=grid,
-        )/1e3
+        min_dist = (
+            invert4geom_utils.normalized_mindist(
+                constraints_df,
+                grid=grid,
+            )
+            / 1e3
+        )
 
         # mask to the ice shelf outline
         min_dist = utils.mask_from_shp(
@@ -608,9 +618,9 @@ def add_single_constraint(
         df = vd.grid_to_table(min_dist)
         min_dist_coords = df.iloc[df.min_dist.argmax()]
 
-        min_dist_coords = pd.DataFrame([{
-            "easting": min_dist_coords.easting,
-            "northing": min_dist_coords.northing}])
+        min_dist_coords = pd.DataFrame(
+            [{"easting": min_dist_coords.easting, "northing": min_dist_coords.northing}]
+        )
 
         # add 1 constraint at point of max proximity
         constraints_df_update = pd.concat(
@@ -618,12 +628,14 @@ def add_single_constraint(
             ignore_index=True,
         )
 
-
         # calculate minimum distance between each grid cell and the nearest point
-        min_dist_update = invert4geom_utils.normalized_mindist(
-            constraints_df_update,
-            grid=grid,
-        )/1e3
+        min_dist_update = (
+            invert4geom_utils.normalized_mindist(
+                constraints_df_update,
+                grid=grid,
+            )
+            / 1e3
+        )
 
         # mask to the ice shelf outline
         min_dist_update = utils.mask_from_shp(
@@ -634,11 +646,17 @@ def add_single_constraint(
         )
         median_constraint_distance = min_dist.median().values
         updated_median_constraint_distance = min_dist_update.median().values
-        median_proximity_change = median_constraint_distance - updated_median_constraint_distance
+        median_proximity_change = (
+            median_constraint_distance - updated_median_constraint_distance
+        )
         gdf.loc[i, "median_constraint_distance"] = median_constraint_distance
-        gdf.loc[i, "updated_median_constraint_distance"] = updated_median_constraint_distance
+        gdf.loc[i, "updated_median_constraint_distance"] = (
+            updated_median_constraint_distance
+        )
         gdf.loc[i, "median_proximity_change"] = median_proximity_change
-        gdf.loc[i, "percent_median_proximity_change"] = (median_proximity_change / median_constraint_distance) * 100
+        gdf.loc[i, "percent_median_proximity_change"] = (
+            median_proximity_change / median_constraint_distance
+        ) * 100
 
     return gdf
 
@@ -650,7 +668,7 @@ def plot_constraints_and_min_distances(
     fname: str | None = None,
 ):
     name = ice_shelf.NAME
-    region=vd.get_region(
+    region = vd.get_region(
         (
             min_dist.easting.values,
             min_dist.northing.values,
@@ -662,7 +680,7 @@ def plot_constraints_and_min_distances(
         region=region,
         cmap="dense",
         hist=True,
-        cpt_lims = (0, utils.get_min_max(min_dist, robust=False)[1]),
+        cpt_lims=(0, utils.get_min_max(min_dist, robust=False)[1]),
         cbar_label="Distance to nearest constraint (km)",
         cbar_font="18p,Helvetica",
         inset=True,
@@ -682,10 +700,7 @@ def plot_constraints_and_min_distances(
         modis_transparency=60,
     )
     fig.plot(
-        constraints_df.iloc[0],
-        style="p2p",
-        fill="black",
-        label="existing constraints"
+        constraints_df.iloc[0], style="p2p", fill="black", label="existing constraints"
     )
     # plot outline of ice shelf
     fig.plot(
@@ -1226,8 +1241,8 @@ def plot_ice_shelf_info(
 
     region = vd.get_region(
         (
-           min_dist.easting.values,
-           min_dist.northing.values,
+            min_dist.easting.values,
+            min_dist.northing.values,
         )
     )
     grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
@@ -1250,13 +1265,13 @@ def plot_ice_shelf_info(
     grids = [grav_grid[a] for a in anoms]
 
     cmaps = ["viridis"] * (len(anoms) - 1) + ["balance+h0"]
-    insets = [False] * (len(grids)-1) + [True]
+    insets = [False] * (len(grids) - 1) + [True]
     cbar_labels = [
-        f"stdev: {round(grav_df[grav_df.ice_shelf_mask==True][a].std(),0)} mGal" # pylint: disable=singleton-comparison
+        f"stdev: {round(grav_df[grav_df.ice_shelf_mask==True][a].std(),0)} mGal"  # pylint: disable=singleton-comparison # noqa: E712
         for a in anoms
     ]
     point_sets = [None, None, None, None, constraints_df]
-    scalebars = [False] * (len(grids)-1) + [True]
+    scalebars = [False] * (len(grids) - 1) + [True]
     titles = anom_titles
 
     # add plotting elements for mindist
@@ -1291,7 +1306,7 @@ def plot_ice_shelf_info(
             cmaps=cmaps,
             insets=insets,
             inset_width=0.6,
-            inset_position="jTR+jTL+o-0/1.5",#{15*.3}c/1.5c",
+            inset_position="jTR+jTL+o-0/1.5",  # {15*.3}c/1.5c",
             robust=True,
             coast=True,
             coast_pen="1.2p,salmon",
@@ -1337,7 +1352,9 @@ def load_ice_shelf_info_single(
         gdf.loc[gdf.index, "median_constraint_distance"] = min_dist.median().values
         gdf.loc[gdf.index, "mean_constraint_distance"] = min_dist.mean().values
         gdf.loc[gdf.index, "max_constraint_distance"] = min_dist.max().values
-        gdf.loc[gdf.index, "constraint_proximity_skewness"] = sp.stats.skew(min_dist.values.ravel(), nan_policy="omit")
+        gdf.loc[gdf.index, "constraint_proximity_skewness"] = sp.stats.skew(
+            min_dist.values.ravel(), nan_policy="omit"
+        )
 
     except FileNotFoundError as e:
         logger.error(e)
@@ -1504,7 +1521,7 @@ def add_shelves_to_ensembles(
                     color="r",
                     marker="*",
                     s=60,
-                    linewidths=.8,
+                    linewidths=0.8,
                     edgecolor="white",
                     label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
                     clip_on=False,
@@ -1515,7 +1532,7 @@ def add_shelves_to_ensembles(
                         row[x],
                         row[y],
                         f"{ind+1}",
-                        fontsize=fontsize+2,
+                        fontsize=fontsize + 2,
                         color="r",
                         fontweight="normal",
                         path_effects=[
@@ -1544,7 +1561,9 @@ def add_shelves_to_ensembles(
                             color="black",
                             fontweight="normal",
                             path_effects=[
-                                patheffects.withStroke(linewidth=1.5, foreground="white")
+                                patheffects.withStroke(
+                                    linewidth=1.5, foreground="white"
+                                )
                             ],
                         )
                     )
@@ -1593,7 +1612,7 @@ def add_shelves_to_ensembles(
                 )
     adjust_text(
         texts,
-        arrowprops={"arrowstyle": '-', "color": 'k', "lw": 0.8},
+        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
         ax=ax,
         expand=(1.2, 1.2),
     )
@@ -1602,7 +1621,7 @@ def add_shelves_to_ensembles(
         leg = ax.legend(
             loc=legend_loc,
             title="Ice Shelves",
-            title_fontproperties={'size': 14},
+            title_fontproperties={"size": 14},
             bbox_to_anchor=legend_bbox_to_anchor,
             columnspacing=0,
             markerscale=0,
@@ -1724,7 +1743,7 @@ def ensemble_scatterplot(
 
     adjust_text(
         texts,
-        arrowprops={"arrowstyle": '-', "color": 'k', "lw": 0.8},
+        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
         ax=ax,
         expand=(1.2, 1.2),
     )

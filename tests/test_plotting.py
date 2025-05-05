@@ -1,1 +1,0 @@
-from synthetic_bathymetry_inversion import plotting

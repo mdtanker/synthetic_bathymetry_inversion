@@ -7,11 +7,11 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import plotly.graph_objects as go
 import seaborn as sns
 from invert4geom import uncertainty
-from polartoolkit import utils
-import plotly.graph_objects as go
 from kneebow.rotor import Rotor
+from polartoolkit import utils
 
 sns.set_theme()
 
@@ -25,7 +25,7 @@ def plot_2var_ensemble(
     y_title=None,
     background="score",
     background_title=None,
-    background_cmap=cmo.matter, # pylint: disable=no-member
+    background_cmap=cmo.matter,  # pylint: disable=no-member
     background_lims=None,
     background_cpt_lims=None,
     points_color=None,
@@ -35,7 +35,7 @@ def plot_2var_ensemble(
     points_label=None,
     points_title=None,
     points_color_log=False,
-    points_cmap=cmo.gray_r, # pylint: disable=no-member
+    points_cmap=cmo.gray_r,  # pylint: disable=no-member
     points_lims=None,
     points_edgecolor="black",
     background_color_log=False,
@@ -48,8 +48,8 @@ def plot_2var_ensemble(
     logy=False,
     flipx=False,
     colorbar: bool = True,
-    colorbar_axes: tuple = (.95, 0.1, 0.05, .8),
-    constrained_layout: bool =True,
+    colorbar_axes: tuple = (0.95, 0.1, 0.05, 0.8),
+    constrained_layout: bool = True,
 ):
     fig, ax = plt.subplots(figsize=figsize, constrained_layout=constrained_layout)
     df = df.copy()
@@ -165,7 +165,7 @@ def plot_2var_ensemble(
             label=points_label,
         )
         if isinstance(points_size, pd.Series):
-            kw = {"prop": 'sizes', "num": 3, "func": lambda s: s / points_scaling}
+            kw = {"prop": "sizes", "num": 3, "func": lambda s: s / points_scaling}
             ax.legend(
                 *points.legend_elements(**kw),
                 loc="upper center",
@@ -262,15 +262,13 @@ def plot_ensemble_as_lines(
             group[y],
             ".-",
             markersize=markersize,
-            color=plt.cm.viridis(norm(name)), # pylint: disable=no-member
+            color=plt.cm.viridis(norm(name)),  # pylint: disable=no-member
         )
         if trend_line:
             z = np.polyfit(group[x], group[y], 1)
             slopes.append(z[0])
             lines.append(np.poly1d(z)(results[x]))
         if plot_elbows:
-
-
             rotor = Rotor()
 
             df = group[[x, y]].copy()
@@ -300,11 +298,11 @@ def plot_ensemble_as_lines(
                 marker="*",
                 edgecolor="black",
                 linewidth=0.5,
-                color=plt.cm.viridis(norm(name)), # pylint: disable=no-member
+                color=plt.cm.viridis(norm(name)),  # pylint: disable=no-member
                 s=60,
                 zorder=20,
             )
-            print(f"Elbow x value: {df[x].iloc[elbow_ind]}")
+            print(f"Elbow x value: {df[x].iloc[elbow_ind]}")  # noqa: T201
 
         if plot_maximums:
             df = group[[x, y]].copy()
@@ -331,11 +329,11 @@ def plot_ensemble_as_lines(
                 marker="*",
                 edgecolor="black",
                 linewidth=0.5,
-                color=plt.cm.viridis(norm(name)), # pylint: disable=no-member
+                color=plt.cm.viridis(norm(name)),  # pylint: disable=no-member
                 s=60,
                 zorder=20,
             )
-            print(f"Max y value at x value: {df[x].iloc[max_ind]}")
+            print(f"Max y value at x value: {df[x].iloc[max_ind]}")  # noqa: T201
 
         if plot_minimums:
             df = group[[x, y]].copy()
@@ -363,15 +361,15 @@ def plot_ensemble_as_lines(
                 marker="*",
                 edgecolor="black",
                 linewidth=0.5,
-                color=plt.cm.viridis(norm(name)), # pylint: disable=no-member
+                color=plt.cm.viridis(norm(name)),  # pylint: disable=no-member
                 s=60,
                 zorder=20,
             )
-            print(f"Min y value at x value: {df[x].iloc[min_ind]}")
+            print(f"Min y value at x value: {df[x].iloc[min_ind]}")  # noqa: T201
 
     if trend_line:
         if slope_min_max:
-            text = f"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -382,7 +380,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
 
-            text = f"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1] - 0.1,
@@ -393,7 +391,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmax(slopes)], "r", lw=1)
         elif slope_min:
-            text = f"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -404,7 +402,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
         elif slope_max:
-            text = f"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -425,9 +423,9 @@ def plot_ensemble_as_lines(
             #     fontsize=10,
             #     verticalalignment="top",
             # )
-            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1)
+            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1) # noqa: E501
 
-        # else:
+            # else:
             z = np.polyfit(results[x], results[y], 1)
             y_hat = np.poly1d(z)(results[x])
 
@@ -719,18 +717,20 @@ def plotly_profiles(
     unique_axes = len(pd.Series(y_axes).unique())
 
     if unique_axes >= 1:
-        y_axes_args = {"yaxis":{"title": y[y_axes.index('y')]}}
+        y_axes_args = {"yaxis": {"title": y[y_axes.index("y")]}}
         x_domain = [0, 1]
     if unique_axes >= 2:
-        y_axes_args["yaxis2"] = { # pylint: disable=possibly-used-before-assignment
-            "title":y[y_axes.index("y2")], "overlaying":"y", "side":"right"
+        y_axes_args["yaxis2"] = {  # pylint: disable=possibly-used-before-assignment
+            "title": y[y_axes.index("y2")],
+            "overlaying": "y",
+            "side": "right",
         }
         x_domain = [0, 1]
     if unique_axes >= 3:
-        y_axes_args["yaxis3"] = { # pylint: disable=possibly-used-before-assignment
-            "title":y[y_axes.index('y3')],
-            "anchor":"free",
-            "overlaying":"y",
+        y_axes_args["yaxis3"] = {  # pylint: disable=possibly-used-before-assignment
+            "title": y[y_axes.index("y3")],
+            "anchor": "free",
+            "overlaying": "y",
         }
         x_domain = [0.15, 1]
     else:
@@ -738,7 +738,7 @@ def plotly_profiles(
 
     fig.update_layout(
         title_text=kwargs.get("title"),
-        xaxis={"title": x, "domain": x_domain}, # pylint: disable=possibly-used-before-assignment
+        xaxis={"title": x, "domain": x_domain},  # pylint: disable=possibly-used-before-assignment
         **y_axes_args,
     )
 
