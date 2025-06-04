@@ -11,7 +11,10 @@ import scipy as sp
 import shapely
 import verde as vd
 import xarray as xr
-from adjustText import adjust_text
+try:
+    from adjustText import adjust_text
+except ImportError:
+    adjust_text = None
 from invert4geom import regional
 from invert4geom import utils as invert4geom_utils
 from matplotlib import patheffects
@@ -1610,12 +1613,16 @@ def add_shelves_to_ensembles(
                     clip_on=False,
                     zorder=10,
                 )
-    adjust_text(
-        texts,
-        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
-        ax=ax,
-        expand=(1.2, 1.2),
-    )
+    if adjust_text is None:
+        logger.error("adjust_text not found, please install adjustText")
+        return
+    else:
+        adjust_text(
+            texts,
+            arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
+            ax=ax,
+            expand=(1.2, 1.2),
+        )
 
     if legend:
         leg = ax.legend(
@@ -1741,12 +1748,16 @@ def ensemble_scatterplot(
     if logx:
         ax.set_xscale("log")
 
-    adjust_text(
-        texts,
-        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
-        ax=ax,
-        expand=(1.2, 1.2),
-    )
+    if adjust_text is None:
+        logger.error("adjust_text not found, please install adjustText")
+        return
+    else:
+        adjust_text(
+            texts,
+            arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
+            ax=ax,
+            expand=(1.2, 1.2),
+        )
 
     if label_shelves and legend:
         leg = ax.legend(

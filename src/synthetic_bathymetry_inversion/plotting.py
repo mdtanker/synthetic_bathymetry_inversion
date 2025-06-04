@@ -10,7 +10,6 @@ import pandas as pd
 import plotly.graph_objects as go
 import seaborn as sns
 from invert4geom import uncertainty
-from kneebow.rotor import Rotor
 from polartoolkit import utils
 
 sns.set_theme()
@@ -237,7 +236,6 @@ def plot_ensemble_as_lines(
     flipx=False,
     colorbar: bool = True,
     ax=None,
-    plot_elbows=False,
     plot_maximums=False,
     plot_minimums=False,
 ):
@@ -268,41 +266,6 @@ def plot_ensemble_as_lines(
             z = np.polyfit(group[x], group[y], 1)
             slopes.append(z[0])
             lines.append(np.poly1d(z)(results[x]))
-        if plot_elbows:
-            rotor = Rotor()
-
-            df = group[[x, y]].copy()
-            # df = df[df[x]<5]
-
-            # df = pd.concat([
-            #     df,
-            #     pd.DataFrame({x: np.arange(df[x].min(), df[x].max(), 1)})]
-            # ).drop_duplicates(subset=x)
-            # df = df.sort_values(x).reset_index(drop=True)
-
-            # df = synthetic.scipy_interp1d(
-            #     df,
-            #     to_interp=y,
-            #     interp_on=x,
-            #     method="cubic",
-            # )
-
-            df = df.sort_values(x).reset_index(drop=True)
-
-            rotor.fit_rotate(df)
-
-            elbow_ind = rotor.get_elbow_index()
-            ax1.scatter(
-                x=df[x].iloc[elbow_ind],
-                y=df[y].iloc[elbow_ind],
-                marker="*",
-                edgecolor="black",
-                linewidth=0.5,
-                color=plt.cm.viridis(norm(name)),  # pylint: disable=no-member
-                s=60,
-                zorder=20,
-            )
-            print(f"Elbow x value: {df[x].iloc[elbow_ind]}")  # noqa: T201
 
         if plot_maximums:
             df = group[[x, y]].copy()

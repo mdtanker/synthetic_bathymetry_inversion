@@ -5,24 +5,22 @@ channels:
 dependencies:
   - python=3.12
   # add your dependencies here
-  # - polartoolkit>=0.9 # install locally
-  # - invert4geom>=0.13 # install locally
+  - polartoolkit>=1
+  - invert4geom>=1
   - geopandas
   - pygmt
   - pyogrio
-  - esmpy
-  - xesmf
+  - esmpy # needed for xesmf to install correctly
+  - xesmf # need for invert4geom noise contamination function
   - cmocean
-  - jupyterlab_execute_time
   - adjusttext
-  - boule
   - shapely
   # for dev purposes
   - ipykernel
   - pre-commit
   - pylint
   - pytest
-  - pip
+  # - pip
   # only if can't install with conda
-  - pip:
-      - kneebow
+  # - pip:
+
