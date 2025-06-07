@@ -11,6 +11,7 @@ import scipy as sp
 import shapely
 import verde as vd
 import xarray as xr
+
 try:
     from adjustText import adjust_text
 except ImportError:
@@ -434,7 +435,7 @@ def constraints_and_min_distances_single(
     # mask to the ice shelf outline
     min_dist = utils.mask_from_shp(
         shapefile=gdf,
-        xr_grid=min_dist,
+        grid=min_dist,
         invert=False,
         masked=True,
     )
@@ -612,7 +613,7 @@ def add_single_constraint(
         # mask to the ice shelf outline
         min_dist = utils.mask_from_shp(
             shapefile=row,
-            xr_grid=min_dist,
+            grid=min_dist,
             invert=False,
             masked=True,
         )
@@ -643,7 +644,7 @@ def add_single_constraint(
         # mask to the ice shelf outline
         min_dist_update = utils.mask_from_shp(
             shapefile=row,
-            xr_grid=min_dist_update,
+            grid=min_dist_update,
             invert=False,
             masked=True,
         )
@@ -931,7 +932,7 @@ def gravity_anomalies_single(
     grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
     grav_grid["ice_shelf_mask"] = utils.mask_from_shp(
         shapefile=gdf,
-        xr_grid=grav_grid.partial_topo_free_disturbance,
+        grid=grav_grid.partial_topo_free_disturbance,
         invert=False,
     ).rename("ice_shelf_mask")
 
@@ -1616,13 +1617,12 @@ def add_shelves_to_ensembles(
     if adjust_text is None:
         logger.error("adjust_text not found, please install adjustText")
         return
-    else:
-        adjust_text(
-            texts,
-            arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
-            ax=ax,
-            expand=(1.2, 1.2),
-        )
+    adjust_text(
+        texts,
+        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
+        ax=ax,
+        expand=(1.2, 1.2),
+    )
 
     if legend:
         leg = ax.legend(
@@ -1750,14 +1750,13 @@ def ensemble_scatterplot(
 
     if adjust_text is None:
         logger.error("adjust_text not found, please install adjustText")
-        return
-    else:
-        adjust_text(
-            texts,
-            arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
-            ax=ax,
-            expand=(1.2, 1.2),
-        )
+        return None
+    adjust_text(
+        texts,
+        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
+        ax=ax,
+        expand=(1.2, 1.2),
+    )
 
     if label_shelves and legend:
         leg = ax.legend(

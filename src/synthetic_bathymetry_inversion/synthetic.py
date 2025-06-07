@@ -502,7 +502,7 @@ def constraint_layout_number(
         # mask to shapefile
         masked = utils.mask_from_shp(
             shapefile=shapefile,
-            xr_grid=grd,
+            grid=grd,
             masked=True,
         ).rename("upward")
         outside_constraints = vd.grid_to_table(masked).dropna()
@@ -1172,7 +1172,7 @@ def rotated_airborne_survey(
     # clip to survey polygon
     min_dist = utils.mask_from_shp(
         shapefile=gpd.GeoDataFrame(geometry=[survey_polygon]),
-        xr_grid=min_dist,
+        grid=min_dist,
         invert=False,
         masked=True,
     )
@@ -1181,7 +1181,7 @@ def rotated_airborne_survey(
     if mask is not None:
         min_dist = utils.mask_from_shp(
             shapefile=gpd.GeoDataFrame(geometry=[mask]),
-            xr_grid=min_dist,
+            grid=min_dist,
             invert=False,
             masked=True,
         )
@@ -1189,7 +1189,7 @@ def rotated_airborne_survey(
     if proximity_mask is not None:
         min_dist = utils.mask_from_shp(
             shapefile=gpd.GeoDataFrame(geometry=[proximity_mask]),
-            xr_grid=min_dist,
+            grid=min_dist,
             invert=False,
             masked=True,
         )

@@ -6,7 +6,7 @@ While most of the code is from external packages, such as [Invert4Geom](https://
 
 The Jupyter Notebooks for all the synthetic inversions, as well as creating the figures are found in `notebooks/`.
 
-Data outputs from these notebooks are saved in `results/`, and figure outputs are saved in `paper/figurs/`.
+Data outputs from these notebooks are saved in `results/`, and figure outputs are saved in `paper/figures/`.
 
 ## Getting the code
 
