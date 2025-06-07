@@ -22,6 +22,8 @@ Install the required dependencies with either `conda` or `mamba`:
 
     mamba env create --file environment.yml --name synthetic_bathymetry_inversion
 
+If you want the specific, pinned, versions for each dependency, replace 'environment.yml' with 'pinned_environment.yml'.
+
 Activate the newly created environment:
 
     mamba activate synthetic_bathymetry_inversion

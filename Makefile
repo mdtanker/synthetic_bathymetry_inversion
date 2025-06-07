@@ -18,6 +18,9 @@ create:
 update:
 	mamba env update --file environment.yml --name $(PROJECT) --prune
 
+export:
+	mamba env export --file pinned_environment.yml --name $(PROJECT) --no-builds
+	
 ####
 ####
 # style commands
