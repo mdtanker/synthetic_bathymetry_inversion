@@ -11,6 +11,7 @@ dependencies:
   - xesmf # need for invert4geom noise contamination function
   - xrft
   - numpy_groupies
+  - numpy_groupies
   - cmocean
   - adjusttext
   - shapely

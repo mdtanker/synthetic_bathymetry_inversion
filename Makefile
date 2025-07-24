@@ -20,7 +20,7 @@ update:
 
 export:
 	mamba env export --file pinned_environment.yml --name $(PROJECT) --no-builds
-	
+
 ####
 ####
 # style commands
