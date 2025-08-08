@@ -248,7 +248,8 @@ def plot_ensemble_as_lines(
     grouped = results.groupby(groupby_col)
 
     norm = plt.Normalize(
-        vmin=results[groupby_col].values.min(), vmax=results[groupby_col].values.max()
+        vmin=results[groupby_col].to_numpy().min(),
+        vmax=results[groupby_col].to_numpy().max(),
     )
     slopes = []
     lines = []
@@ -330,7 +331,7 @@ def plot_ensemble_as_lines(
 
     if trend_line:
         if slope_min_max:
-            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -341,7 +342,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
 
-            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1] - 0.1,
@@ -352,7 +353,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmax(slopes)], "r", lw=1)
         elif slope_min:
-            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -363,7 +364,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
         elif slope_max:
-            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -384,7 +385,7 @@ def plot_ensemble_as_lines(
             #     fontsize=10,
             #     verticalalignment="top",
             # )
-            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1) # noqa: E501
+            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1)
 
             # else:
             z = np.polyfit(results[x], results[y], 1)

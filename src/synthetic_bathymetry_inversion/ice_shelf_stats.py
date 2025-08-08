@@ -141,7 +141,7 @@ def combine_offshore_onshore_points(
             # convert to a geodataframe
             geometry = [
                 shapely.geometry.Point(xy)
-                for xy in zip(bedmap_points_gdf.x, bedmap_points_gdf.y)
+                for xy in zip(bedmap_points_gdf.x, bedmap_points_gdf.y, strict=False)
             ]
             bedmap_points_gdf = gpd.GeoDataFrame(
                 bedmap_points_gdf, crs="EPSG:3031", geometry=geometry
@@ -232,7 +232,7 @@ def combine_offshore_onshore_points(
 
         dataid_df["source"] = dataid_df.dataid.map(number_to_source)
 
-        # drop seismic points (only for Amery and Ronne-Filchner) and seem to be erroneous # noqa: E501
+        # drop seismic points (only for Amery and Ronne-Filchner) and seem to be erroneous
         dataid_df = dataid_df[dataid_df.source != "seismic"]
 
         dataid_df = dataid_df[["easting", "northing", "dataid", "source"]]
@@ -545,11 +545,11 @@ def load_constraints_and_min_distances(
             logger.error("Failed to load minimum distances for %s", row.NAME)
             continue
 
-        gdf.loc[i, "median_constraint_distance"] = min_dist.median().values
-        gdf.loc[i, "mean_constraint_distance"] = min_dist.mean().values
-        gdf.loc[i, "max_constraint_distance"] = min_dist.max().values
+        gdf.loc[i, "median_constraint_distance"] = min_dist.median().to_numpy()
+        gdf.loc[i, "mean_constraint_distance"] = min_dist.mean().to_numpy()
+        gdf.loc[i, "max_constraint_distance"] = min_dist.max().to_numpy()
         gdf.loc[i, "constraint_proximity_skewness"] = sp.stats.skew(
-            min_dist.values.ravel(), nan_policy="omit"
+            min_dist.to_numpy().ravel(), nan_policy="omit"
         )
 
         if plot:
@@ -646,8 +646,8 @@ def add_single_constraint(
             invert=False,
             masked=True,
         )
-        median_constraint_distance = min_dist.median().values
-        updated_median_constraint_distance = min_dist_update.median().values
+        median_constraint_distance = min_dist.median().to_numpy()
+        updated_median_constraint_distance = min_dist_update.median().to_numpy()
         median_proximity_change = (
             median_constraint_distance - updated_median_constraint_distance
         )
@@ -672,8 +672,8 @@ def plot_constraints_and_min_distances(
     name = ice_shelf.NAME
     region = vd.get_region(
         (
-            min_dist.easting.values,
-            min_dist.northing.values,
+            min_dist.easting.to_numpy(),
+            min_dist.northing.to_numpy(),
         ),
     )
 
@@ -714,7 +714,7 @@ def plot_constraints_and_min_distances(
     fig.text(
         position="TC",
         justify="BC",
-        text=f"{name.replace("_", " ")} Ice Shelf",
+        text=f"{name.replace('_', ' ')} Ice Shelf",
         offset="0c/1c",
         font="20p,Helvetica",
         no_clip=True,
@@ -723,7 +723,7 @@ def plot_constraints_and_min_distances(
     fig.text(
         position="TC",
         justify="BC",
-        text=f"Median; {round(np.nanmedian(min_dist),2)} km",
+        text=f"Median; {round(np.nanmedian(min_dist), 2)} km",
         offset="0c/.3c",
         font="16p,Helvetica",
         no_clip=True,
@@ -794,7 +794,7 @@ def gravity_anomalies_single(
         layer="icebase",
         spacing=spacing,
         region=reg,
-        fill_nans=True,  # fills nans over ocean with 0's (while still reference to the geoid) # noqa: E501
+        fill_nans=True,  # fills nans over ocean with 0's (while still reference to the geoid)
         reference="ellipsoid",  # converts to be referenced to the ellipsoid
         verbose="q",
     ).rename({"x": "easting", "y": "northing"})
@@ -802,7 +802,7 @@ def gravity_anomalies_single(
         layer="bed",
         spacing=spacing,
         region=reg,
-        fill_nans=True,  # fills nans over ocean with 0's (while still reference to the geoid) # noqa: E501
+        fill_nans=True,  # fills nans over ocean with 0's (while still reference to the geoid)
         reference="ellipsoid",  # converts to be referenced to the ellipsoid
         verbose="q",
     ).rename({"x": "easting", "y": "northing"})
@@ -1098,7 +1098,7 @@ def plot_grav_anomalies(
     reverse_cpts = [False] * (len(grids) - 1) + [True]
     insets = [False] * (len(grids))
     cbar_labels = [
-        f"stdev: {round(grav_df[grav_df.ice_shelf_mask==True][a].std(),0)} mGal"  # noqa: E712 # pylint: disable=singleton-comparison
+        f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # noqa: E712 # pylint: disable=singleton-comparison
         for a in anoms
     ]
     offshore_points = constraints_df[constraints_df.onshore == False]  # noqa: E712 # pylint: disable=singleton-comparison
@@ -1108,7 +1108,7 @@ def plot_grav_anomalies(
     scalebars = [True] + [False] * (len(grids) - 1)
     titles = anom_titles
 
-    if np.isnan(grav_grid.error.values).all():
+    if np.isnan(grav_grid.error.to_numpy()).all():
         logger.error("No uncertainty data for %s", name)
     else:
         cmaps.insert(0, "thermal")
@@ -1125,7 +1125,7 @@ def plot_grav_anomalies(
     try:
         fig = maps.subplots(
             grids,
-            fig_title=f"{name.replace("_", " ")} Ice Shelf",
+            fig_title=f"{name.replace('_', ' ')} Ice Shelf",
             cmaps=cmaps,
             reverse_cpts=reverse_cpts,
             insets=insets,
@@ -1243,8 +1243,8 @@ def plot_ice_shelf_info(
 
     region = vd.get_region(
         (
-            min_dist.easting.values,
-            min_dist.northing.values,
+            min_dist.easting.to_numpy(),
+            min_dist.northing.to_numpy(),
         )
     )
     grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
@@ -1269,7 +1269,7 @@ def plot_ice_shelf_info(
     cmaps = ["viridis"] * (len(anoms) - 1) + ["balance+h0"]
     insets = [False] * (len(grids) - 1) + [True]
     cbar_labels = [
-        f"stdev: {round(grav_df[grav_df.ice_shelf_mask==True][a].std(),0)} mGal"  # pylint: disable=singleton-comparison # noqa: E712
+        f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # pylint: disable=singleton-comparison # noqa: E712
         for a in anoms
     ]
     point_sets = [None, None, None, None, constraints_df]
@@ -1278,7 +1278,7 @@ def plot_ice_shelf_info(
 
     # add plotting elements for mindist
     cmaps.insert(0, "dense")
-    cbar_labels.insert(0, f"median; {round(np.nanmedian(min_dist),2)} km")
+    cbar_labels.insert(0, f"median; {round(np.nanmedian(min_dist), 2)} km")
     insets.insert(0, False)
     scalebars.insert(0, False)
     point_sets.insert(0, constraints_df)
@@ -1286,7 +1286,7 @@ def plot_ice_shelf_info(
     grids.insert(0, min_dist)
 
     # add plotting elements for uncertainty if available
-    if np.isnan(grav_grid.error.values).all():
+    if np.isnan(grav_grid.error.to_numpy()).all():
         logger.error("No uncertainty data for %s", name)
     else:
         cmaps.insert(1, "thermal")
@@ -1304,7 +1304,7 @@ def plot_ice_shelf_info(
             grids,
             fig_height=15,
             region=region,
-            fig_title=f"{name.replace("_", " ")} Ice Shelf",
+            fig_title=f"{name.replace('_', ' ')} Ice Shelf",
             cmaps=cmaps,
             insets=insets,
             inset_width=0.6,
@@ -1351,11 +1351,11 @@ def load_ice_shelf_info_single(
 
     try:
         min_dist = xr.open_dataarray(f"{file_path}{name}_min_dist.nc")
-        gdf.loc[gdf.index, "median_constraint_distance"] = min_dist.median().values
-        gdf.loc[gdf.index, "mean_constraint_distance"] = min_dist.mean().values
-        gdf.loc[gdf.index, "max_constraint_distance"] = min_dist.max().values
+        gdf.loc[gdf.index, "median_constraint_distance"] = min_dist.median().to_numpy()
+        gdf.loc[gdf.index, "mean_constraint_distance"] = min_dist.mean().to_numpy()
+        gdf.loc[gdf.index, "max_constraint_distance"] = min_dist.max().to_numpy()
         gdf.loc[gdf.index, "constraint_proximity_skewness"] = sp.stats.skew(
-            min_dist.values.ravel(), nan_policy="omit"
+            min_dist.to_numpy().ravel(), nan_policy="omit"
         )
 
     except FileNotFoundError as e:
@@ -1509,7 +1509,7 @@ def add_shelves_to_ensembles(
         if col_to_add_to_label is not None:
             if isinstance(col_to_add_to_label, list | tuple):
                 vals = [f"{round(row[x])}" for x in col_to_add_to_label]
-                add_to_label = f": {"/".join(vals)} m"
+                add_to_label = f": {'/'.join(vals)} m"
             elif isinstance(col_to_add_to_label, str):
                 add_to_label = f": {round(row[col_to_add_to_label])} m"
         else:
@@ -1525,7 +1525,7 @@ def add_shelves_to_ensembles(
                     s=60,
                     linewidths=0.8,
                     edgecolor="white",
-                    label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
+                    label=f"{ind + 1}) {row.NAME.replace('_', ' ')}{add_to_label}",
                     clip_on=False,
                     zorder=10,
                 )
@@ -1533,7 +1533,7 @@ def add_shelves_to_ensembles(
                     ax.text(
                         row[x],
                         row[y],
-                        f"{ind+1}",
+                        f"{ind + 1}",
                         fontsize=fontsize + 2,
                         color="r",
                         fontweight="normal",
@@ -1542,51 +1542,14 @@ def add_shelves_to_ensembles(
                         ],
                     )
                 )
-            else:
-                # plot other shelves as black dots and black labels
-                if row.NAME in shelves_to_label:
-                    ax.scatter(
-                        row[x],
-                        row[y],
-                        color="black",
-                        s=6,
-                        label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
-                        clip_on=False,
-                        zorder=10,
-                    )
-                    texts.append(
-                        ax.text(
-                            row[x],
-                            row[y],
-                            f"{ind+1}",
-                            fontsize=fontsize,
-                            color="black",
-                            fontweight="normal",
-                            path_effects=[
-                                patheffects.withStroke(
-                                    linewidth=1.5, foreground="white"
-                                )
-                            ],
-                        )
-                    )
-                else:
-                    ax.scatter(
-                        row[x],
-                        row[y],
-                        color="black",
-                        s=6,
-                        clip_on=False,
-                        zorder=10,
-                    )
-        else:
             # plot other shelves as black dots and black labels
-            if row.NAME in shelves_to_label:
+            elif row.NAME in shelves_to_label:
                 ax.scatter(
                     row[x],
                     row[y],
                     color="black",
                     s=6,
-                    label=f"{ind+1}) {row.NAME.replace('_', ' ')}{add_to_label}",
+                    label=f"{ind + 1}) {row.NAME.replace('_', ' ')}{add_to_label}",
                     clip_on=False,
                     zorder=10,
                 )
@@ -1594,7 +1557,7 @@ def add_shelves_to_ensembles(
                     ax.text(
                         row[x],
                         row[y],
-                        f"{ind+1}",
+                        f"{ind + 1}",
                         fontsize=fontsize,
                         color="black",
                         fontweight="normal",
@@ -1612,6 +1575,39 @@ def add_shelves_to_ensembles(
                     clip_on=False,
                     zorder=10,
                 )
+        # plot other shelves as black dots and black labels
+        elif row.NAME in shelves_to_label:
+            ax.scatter(
+                row[x],
+                row[y],
+                color="black",
+                s=6,
+                label=f"{ind + 1}) {row.NAME.replace('_', ' ')}{add_to_label}",
+                clip_on=False,
+                zorder=10,
+            )
+            texts.append(
+                ax.text(
+                    row[x],
+                    row[y],
+                    f"{ind + 1}",
+                    fontsize=fontsize,
+                    color="black",
+                    fontweight="normal",
+                    path_effects=[
+                        patheffects.withStroke(linewidth=1.5, foreground="white")
+                    ],
+                )
+            )
+        else:
+            ax.scatter(
+                row[x],
+                row[y],
+                color="black",
+                s=6,
+                clip_on=False,
+                zorder=10,
+            )
     if adjust_text is None:
         logger.error("adjust_text not found, please install adjustText")
         return
@@ -1638,7 +1634,7 @@ def add_shelves_to_ensembles(
             borderpad=0.2,
             # borderaxespad=0.2,
         )
-        for handle, text in zip(leg.legend_handles, leg.get_texts()):
+        for handle, text in zip(leg.legend_handles, leg.get_texts(), strict=False):
             text.set_color(handle.get_facecolor()[0])
 
 
@@ -1688,14 +1684,14 @@ def ensemble_scatterplot(
                 color="red",
                 marker="*",
                 s=12,
-                label=f"{ind+1} {row.NAME.replace('_', ' ')}{add_to_label}",
+                label=f"{ind + 1} {row.NAME.replace('_', ' ')}{add_to_label}",
             )
             if label_shelves:
                 texts.append(
                     ax.text(
                         row[x],
                         row[y],
-                        f"{ind+1}",
+                        f"{ind + 1}",
                         fontsize=8,
                         color="red",
                         fontweight="normal",
@@ -1704,39 +1700,36 @@ def ensemble_scatterplot(
                         ],
                     )
                 )
-        else:
-            # plot other shelves as black dots and black labels
-            if row.NAME in shelves_to_label:
-                ax.scatter(
-                    row[x],
-                    row[y],
-                    color="black",
-                    s=2,
-                    label=f"{ind+1} {row.NAME.replace('_', ' ')}{add_to_label}",
-                )
-                if label_shelves:
-                    texts.append(
-                        ax.text(
-                            row[x],
-                            row[y],
-                            f"{ind+1}",
-                            fontsize=8,
-                            color="black",
-                            fontweight="normal",
-                            path_effects=[
-                                patheffects.withStroke(
-                                    linewidth=1.5, foreground="white"
-                                )
-                            ],
-                        )
+        # plot other shelves as black dots and black labels
+        elif row.NAME in shelves_to_label:
+            ax.scatter(
+                row[x],
+                row[y],
+                color="black",
+                s=2,
+                label=f"{ind + 1} {row.NAME.replace('_', ' ')}{add_to_label}",
+            )
+            if label_shelves:
+                texts.append(
+                    ax.text(
+                        row[x],
+                        row[y],
+                        f"{ind + 1}",
+                        fontsize=8,
+                        color="black",
+                        fontweight="normal",
+                        path_effects=[
+                            patheffects.withStroke(linewidth=1.5, foreground="white")
+                        ],
                     )
-            else:
-                ax.scatter(
-                    row[x],
-                    row[y],
-                    color="black",
-                    s=2,
                 )
+        else:
+            ax.scatter(
+                row[x],
+                row[y],
+                color="black",
+                s=2,
+            )
 
     # ax.set_xlim(xlims)
     # ax.set_ylim(ylims)
@@ -1766,7 +1759,7 @@ def ensemble_scatterplot(
             fontsize=8,
             ncol=legend_cols,
         )
-        for handle, text in zip(leg.legend_handles, leg.get_texts()):
+        for handle, text in zip(leg.legend_handles, leg.get_texts(), strict=False):
             text.set_color(handle.get_facecolor()[0])
 
     return fig

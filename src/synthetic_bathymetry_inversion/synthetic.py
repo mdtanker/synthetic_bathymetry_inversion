@@ -331,7 +331,7 @@ def constraint_layout_number(
     if shapefile is not None:
         bounds = gpd.read_file(shapefile).bounds
         region = [bounds.minx, bounds.maxx, bounds.miny, bounds.maxy]
-        region = [x.values[0] for x in region]
+        region = [x.to_numpy()[0] for x in region]
 
     x = region[1] - region[0]
     y = region[3] - region[2]
@@ -545,7 +545,7 @@ def constraint_layout_spacing(
     if shapefile is not None:
         bounds = gpd.read_file(shapefile).bounds
         region = [bounds.minx, bounds.maxx, bounds.miny, bounds.maxy]
-        region = [x.values[0] for x in region]
+        region = [x.to_numpy()[0] for x in region]
 
     # create regular grid, with set number of constraint points
     reg = vd.pad_region(region, padding) if padding is not None else region
@@ -747,9 +747,13 @@ def airborne_survey(
     df["time"] = np.nan
     for i in df.line.unique():
         if i >= 1000:
-            time = df[df.line == i].sort_values("northing").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("northing").reset_index().index.to_numpy()
+            )
         else:
-            time = df[df.line == i].sort_values("easting").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("easting").reset_index().index.to_numpy()
+            )
         df.loc[df.line == i, "time"] = time
 
     # convert to geopandas
@@ -1123,9 +1127,13 @@ def rotated_airborne_survey(
     df["time"] = np.nan
     for i in df.line.unique():
         if i >= 1000:
-            time = df[df.line == i].sort_values("northing").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("northing").reset_index().index.to_numpy()
+            )
         else:
-            time = df[df.line == i].sort_values("easting").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("easting").reset_index().index.to_numpy()
+            )
         df.loc[df.line == i, "time"] = time
 
     # calculate distance along each line
@@ -1198,7 +1206,7 @@ def rotated_airborne_survey(
         if line_numbers is not None:
             title = f"{line_numbers} lines, {tie_numbers} ties"
         elif line_spacing is not None:
-            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"  # noqa: E501
+            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"
         else:
             title = None
         # fig = maps.basemap(
@@ -1222,7 +1230,7 @@ def rotated_airborne_survey(
                     robust=True,
                 )[1],
             ),
-            cbar_label=f"distance to nearest datapoint, median {round(median_proximity,2)} (km)",  # noqa: E501
+            cbar_label=f"distance to nearest datapoint, median {round(median_proximity, 2)} (km)",
             simple_basemap=True,
             simple_basemap_version="measures-v2",
             region=region,
@@ -1272,7 +1280,9 @@ def rotated_airborne_survey(
         "flight_kms": flight_kms,
         "median_proximity": median_proximity,
         "max_proximity": max_proximity,
-        "proximity_skew": scipy.stats.skew(min_dist.values.ravel(), nan_policy="omit"),
+        "proximity_skew": scipy.stats.skew(
+            min_dist.to_numpy().ravel(), nan_policy="omit"
+        ),
     }
     return df
 
@@ -1308,7 +1318,9 @@ def distance_along_line(
     gdf["dist_along_line"] = np.nan
     for i in gdf[line_col_name].unique():
         line = gdf[gdf[line_col_name] == i]
-        dist = line.distance(line.sort_values(by=time_col_name).geometry.iloc[0]).values
+        dist = line.distance(
+            line.sort_values(by=time_col_name).geometry.iloc[0]
+        ).to_numpy()
         gdf.loc[gdf[line_col_name] == i, "dist_along_line"] = dist
 
     return gdf.dist_along_line
@@ -1356,7 +1368,7 @@ def filter_flight_lines(
         line = line[[distance_column, data_column]]
 
         # get data spacing
-        distance = line[distance_column].values
+        distance = line[distance_column].to_numpy()
         data_spacing = np.median(np.diff(distance))
 
         # pad distance of 10% of line distance
@@ -1436,9 +1448,9 @@ def scipy_interp1d(
     )
 
     # get interpolated values at points with NaN's
-    values = f(df1[df1[to_interp].isnull()][interp_on])
+    values = f(df1[df1[to_interp].isna()][interp_on])
 
     # fill NaN's  with values
-    df1.loc[df1[to_interp].isnull(), to_interp] = values
+    df1.loc[df1[to_interp].isna(), to_interp] = values
 
     return df1
