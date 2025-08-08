@@ -16,6 +16,8 @@ You can download a copy of all the files for this project by cloning the GitHub 
 
 ## Dependencies
 
+These instructions assume you have Python (>=3.11) installed. If you don't we recommend installing it with [miniforge](https://github.com/conda-forge/miniforge) for a simple and minimal setup.
+
 Install the required dependencies with either `conda` or `mamba`:
 
     cd synthetic_bathymetry_inversion
@@ -30,23 +32,9 @@ Activate the newly created environment:
 
 Install the local project
 
-    pip install -e .
+    pip install --no-deps -e .
 
 
-## Developer instructions
+# How to contribute / develop?
 
-This assumes you have `Make` installed. If you don't, you can just manually input the respective commands from the `Makefile`.
-
-Style-check your code:
-
-    make style
-
-Test your code
-
-    make test
-
-To update dependencies, first add or change dependencies listed in `environment.yml`, then with your conda environment activated run:
-
-    make update
-
-When writing code; use logging to inform users of info, errors, and warnings. In each module `.py` file, import the project-wide logger instance with `from synthetic_bathymetry_inversion import logger` and then for example: `logger.info("log this message")`
+See the file `CONTRIBUTING.md` for some detailed instructions on how to work on developing this repository.

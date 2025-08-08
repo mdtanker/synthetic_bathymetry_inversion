@@ -5,21 +5,19 @@ channels:
 dependencies:
   - python=3.12
   # add your dependencies here
-  - polartoolkit>=1.0.5
-  - invert4geom>=1
+  - polartoolkit==1.1.3
+  - invert4geom=1.1.0
   - esmpy # needed for xesmf to install correctly
-  - xesmf # need for invert4geom noise contamination function
-  - xrft
-  - numpy_groupies
-  - numpy_groupies
+  - xesmf # needed for invert4geom noise contamination function
   - cmocean
   - adjusttext
   - shapely
-  # for dev purposes
+  # dev
   - ipykernel
-  - pre-commit
-  - pylint
-  - pytest
+  - jupyterlab
+  - pytest>=6
+  - pytest-cov>=3
+  # below packages need to be installed with pip (aren't available in conda-forge)
   # - pip
-  # only if can't install with conda
   # - pip:
+  #     -

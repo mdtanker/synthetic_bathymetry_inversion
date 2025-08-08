@@ -1,6 +1,4 @@
-from __future__ import annotations  # pylint: disable=too-many-lines
-
-import typing
+import typing  # pylint: disable=too-many-lines
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
