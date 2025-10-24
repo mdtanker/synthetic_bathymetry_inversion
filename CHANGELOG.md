@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - updated and reran all notebooks
 - update figure outputs from notebooks
 - turn notebooks and repo into a website
-
+- update `ice_shelf_stats.csv`
+  
 ## v0.0.1
 Released on 2025-06-07
 Contributors:
