@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - move all notebooks to docs folder
 - updated and reran all notebooks
 - update figure outputs from notebooks
-  
+- turn notebooks and repo into a website
+
 ## v0.0.1
 Released on 2025-06-07
 Contributors:

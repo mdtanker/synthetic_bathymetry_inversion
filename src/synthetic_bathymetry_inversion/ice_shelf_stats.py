@@ -1236,7 +1236,7 @@ def polygons_to_points(
 
     Parameters
     ----------
-    polygons : gpd.GeoDataFrame
+    polygons : geopandas.GeoDataFrame
         Geodataframe of polygons to convert to points
     spacing : float, optional
         Spacing between points, by default 100

@@ -1217,7 +1217,7 @@ def distance_along_line(
 
     Parameters
     ----------
-    data : gpd.GeoDataFrame | pd.DataFrame
+    data : geopandas.GeoDataFrame | pd.DataFrame
         Dataframe containing the data points to calculate the distance along each line,
         must have a set geometry column.
     line_col_name : str, optional
@@ -1257,7 +1257,7 @@ def filter_flight_lines(
 
     Parameters
     ----------
-    df : gpd.GeoDataFrame | pd.DataFrame
+    df : geopandas.GeoDataFrame | pd.DataFrame
         _description_
     filt_type : str
         a string with format "<type><width>+h" where type is GMT filter type, width is
@@ -1274,7 +1274,7 @@ def filter_flight_lines(
 
     Returns
     -------
-    gpd.GeoDataFrame | pd.DataFrame
+    geopandas.GeoDataFrame | pd.DataFrame
         _description_
     """
 
@@ -1348,10 +1348,9 @@ def scipy_interp1d(
 ):
     """
     interpolate NaN's in "to_interp" column, based on values from "interp_on" column
-    method:
-        'linear', 'nearest', 'nearest-up', 'zero', 'slinear', 'quadratic', 'cubic',
-        'previous', 'next'
-    use kwargs to pass other arguments to scipy.interpolate.interp1d()
+    method: 'linear', 'nearest', 'nearest-up', 'zero', 'slinear', 'quadratic', 'cubic',
+    'previous', 'next'
+    use kwargs to pass other arguments to :func:`scipy.interpolate.interp1d()`
     """
     df1 = df.copy()
 
