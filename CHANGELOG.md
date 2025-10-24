@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - remove unused test files
 - clean up repo
 - clean code and remove unused functions
+- move all notebooks to docs folder
+- updated and reran all notebooks
 
 ## v0.0.1
 Released on 2025-06-07
