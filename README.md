@@ -1,12 +1,18 @@
 # Synthetic sub-ice shelf bathymetry inversions
 
-This repository contains the code and Jupyter notebooks for running all the inversions and create the figures for the manuscript: "Gravity Inversion for Sub-Ice Shelf Bathymetry: Strengths, Limitations, and Insights from Synthetic Modeling".
+
+This repository contains the code and Jupyter notebooks for running all the inversions and creating the figures for the manuscript: ["Gravity Inversion for Sub-Ice Shelf Bathymetry: Strengths, Limitations, and Insights from Synthetic Modeling"](https://doi.org/10.5194/egusphere-2025-2380).
 
 While most of the code is from external packages, such as [Invert4Geom](https://github.com/mdtanker/invert4geom) for the inversion, there is some code supplied in `src/`.
 
-The Jupyter Notebooks for all the synthetic inversions, as well as creating the figures are found in `notebooks/`.
+The Jupyter Notebooks for all the synthetic inversions, as well as creating the figures are found in `docs/`.
 
 Data outputs from these notebooks are saved in `results/`, and figure outputs are saved in `paper/figures/`.
+
+These notebooks can be explored at the following website generated from this repository:
+
+
+<!-- SPHINX-START-badges -->
 
 ## Getting the code
 
@@ -16,37 +22,46 @@ You can download a copy of all the files for this project by cloning the GitHub 
 
 ## Dependencies
 
+These instructions assume you have Python (>=3.11) installed. If you don't we recommend installing it with [miniforge](https://github.com/conda-forge/miniforge) for a simple and minimal setup.
+
+You can setup your environment in two ways: 1) with `pixi`, or 2) with `conda` (or `mamba`).
+
+### `pixi`
+Install `pixi` with the instructions at https://pixi.sh/latest/installation/
+
+Then install the environment defined in `pyproject.toml` with:
+```
+pixi install
+```
+
+## `conda` or `mamba`
+
 Install the required dependencies with either `conda` or `mamba`:
 
     cd synthetic_bathymetry_inversion
 
     mamba env create --file environment.yml --name synthetic_bathymetry_inversion
 
-If you want the specific, pinned, versions for each dependency, replace 'environment.yml' with 'pinned_environment.yml'.
-
 Activate the newly created environment:
 
     mamba activate synthetic_bathymetry_inversion
 
-Install the local project
-
-    pip install -e .
-
-
 ## Developer instructions
 
-This assumes you have `Make` installed. If you don't, you can just manually input the respective commands from the `Makefile`.
+Export `pixi` environment to a conda `environment.yml` file:
+```
+pixi workspace export conda-environment environment.yml
+```
 
-Style-check your code:
+Create the docs locally:
+```
+pixi run api
+pixi run docs
+```
 
-    make style
+Style-checks and formatting the code / notebooks
+```
+pixi run style
+```
 
-Test your code
-
-    make test
-
-To update dependencies, first add or change dependencies listed in `environment.yml`, then with your conda environment activated run:
-
-    make update
-
-When writing code; use logging to inform users of info, errors, and warnings. In each module `.py` file, import the project-wide logger instance with `from synthetic_bathymetry_inversion import logger` and then for example: `logger.info("log this message")`
+<!-- SPHINX-END-badges -->

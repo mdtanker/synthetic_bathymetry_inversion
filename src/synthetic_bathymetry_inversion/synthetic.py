@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-import math
+import math  # pylint: disable=too-many-lines
 
 import geopandas as gpd
 import numpy as np
@@ -328,12 +326,17 @@ def constraint_layout_number(
     plot=False,
     seed=0,
 ):
+    """
+    Create a layout of constraint points within a region. Can either specify number of
+    constraints, their spacing, or the number of points in each direction (shape).
+    """
+
     full_region = region
 
     if shapefile is not None:
         bounds = gpd.read_file(shapefile).bounds
         region = [bounds.minx, bounds.maxx, bounds.miny, bounds.maxy]
-        region = [x.values[0] for x in region]
+        region = [x.to_numpy()[0] for x in region]
 
     x = region[1] - region[0]
     y = region[3] - region[2]
@@ -367,7 +370,7 @@ def constraint_layout_number(
             },
         }
         sampled_coord_dict = uncertainty.create_lhc(
-            n_samples=num_constraints,
+            n_samples=int(num_constraints),
             parameter_dict=coord_dict,
             criterion="maximin",
         )
@@ -384,6 +387,7 @@ def constraint_layout_number(
         fudge_factor = 0
         while True:
             if num_constraints is not None:
+                num_constraints = int(num_constraints)
                 num_y = int(np.ceil((num_constraints / (x / y)) ** 0.5))
                 num_x = int(np.ceil(num_constraints / num_y)) + fudge_factor
             elif shape is not None:
@@ -536,99 +540,6 @@ def constraint_layout_number(
     return constraints
 
 
-def constraint_layout_spacing(
-    spacing,
-    shift_stdev=0,
-    region=None,
-    shapefile=None,
-    padding=None,
-    plot=False,
-):
-    if shapefile is not None:
-        bounds = gpd.read_file(shapefile).bounds
-        region = [bounds.minx, bounds.maxx, bounds.miny, bounds.maxy]
-        region = [x.values[0] for x in region]
-
-    # create regular grid, with set number of constraint points
-    reg = vd.pad_region(region, padding) if padding is not None else region
-
-    # start grid from edges
-    # x = np.arange(reg[0], reg[1], spacing)
-    # y = np.arange(reg[2], reg[3], spacing)
-
-    # start grid from center
-    x_mid = reg[0] + (reg[1] - reg[0]) / 2
-    y_mid = reg[2] + (reg[3] - reg[2]) / 2
-    x1 = np.arange(x_mid, reg[0], -spacing)
-    x2 = np.arange(x_mid + spacing, reg[1], spacing)
-    y1 = np.arange(y_mid, reg[2], -spacing)
-    y2 = np.arange(y_mid + spacing, reg[3], spacing)
-    x = np.concatenate([x1, x2])
-    y = np.concatenate([y1, y2])
-
-    coords = np.meshgrid(x, y)
-
-    # turn coordinates into dataarray
-    da = vd.make_xarray_grid(
-        coords,
-        data=np.ones_like(coords[0]) * 1e3,
-        data_names="upward",
-        dims=("northing", "easting"),
-    )
-    # turn dataarray into dataframe
-    df = vd.grid_to_table(da)
-
-    # add randomness to the points
-    rand = np.random.default_rng(seed=0)
-    constraints = df.copy()
-    constraints["northing"] = rand.normal(df.northing, shift_stdev)
-    constraints["easting"] = rand.normal(df.easting, shift_stdev)
-
-    # check whether points are inside or outside of shp
-    if shapefile is not None:
-        gdf = gpd.GeoDataFrame(
-            constraints,
-            geometry=gpd.points_from_xy(x=constraints.easting, y=constraints.northing),
-            crs="EPSG:3031",
-        )
-        constraints["inside"] = gdf.within(gpd.read_file(shapefile).geometry[0])
-        constraints = constraints.drop(columns="geometry")
-    else:
-        constraints["inside"] = True
-
-    # drop outside constraints
-    constraints = constraints[constraints.inside]
-
-    # ensure all points are within region
-    constraints = utils.points_inside_region(
-        constraints, region, names=("easting", "northing")
-    )
-
-    if plot:
-        fig = maps.basemap(
-            fig_height=8,
-            region=region,
-            frame=True,
-        )
-
-        fig.plot(
-            x=constraints.easting,
-            y=constraints.northing,
-            style="c.1c",
-            fill="black",
-        )
-
-        if shapefile is not None:
-            fig.plot(
-                shapefile,
-                pen="0.2p,black",
-            )
-
-        fig.show()
-
-    return constraints
-
-
 def airborne_survey(
     along_line_spacing: float,
     grav_observation_height: float,
@@ -643,6 +554,11 @@ def airborne_survey(
     grav_grid: xr.DataArray | None = None,
     plot: bool = False,
 ):
+    """
+    Create a synthetic airborne gravity survey within a rectangular region.
+    Specify either number of lines or line spacing in each direction.
+    """
+
     if padding is not None:
         region = vd.pad_region(region, padding)
 
@@ -749,9 +665,13 @@ def airborne_survey(
     df["time"] = np.nan
     for i in df.line.unique():
         if i >= 1000:
-            time = df[df.line == i].sort_values("northing").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("northing").reset_index().index.to_numpy()
+            )
         else:
-            time = df[df.line == i].sort_values("easting").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("easting").reset_index().index.to_numpy()
+            )
         df.loc[df.line == i, "time"] = time
 
     # convert to geopandas
@@ -1125,9 +1045,13 @@ def rotated_airborne_survey(
     df["time"] = np.nan
     for i in df.line.unique():
         if i >= 1000:
-            time = df[df.line == i].sort_values("northing").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("northing").reset_index().index.to_numpy()
+            )
         else:
-            time = df[df.line == i].sort_values("easting").reset_index().index.values
+            time = (
+                df[df.line == i].sort_values("easting").reset_index().index.to_numpy()
+            )
         df.loc[df.line == i, "time"] = time
 
     # calculate distance along each line
@@ -1200,7 +1124,7 @@ def rotated_airborne_survey(
         if line_numbers is not None:
             title = f"{line_numbers} lines, {tie_numbers} ties"
         elif line_spacing is not None:
-            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"  # noqa: E501
+            title = f"{round(line_spacing, 2)} km line spacing, {round(tie_spacing, 2)} km tie spacing"
         else:
             title = None
         # fig = maps.basemap(
@@ -1224,7 +1148,7 @@ def rotated_airborne_survey(
                     robust=True,
                 )[1],
             ),
-            cbar_label=f"distance to nearest datapoint, median {round(median_proximity,2)} (km)",  # noqa: E501
+            cbar_label=f"distance to nearest datapoint, median {round(median_proximity, 2)} (km)",
             simple_basemap=True,
             simple_basemap_version="measures-v2",
             region=region,
@@ -1274,7 +1198,9 @@ def rotated_airborne_survey(
         "flight_kms": flight_kms,
         "median_proximity": median_proximity,
         "max_proximity": max_proximity,
-        "proximity_skew": scipy.stats.skew(min_dist.values.ravel(), nan_policy="omit"),
+        "proximity_skew": scipy.stats.skew(
+            min_dist.to_numpy().ravel(), nan_policy="omit"
+        ),
     }
     return df
 
@@ -1291,7 +1217,7 @@ def distance_along_line(
 
     Parameters
     ----------
-    data : gpd.GeoDataFrame | pd.DataFrame
+    data : geopandas.GeoDataFrame | pd.DataFrame
         Dataframe containing the data points to calculate the distance along each line,
         must have a set geometry column.
     line_col_name : str, optional
@@ -1310,7 +1236,9 @@ def distance_along_line(
     gdf["dist_along_line"] = np.nan
     for i in gdf[line_col_name].unique():
         line = gdf[gdf[line_col_name] == i]
-        dist = line.distance(line.sort_values(by=time_col_name).geometry.iloc[0]).values
+        dist = line.distance(
+            line.sort_values(by=time_col_name).geometry.iloc[0]
+        ).to_numpy()
         gdf.loc[gdf[line_col_name] == i, "dist_along_line"] = dist
 
     return gdf.dist_along_line
@@ -1329,7 +1257,7 @@ def filter_flight_lines(
 
     Parameters
     ----------
-    df : gpd.GeoDataFrame | pd.DataFrame
+    df : geopandas.GeoDataFrame | pd.DataFrame
         _description_
     filt_type : str
         a string with format "<type><width>+h" where type is GMT filter type, width is
@@ -1346,7 +1274,7 @@ def filter_flight_lines(
 
     Returns
     -------
-    gpd.GeoDataFrame | pd.DataFrame
+    geopandas.GeoDataFrame | pd.DataFrame
         _description_
     """
 
@@ -1358,7 +1286,7 @@ def filter_flight_lines(
         line = line[[distance_column, data_column]]
 
         # get data spacing
-        distance = line[distance_column].values
+        distance = line[distance_column].to_numpy()
         data_spacing = np.median(np.diff(distance))
 
         # pad distance of 10% of line distance
@@ -1420,10 +1348,9 @@ def scipy_interp1d(
 ):
     """
     interpolate NaN's in "to_interp" column, based on values from "interp_on" column
-    method:
-        'linear', 'nearest', 'nearest-up', 'zero', 'slinear', 'quadratic', 'cubic',
-        'previous', 'next'
-    use kwargs to pass other arguments to scipy.interpolate.interp1d()
+    method: 'linear', 'nearest', 'nearest-up', 'zero', 'slinear', 'quadratic', 'cubic',
+    'previous', 'next'
+    use kwargs to pass other arguments to :func:`scipy.interpolate.interp1d()`
     """
     df1 = df.copy()
 
@@ -1438,9 +1365,9 @@ def scipy_interp1d(
     )
 
     # get interpolated values at points with NaN's
-    values = f(df1[df1[to_interp].isnull()][interp_on])
+    values = f(df1[df1[to_interp].isna()][interp_on])
 
     # fill NaN's  with values
-    df1.loc[df1[to_interp].isnull(), to_interp] = values
+    df1.loc[df1[to_interp].isna(), to_interp] = values
 
     return df1

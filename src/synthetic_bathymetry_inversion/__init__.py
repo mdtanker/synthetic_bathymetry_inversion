@@ -1,9 +1,7 @@
-from __future__ import annotations
-
 import logging
 
-logging.basicConfig(level=logging.INFO)
+from ._version import version as __version__
+
+__all__ = ["__version__"]
 
 logger = logging.getLogger(__name__)
-
-logger.addHandler(logging.NullHandler())

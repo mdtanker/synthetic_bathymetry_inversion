@@ -1,16 +1,14 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
+# ================= Project metadata ==================
 [project]
 name = "synthetic_bathymetry_inversion"
-version = "0.0.1"
 authors = [
   { name = "Matt Tankersley", email = "matt.d.tankersley@gmail.com" },
 ]
 description = "Synthetic gravity inversions for sub-ice shelf bathymetry"
 keywords = ["python", "gravity", "inversion", "bathymetry"]
-requires-python = ">=3.9"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
@@ -20,81 +18,172 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-readme = "README.md"
-license = {file = "LICENSE"}
-
+dynamic = ["version"]
+dependencies = [] # <==== These are PyPI dependencies, add with: pixi add --pypi PACKAGE_NAME
 [project.urls]
 Documentation = "https://github.com/mdtanker/synthetic_bathymetry_inversion#readme"
 Issues = "https://github.com/mdtanker/synthetic_bathymetry_inversion/issues"
 Source = "https://github.com/mdtanker/synthetic_bathymetry_inversion"
 
-[tool.ruff]
-lint.select = [
-  "E", "F", "W", # flake8
-  "B",           # flake8-bugbear
-  "I",           # isort
-  "ARG",         # flake8-unused-arguments
-  "C4",          # flake8-comprehensions
-  "EM",          # flake8-errmsg
-  "ICN",         # flake8-import-conventions
-  "ISC",         # flake8-implicit-str-concat
-  "G",           # flake8-logging-format
-  "PGH",         # pygrep-hooks
-  "PIE",         # flake8-pie
-  "PL",          # pylint
-  "PT",          # flake8-pytest-style
-  "PTH",         # flake8-use-pathlib
-  "RET",         # flake8-return
-  "RUF",         # Ruff-specific
-  "SIM",         # flake8-simplify
-  "T20",         # flake8-print
-  "UP",          # pyupgrade
-  "YTT",         # flake8-2020
-  "EXE",         # flake8-executable
-  "NPY",         # NumPy specific rules
-  "PD",          # pandas-vet
-]
-lint.ignore = [
-  "PLR",    # Design related pylint codes
-  "G004",   # Logging with f-strings
-  "PD901",  # Bad variable name warning
-  "PD003", # Changes .isna to .isnull
-  "PD004", # Changes .notna to .notnull
-  "PD011", # Changes .values() to .to_numpy()
-  "ISC001", # Implicit string concatenation
-]
-src = ["src"]
-lint.unfixable = [
-  "T20",  # Removes print statements
-  "F841", # Removes unused variables
-  "PD003", # Changes .isna to .isnull
-  "PD004", # Changes .notna to .notnull
-  "PD011", # Changes .values() to .to_numpy()
-]
-# exclude = ["docs/index.md", "CHANGELOG.md"]
-line-length = 88 # Set the maximum line length to 88.
-lint.flake8-unused-arguments.ignore-variadic-names = true
-lint.isort.required-imports = ["from __future__ import annotations"]
-# Uncomment if using a _compat.typing backport
-extend-include = ["*.ipynb"]
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = ["T20"]
-"*.ipynb" = ["E501", "B007", "E402", "B018", "T201", "C408", "E712",]
+# ================ Make this project available as a package =================
 
-[tool.ruff.lint.flake8-pytest-style]
-mark-parentheses = true
+[build-system]
+requires = ["hatchling>=1.26", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.pixi.pypi-dependencies]
+synthetic_bathymetry_inversion = { path = ".", editable = true }
+
+# ================== Conda dependencies ==================
+# added with: pixi add PACKAGE_NAME
+
+[tool.pixi.dependencies]
+polartoolkit = ">=1.2.0,<2"
+xesmf = ">=0.8.7,<0.9"
+optuna = ">=4.5.0,<5"
+cmocean = ">=4.0.3,<5"
+adjusttext = ">=1.3.0,<2"
+shapely = ">=2.1.1,<3"
+numpy_groupies = ">=0.11.3,<0.12"
+invert4geom = ">=1.1.0,<2"
+python = "3.12.*"
+ipykernel = ">=6.30.1,<7"
+uqpy = ">=4.1.7"
+nbformat = ">=5.10.4,<6"
+
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "win-64"]
+
+# ================= Specify non-essential dependencies ==================
+
+# Features were added with: pixi add --feature docs sphinx myst-parser furo
+
+[tool.pixi.feature.docs.dependencies]
+sphinx = ">=7.0"
+myst-parser = ">=0.13"
+sphinx-copybutton = "*"
+sphinx-autodoc-typehints = "*"
+furo = ">=2023.8.17"
+nbsphinx = "*"
+sphinx-autobuild = ">=2024.10.3,<2025"
+
+[tool.pixi.feature.docs.tasks]
+docs = "sphinx-autobuild --open-browser -n -T -b html docs docs/_build/html"
+api = "sphinx-apidoc -o docs/api/ --module-first --no-toc --force src/synthetic_bathymetry_inversion"
+
+
+[tool.pixi.feature.pre-commit.dependencies]
+pre-commit = "*"
+
+[tool.pixi.feature.pre-commit.tasks]
+pre-commit = "pre-commit run --all-files"
+
+[tool.pixi.feature.pylint.dependencies]
+pylint = ">=3.2"
+
+[tool.pixi.feature.pylint.tasks]
+pylint = "pylint synthetic_bathymetry_inversion"
+
+[tool.pixi.feature.style.dependencies]
+pre-commit = "*"
+pylint = ">=3.2"
+
+[tool.pixi.feature.style.tasks]
+style = "pre-commit run --all-files | pylint synthetic_bathymetry_inversion"
+
+[tool.pixi.environments]
+docs = ["docs"]
+pre-commit = { features = ["pre-commit"], no-default-feature = true }
+pylint = ["pylint"]
+style = ["style"]
+# docs = {features = ["docs"], solve-group = "default"}
+
+# ================== Define tasks (shortcuts) ==================
+
+[tool.pixi.tasks]
+
+# ================== Linting, formatting, style checks ==================
+
+[tool.hatch]
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/synthetic_bathymetry_inversion/_version.py"
+
+[tool.hatch.envs.default]
+# duplicate for now since hatch doesn't support groups yet
+dependencies = []
+
+[tool.coverage]
+run.source = ["synthetic_bathymetry_inversion"]
+report.exclude_also = [
+  '\.\.\.',
+  'if typing.TYPE_CHECKING:',
+]
+
+[tool.mypy]
+files = ["src"]
+python_version = "3.12"
+warn_unused_configs = true
+strict = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+ignore_missing_imports = true
+disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = "synthetic_bathymetry_inversion.*"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+
+[tool.ruff]
+
+[tool.ruff.lint]
+extend-select = [
+  "ARG",      # flake8-unused-arguments
+  "B",        # flake8-bugbear
+  "C4",       # flake8-comprehensions
+  "EM",       # flake8-errmsg
+  "EXE",      # flake8-executable
+  "G",        # flake8-logging-format
+  "I",        # isort
+  "ICN",      # flake8-import-conventions
+  "NPY",      # NumPy specific rules
+  "PD",       # pandas-vet
+  "PGH",      # pygrep-hooks
+  "PIE",      # flake8-pie
+  "PL",       # pylint
+  "PT",       # flake8-pytest-style
+  "PTH",      # flake8-use-pathlib
+  "RET",      # flake8-return
+  "RUF",      # Ruff-specific
+  "SIM",      # flake8-simplify
+  "T20",      # flake8-print
+  "UP",       # pyupgrade
+  "YTT",      # flake8-2020
+]
+ignore = [
+  "PLR09",    # Too many <...>
+  "PLR2004",  # Magic value used in comparison
+]
+# Uncomment if using a _compat.typing backport
+# typing-modules = ["synthetic_bathymetry_inversion._compat.typing"]
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = ["T201", "B007", "C408"]
 
 [tool.pylint]
-py-version = "3.9"
-# ignore-patterns = [".*.md",]
+py-version = "3.12"
+ignore-paths = [".*\\_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 similarities.min-similarity-lines = 5
@@ -106,3 +195,6 @@ messages_control.disable = [
   "wrong-import-position",
   "cyclic-import",
 ]
+
+[tool.codespell]
+ignore-words-list = ["montaj", "Stange"]

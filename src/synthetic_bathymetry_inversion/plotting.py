@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-import string
-
 import cmocean.cm as cmo
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -50,6 +46,11 @@ def plot_2var_ensemble(
     colorbar_axes: tuple = (0.95, 0.1, 0.05, 0.8),
     constrained_layout: bool = True,
 ):
+    """
+    plot 2D ensemble results with 1 axis for each ensemble variable, and background
+    color showing the values of a 3rd variable (e.g., score). Optionally, overlay
+    points colored by a 4th variable.
+    """
     fig, ax = plt.subplots(figsize=figsize, constrained_layout=constrained_layout)
     df = df.copy()
 
@@ -239,6 +240,10 @@ def plot_ensemble_as_lines(
     plot_maximums=False,
     plot_minimums=False,
 ):
+    """
+    plot 2D ensemble results as lines with y axis as 1 ensemble variable and color as
+    the other ensemble variable.
+    """
     sns.set_theme()
 
     if ax is None:
@@ -250,7 +255,8 @@ def plot_ensemble_as_lines(
     grouped = results.groupby(groupby_col)
 
     norm = plt.Normalize(
-        vmin=results[groupby_col].values.min(), vmax=results[groupby_col].values.max()
+        vmin=results[groupby_col].to_numpy().min(),
+        vmax=results[groupby_col].to_numpy().max(),
     )
     slopes = []
     lines = []
@@ -332,7 +338,7 @@ def plot_ensemble_as_lines(
 
     if trend_line:
         if slope_min_max:
-            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -343,7 +349,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
 
-            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1] - 0.1,
@@ -354,7 +360,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmax(slopes)], "r", lw=1)
         elif slope_min:
-            text = rf"$min\ slope={round(min(slopes),slope_decimals)}$"
+            text = rf"$min\ slope={round(min(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -365,7 +371,7 @@ def plot_ensemble_as_lines(
             )
             ax1.plot(results[x], lines[np.argmin(slopes)], "r", lw=1)
         elif slope_max:
-            text = rf"$max\ slope={round(max(slopes),slope_decimals)}$"
+            text = rf"$max\ slope={round(max(slopes), slope_decimals)}$"
             plt.gca().text(
                 trend_line_text_loc[0],
                 trend_line_text_loc[1],
@@ -386,7 +392,7 @@ def plot_ensemble_as_lines(
             #     fontsize=10,
             #     verticalalignment="top",
             # )
-            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1) # noqa: E501
+            # ax1.plot(results[x], lines[np.argsort(slopes)[len(slopes) // 2]], "r", lw=1)
 
             # else:
             z = np.polyfit(results[x], results[y], 1)
@@ -448,87 +454,6 @@ def plot_ensemble_as_lines(
     return fig
 
 
-def plot_1var_ensemble(
-    df,
-    x,
-    y,
-    title,
-    xlabel,
-    ylabel,
-    highlight_points=None,
-    horizontal_line=None,
-    horizontal_line_label=None,
-    starting_error=None,
-    logy=False,
-    logx=False,
-):
-    sns.set_theme()
-
-    df = df.copy()
-
-    df = df.sort_values(x)
-
-    _fig, ax1 = plt.subplots(figsize=(5, 3.5))
-    plt.title(title)
-
-    if horizontal_line is not None:
-        plt.axhline(
-            y=horizontal_line,
-            linewidth=2,
-            color="gray",
-            linestyle="dashed",
-            label=horizontal_line_label,
-        )
-
-    ax1.plot(df[x], df[y], "bd-", markersize=7, label="inverted")
-    ax1.set_xlabel(
-        xlabel,
-        # color="b",
-    )
-
-    if starting_error is not None:
-        ax1.plot(
-            df[x],
-            df[starting_error],
-            "g.-",
-            markersize=10,
-            label="starting",
-            zorder=1,
-        )
-
-    if logy:
-        ax1.set_yscale("log")
-    if logx:
-        ax1.set_xscale("log")
-
-    ax1.set_ylabel(ylabel)
-    # ax1.tick_params(axis="x", colors='b', which="both")
-    ax1.set_zorder(2)
-
-    if highlight_points is not None:
-        for i, ind in enumerate(highlight_points):
-            plt.plot(
-                df[x].loc[ind],
-                df[y].loc[ind],
-                "s",
-                markersize=12,
-                color="b",
-                zorder=3,
-            )
-            plt.annotate(
-                string.ascii_lowercase[i + 1],
-                (df[x].loc[ind], df[y].loc[ind]),
-                fontsize=15,
-                color="white",
-                ha="center",
-                va="center",
-                zorder=4,
-            )
-
-    plt.legend(loc="best")
-    plt.tight_layout()
-
-
 def uncert_plots(
     results,
     inversion_region,
@@ -537,6 +462,9 @@ def uncert_plots(
     constraint_points=None,
     weight_by=None,
 ):
+    """
+    plot uncertainty results from invert4geom uncertainty module
+    """
     if (weight_by == "constraints") & (constraint_points is None):
         msg = "must provide constraint_points if weighting by constraints"
         raise ValueError(msg)
