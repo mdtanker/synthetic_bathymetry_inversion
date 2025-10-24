@@ -1,10 +1,6 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
+# ================= Project metadata ==================
 [project]
 name = "synthetic_bathymetry_inversion"
-version = "0.0.1"
 authors = [
   { name = "Matt Tankersley", email = "matt.d.tankersley@gmail.com" },
 ]
@@ -28,63 +24,102 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
-# list your package's dependencies below
-# follow SPEC0 for specifying minimum dependency versions for main packages: https://scientific-python.org/specs/spec-0000/
-# uncomment below packages if you need them
-dependencies = [
-  # "ipython>=8.13.0",
-  # "matplotlib>=3.7.0",
-  # "networkx>=3.1",
-  # "pandas>=2.0.0",
-  # "scikit-image>=0.21.0",
-  # "scikit-learn>=1.3.0",
-  # "scipy>=1.11.0",
-  # "xarray>=2023.4.0",
-  # "zarr>=2.15.0",
-  "polartoolkit>=1.1.3",
-  "invert4geom>=1.1.0",
-  "esmpy",
-  "xesmf",
-  "cmocean",
-  "adjusttext",
-  "shapely",
-]
-
-[dependency-groups]
-test = [
-  "pytest >=6",
-  "pytest-cov >=3",
-]
-dev = [
-  { include-group = "test" },
-]
-all = [
-  {include-group = "test"},
-  {include-group = "dev"},
-]
-
+dynamic = ["version"]
+dependencies = [] # <==== These are PyPI dependencies, add with:
+                  # pixi add --pypi PACKAGE_NAME
 [project.urls]
 Documentation = "https://github.com/mdtanker/synthetic_bathymetry_inversion#readme"
 Issues = "https://github.com/mdtanker/synthetic_bathymetry_inversion/issues"
 Source = "https://github.com/mdtanker/synthetic_bathymetry_inversion"
 
+# ================ Make this project available as a package =================
+
+[build-system]
+requires = ["hatchling>=1.26", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.pixi.pypi-dependencies]
+synthetic_bathymetry_inversion = { path = ".", editable = true }
+
+# ================== Conda dependencies ==================
+# added with: pixi add PACKAGE_NAME
+
+[tool.pixi.dependencies]
+polartoolkit = ">=1.2.0,<2"
+xesmf = ">=0.8.7,<0.9"
+optuna = ">=4.5.0,<5"
+cmocean = ">=4.0.3,<5"
+adjusttext = ">=1.3.0,<2"
+shapely = ">=2.1.1,<3"
+numpy_groupies = ">=0.11.3,<0.12"
+invert4geom = ">=1.1.0,<2"
+python = "3.12.*"
+ipykernel = ">=6.30.1,<7"
+uqpy = ">=4.1.7"
+nbformat = ">=5.10.4,<6"
+
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "win-64"]
+
+# ================= Specify non-essential dependencies ==================
+
+# Features were added with: pixi add --feature docs sphinx myst-parser furo
+
+[tool.pixi.feature.docs.dependencies]
+sphinx = ">=7.0"
+myst-parser = ">=0.13"
+sphinx-copybutton = "*"
+sphinx-autodoc-typehints = "*"
+furo = ">=2023.8.17"
+nbsphinx = "*"
+sphinx-autobuild = ">=2024.10.3,<2025"
+
+[tool.pixi.feature.docs.tasks]
+docs = "sphinx-autobuild --open-browser -n -T -b html docs docs/_build/html"
+api = "sphinx-apidoc -o docs/api/ --module-first --no-toc --force src/synthetic_bathymetry_inversion"
+
+
+[tool.pixi.feature.pre-commit.dependencies]
+pre-commit = "*"
+
+[tool.pixi.feature.pre-commit.tasks]
+pre-commit = "pre-commit run --all-files"
+
+[tool.pixi.feature.pylint.dependencies]
+pylint = ">=3.2"
+
+[tool.pixi.feature.pylint.tasks]
+pylint = "pylint synthetic_bathymetry_inversion"
+
+[tool.pixi.feature.style.dependencies]
+pre-commit = "*"
+pylint = ">=3.2"
+
+[tool.pixi.feature.style.tasks]
+style = "pre-commit run --all-files | pylint synthetic_bathymetry_inversion"
+
+[tool.pixi.environments]
+docs = ["docs"]
+pre-commit = { features = ["pre-commit"], no-default-feature = true }
+pylint = ["pylint"]
+style = ["style"]
+# docs = {features = ["docs"], solve-group = "default"}
+
+# ================== Define tasks (shortcuts) ==================
+
+[tool.pixi.tasks]
+
+# ================== Linting, formatting, style checks ==================
+
+[tool.hatch]
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/synthetic_bathymetry_inversion/_version.py"
+
 [tool.hatch.envs.default]
 # duplicate for now since hatch doesn't support groups yet
 dependencies = []
-scripts.test = "pytest {args}"
-
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-xfail_strict = true
-filterwarnings = [
-  "error",
-]
-log_cli_level = "INFO"
-testpaths = [
-  "tests",
-]
-
 
 [tool.coverage]
 run.source = ["synthetic_bathymetry_inversion"]
@@ -94,8 +129,8 @@ report.exclude_also = [
 ]
 
 [tool.mypy]
-files = ["src", "tests"]
-python_version = "3.11"
+files = ["src"]
+python_version = "3.12"
 warn_unused_configs = true
 strict = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
@@ -147,12 +182,10 @@ ignore = [
 # typing-modules = ["synthetic_bathymetry_inversion._compat.typing"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["T20"]
-"noxfile.py" = ["T20"]
 "*.ipynb" = ["T201", "B007", "C408"]
 
 [tool.pylint]
-py-version = "3.11"
+py-version = "3.12"
 ignore-paths = [".*\\_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"

@@ -1,10 +1,19 @@
 # output results
 results/*
 !results/.gitkeep
+results/ice_shelves/*
+!results/ice_shelves/.gitkeep
+results/Ross_Sea/*
+!results/Ross_Sea/.gitkeep
+results/Ross_Sea/ensembles/*
+!results/Ross_Sea/ensembles/.gitkeep
 
 # temp files
 tmp_outputs/*
 !tmp_outputs/.gitkeep
+
+# setuptools_scm
+src/*/_version.py
 
 # vs code
 .vscode/
@@ -180,3 +189,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml

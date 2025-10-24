@@ -1,23 +1,20 @@
-name: synthetic_bathymetry_inversion
+name: default
 channels:
-  - conda-forge
-  - nodefaults
+- conda-forge
+- nodefaults
 dependencies:
-  - python=3.12
-  # add your dependencies here
-  - polartoolkit==1.1.3
-  - invert4geom=1.1.0
-  - esmpy # needed for xesmf to install correctly
-  - xesmf # needed for invert4geom noise contamination function
-  - cmocean
-  - adjusttext
-  - shapely
-  # dev
-  - ipykernel
-  - jupyterlab
-  - pytest>=6
-  - pytest-cov>=3
-  # below packages need to be installed with pip (aren't available in conda-forge)
-  # - pip
-  # - pip:
-  #     -
+- polartoolkit >=1.2.0,<2
+- xesmf >=0.8.7,<0.9
+- optuna >=4.5.0,<5
+- cmocean >=4.0.3,<5
+- adjusttext >=1.3.0,<2
+- shapely >=2.1.1,<3
+- numpy_groupies >=0.11.3,<0.12
+- invert4geom >=1.1.0,<2
+- python 3.12.*
+- ipykernel >=6.30.1,<7
+- uqpy >=4.1.7
+- nbformat >=5.10.4,<6
+- pip
+- pip:
+  - -e .

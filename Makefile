@@ -17,6 +17,3 @@ update:
 
 remove:
 	mamba env remove --name $(PROJECT)
-
-export:
-	mamba env export --file pinned_environment.yml --name $(PROJECT) --no-builds
