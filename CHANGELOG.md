@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - replace `nox` with `pixi` tasks
 - remove unused test files
 - clean up repo
-
+- clean code and remove unused functions
 
 ## v0.0.1
 Released on 2025-06-07

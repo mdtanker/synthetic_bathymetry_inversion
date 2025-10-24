@@ -220,7 +220,7 @@ def combine_offshore_onshore_points(
             10: "multibeam",
         }
 
-        dataid = fetch.bedmachine(layer="dataid")
+        dataid = fetch.bedmachine(layer="dataid").compute()
         # drop no data points
         dataid_ds = dataid.where(dataid != 0, drop=True)
 
@@ -259,6 +259,9 @@ def combine_offshore_onshore_points(
 
 
 def get_ice_shelves():
+    """
+    get a geodataframe of ice shelf shapefiles with some merged shelves.
+    """
     # read into a geodataframe
     ice_shelves = gpd.read_file(fetch.antarctic_boundaries(version="IceShelf"))
 
@@ -336,6 +339,9 @@ def plot_ice_shelf_names(
     shadow_font="2p,white",
     names_as_numbers=False,
 ):
+    """
+    Add ice shelf names to a pygmt map.
+    """
     if names_as_numbers:
         text = [str(i) for i in range(1, len(ice_shelves) + 1)]
     else:
@@ -375,12 +381,21 @@ def constraints_and_min_distances_single(
     plot: bool = False,
     save_plot: bool = False,
 ) -> None:
+    """
+    For an ice shelf, extract all available point measurements of bathymetry / bed
+    topography in a region around the ice shelf. Save these to a csv, then compute a
+    grid of the distance to the nearest points, and save this to a netcdf.
+    """
+    logger.debug("Processing %s ice shelf", ice_shelf.NAME)
+
     # convert to geodataframe
     gdf = gpd.GeoDataFrame(ice_shelf).T.set_geometry("geometry")
 
     # define region around each ice shelf with 10km buffer
     reg = utils.region_to_bounding_box(gdf.iloc[0].geometry.bounds)
     reg = vd.pad_region(reg, buffer)
+
+    logger.debug("Using region: %s", reg)
 
     # get ibcso points offshore and bedmap points onshore for the region
     bed_points = combine_offshore_onshore_points(
@@ -390,6 +405,8 @@ def constraints_and_min_distances_single(
         grounded_as_points=grounded_as_points,
         spacing=spacing,
     )
+
+    logger.debug("Number of point measurements: %s", len(bed_points))
 
     if fname is not None:
         bed_points.to_csv(
@@ -419,6 +436,7 @@ def constraints_and_min_distances_single(
 
     # calculate minimum distance between each grid cell and the nearest point
     try:
+        logger.debug("Calculating minimum distance grid")
         min_dist = (
             invert4geom_utils.normalized_mindist(
                 bed_points,
@@ -431,6 +449,7 @@ def constraints_and_min_distances_single(
         logger.error("issue with calculating minimum distance for %s", gdf.NAME)
         return
     # mask to the ice shelf outline
+    logger.debug("Masking grid to ice shelf outline")
     min_dist = utils.mask_from_shp(
         shapefile=gdf,
         grid=min_dist,
@@ -441,13 +460,15 @@ def constraints_and_min_distances_single(
     if fname is not None:
         min_dist.to_netcdf(f"{fname}_min_dist.nc")
 
-    if plot:
+    if plot or save_plot:
+        logger.debug("Plotting")
         fname = fname if save_plot else None
         plot_constraints_and_min_distances(
             gdf.iloc[0],
             min_dist,
             bed_points,
             fname,
+            show_plot=plot,
         )
 
 
@@ -522,6 +543,10 @@ def load_constraints_and_min_distances(
     plot: bool = False,
     save_plot: bool = False,
 ):
+    """
+    Load constraints and minimum distances for each ice shelf and calculate some
+    statistics.
+    """
     gdf = ice_shelves.copy()
 
     pbar = tqdm(
@@ -533,7 +558,10 @@ def load_constraints_and_min_distances(
         pbar.set_description(f"Loading data for {row.NAME}")
 
         try:
-            constraints_df = pd.read_csv(f"{file_path}{row.NAME}_constraints.csv.gz")
+            constraints_df = pd.read_csv(
+                f"{file_path}{row.NAME}_constraints.csv.gz",
+                low_memory=False,
+            )
         except FileNotFoundError as e:
             logger.error(e)
             logger.error("Failed to load constraints for %s", row.NAME)
@@ -552,7 +580,7 @@ def load_constraints_and_min_distances(
             min_dist.to_numpy().ravel(), nan_policy="omit"
         )
 
-        if plot:
+        if plot or save_plot:
             fname = file_path + row.NAME if save_plot else None
 
             plot_constraints_and_min_distances(
@@ -560,6 +588,7 @@ def load_constraints_and_min_distances(
                 min_dist=min_dist,
                 constraints_df=constraints_df,
                 fname=fname,
+                show_plot=plot,
             )
 
     return gdf
@@ -571,6 +600,10 @@ def add_single_constraint(
     spacing=100,
     buffer=20e3,
 ):
+    """
+    Add a single constraint to the ice shelf and recalculate the median minimum
+    distance.
+    """
     gdf = ice_shelves.copy()
 
     pbar = tqdm(
@@ -582,7 +615,10 @@ def add_single_constraint(
         pbar.set_description(f"Loading data for {row.NAME}")
 
         try:
-            constraints_df = pd.read_csv(f"{file_path}{row.NAME}_constraints.csv.gz")
+            constraints_df = pd.read_csv(
+                f"{file_path}{row.NAME}_constraints.csv.gz",
+                low_memory=False,
+            )
         except FileNotFoundError as e:
             logger.error(e)
             logger.error("Failed to load constraints for %s", row.NAME)
@@ -668,7 +704,11 @@ def plot_constraints_and_min_distances(
     min_dist: xr.DataArray,
     constraints_df: pd.DataFrame,
     fname: str | None = None,
+    show_plot: bool = True,
 ):
+    """
+    Plot constraint proximity and the locations of the constraints for an ice shelf.
+    """
     name = ice_shelf.NAME
     region = vd.get_region(
         (
@@ -687,7 +727,6 @@ def plot_constraints_and_min_distances(
         cbar_font="18p,Helvetica",
         inset=True,
         inset_width=0.2,
-        # inset_position=f"jTL+-{12*.2}c/0c",
         inset_position="jTR+jTL",
         scalebar=True,
         scalebar_box="+gwhite@30+p0.5p,gray30,solid+r3p",
@@ -695,8 +734,6 @@ def plot_constraints_and_min_distances(
         points=constraints_df,
         points_style="p1.5p",
         points_fill="black",
-        # simple_basemap=True,
-        # simple_basemap_version="measures-v2",
         modis_basemap=True,
         modis_version="125m",
         modis_transparency=60,
@@ -723,13 +760,15 @@ def plot_constraints_and_min_distances(
     fig.text(
         position="TC",
         justify="BC",
-        text=f"Median; {round(np.nanmedian(min_dist), 2)} km",
+        text=f"Median nearest distance; {round(np.nanmedian(min_dist), 2)} km",
         offset="0c/.3c",
         font="16p,Helvetica",
         no_clip=True,
     )
     fig.legend(position="jTR+jTR", box="+gwhite@30+p1p,gray30,solid")
-    fig.show()
+
+    if show_plot:
+        fig.show()
 
     if fname is not None:
         fig.savefig(f"{fname}_constraints.png")
@@ -746,6 +785,11 @@ def gravity_anomalies_single(
     plot: bool = False,
     save_plot: bool = False,
 ) -> None:
+    """
+    Calculate gravity disturbance anomalies over an ice shelf region and the terrain
+    mass effect components due to ice, water, and rock layers. Save the resulting
+    datasets to csv files. Optionally plot the results.
+    """
     # convert to geodataframe
     gdf = gpd.GeoDataFrame(ice_shelf).T.set_geometry("geometry")
 
@@ -807,20 +851,38 @@ def gravity_anomalies_single(
         verbose="q",
     ).rename({"x": "easting", "y": "northing"})
 
-    # make gravity dataframe
-    grav_df = (
-        xr.merge(
-            [
-                eigen_gravity.gravity,
-                antgg_disturbance.gravity_disturbance,
-                antgg_disturbance.ellipsoidal_height,
-                antgg_uncertainty.error,
-            ]
-        )
-        .to_dataframe()
-        .reset_index()
-        .rename(columns={"x": "easting", "y": "northing"})
-    )
+    # # make gravity dataframe
+    # grav_df = (
+    #     xr.merge(
+    #         [
+    #             eigen_gravity.gravity,
+    #             antgg_disturbance.gravity_disturbance,
+    #             antgg_disturbance.ellipsoidal_height,
+    #             antgg_uncertainty.error,
+    #         ]
+    #     )
+    #     .to_dataframe()
+    #     .reset_index()
+    #     .rename(columns={"x": "easting", "y": "northing"})
+    # )
+
+    # clip grav to ice shelf region now instead of latter
+    grav_grid = xr.merge(
+        [
+            eigen_gravity.gravity,
+            antgg_disturbance.gravity_disturbance,
+            antgg_disturbance.ellipsoidal_height,
+            antgg_uncertainty.error,
+        ]
+    ).rename({"x": "easting", "y": "northing"})
+    # create mask for ice shelf
+    grav_grid["ice_shelf_mask"] = utils.mask_from_shp(
+        shapefile=gdf,
+        grid=grav_grid.gravity_disturbance,
+        invert=False,
+    ).rename("ice_shelf_mask")
+    # subset data to ice shelf
+    grav_df = grav_grid.to_dataframe().reset_index()
 
     # check layers to cross
     # anywhere bed is above icebase, set equal to icebase
@@ -917,7 +979,7 @@ def gravity_anomalies_single(
             constraints_df=constraints_df,
             **regional_grav_kwargs,
         )
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         logger.error(e)
         logger.error("Error in regional separation")
 
@@ -926,16 +988,16 @@ def gravity_anomalies_single(
         grav_df["res"] = np.nan
 
     logger.debug("calculating stats for each anomaly type")
-    # create mask for ice shelf
-    grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
-    grav_grid["ice_shelf_mask"] = utils.mask_from_shp(
-        shapefile=gdf,
-        grid=grav_grid.partial_topo_free_disturbance,
-        invert=False,
-    ).rename("ice_shelf_mask")
+    # # create mask for ice shelf
+    # grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
+    # grav_grid["ice_shelf_mask"] = utils.mask_from_shp(
+    #     shapefile=gdf,
+    #     grid=grav_grid.partial_topo_free_disturbance,
+    #     invert=False,
+    # ).rename("ice_shelf_mask")
 
-    # subset data to ice shelf
-    grav_df = grav_grid.to_dataframe().reset_index()
+    # # subset data to ice shelf
+    # grav_df = grav_grid.to_dataframe().reset_index()
 
     if fname is not None:
         grav_df.to_csv(
@@ -967,6 +1029,9 @@ def gravity_anomalies(
     plot: bool = False,
     save_plot: bool = False,
 ) -> None:
+    """
+    Compute gravity anomalies for each ice shelf and save to csv.
+    """
     gdf = ice_shelves.copy()
 
     pbar = tqdm(
@@ -978,7 +1043,10 @@ def gravity_anomalies(
         pbar.set_description(f"Processing {row.NAME}")
 
         try:
-            constraints_df = pd.read_csv(f"{file_path}{row.NAME}_constraints.csv.gz")
+            constraints_df = pd.read_csv(
+                f"{file_path}{row.NAME}_constraints.csv.gz",
+                low_memory=False,
+            )
         except FileNotFoundError as e:
             logger.error(e)
             logger.error("Failed to load constraints for %s", row.NAME)
@@ -1003,6 +1071,8 @@ def load_grav_anomalies(
     plot: bool = False,
     save_plot: bool = False,
 ):
+    """
+    Load gravity anomalies and calculate statistics for each ice shelf."""
     gdf = ice_shelves.copy()
 
     pbar = tqdm(
@@ -1015,7 +1085,10 @@ def load_grav_anomalies(
         pbar.set_description(f"Loading data for {row.NAME}")
 
         try:
-            constraints_df = pd.read_csv(f"{file_path}{row.NAME}_constraints.csv.gz")
+            constraints_df = pd.read_csv(
+                f"{file_path}{row.NAME}_constraints.csv.gz",
+                low_memory=False,
+            )
         except FileNotFoundError as e:
             logger.error(e)
             logger.error("Failed to load constraints for %s", row.NAME)
@@ -1074,6 +1147,9 @@ def plot_grav_anomalies(
     constraints_df: pd.DataFrame,
     fname: str | None = None,
 ):
+    """
+    Plot gravity anomalies for a single ice shelf.
+    """
     name = ice_shelf.iloc[0].NAME
 
     grav_grid = grav_df.set_index(["northing", "easting"]).to_xarray()
@@ -1146,7 +1222,7 @@ def plot_grav_anomalies(
         if fname is not None:
             fig.savefig(f"{fname}_grav_anomalies.png")
 
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         logger.error(e)
         logger.error("Failed to plot %s", name)
 
@@ -1238,7 +1314,11 @@ def plot_ice_shelf_info(
     constraints_df: pd.DataFrame | None = None,
     min_dist: xr.DataArray | None = None,
     fig_path: str | None = None,
+    show_plot: bool = True,
 ):
+    """
+    Plot ice shelf information including constraint proximity and gravity anomalies.
+    """
     name = ice_shelf.NAME.iloc[0]
 
     region = vd.get_region(
@@ -1329,11 +1409,12 @@ def plot_ice_shelf_info(
             modis_transparency=60,
             yshift_extra=1,
         )
-        fig.show()
+        if show_plot:
+            fig.show()
         if fig_path is not None:
             fig.savefig(f"{fig_path}{name}_info.png")
 
-    except Exception as e:
+    except Exception as e:  # pylint: disable=broad-exception-caught
         logger.error(e)
         logger.error("Failed to plot %s", name)
 
@@ -1344,6 +1425,11 @@ def load_ice_shelf_info_single(
     plot: bool = False,
     save_plot: bool = False,
 ):
+    """
+    Load ice shelf bed constraint points and gravity anomalies from saved files, and
+    calculated statistics on constraint proximity and gravity anomalies. Optionally make
+    subplots of this data for the ice shelf.
+    """
     # convert to geodataframe
     gdf = gpd.GeoDataFrame(ice_shelf).T.set_geometry("geometry")
 
@@ -1363,7 +1449,10 @@ def load_ice_shelf_info_single(
         logger.error("Failed to load minimum distances for %s", name)
         return gdf
     try:
-        constraints_df = pd.read_csv(f"{file_path}{name}_constraints.csv.gz")
+        constraints_df = pd.read_csv(
+            f"{file_path}{name}_constraints.csv.gz",
+            low_memory=False,
+        )
     except FileNotFoundError as e:
         logger.error(e)
         logger.error("Failed to load constraints for %s", name)
@@ -1424,7 +1513,7 @@ def load_ice_shelf_info_single(
                 col_name
             ]
 
-    if plot:
+    if plot or save_plot:
         fig_path = file_path if save_plot else None
 
         plot_ice_shelf_info(
@@ -1433,6 +1522,7 @@ def load_ice_shelf_info_single(
             constraints_df=constraints_df,
             min_dist=min_dist,
             fig_path=fig_path,
+            show_plot=plot,
         )
 
     return gdf
@@ -1444,6 +1534,11 @@ def load_ice_shelf_info(
     plot: bool = False,
     save_plot: bool = False,
 ):
+    """
+    Go through each ice shelf and load saved constraint proximity and gravity anomaly
+    data and calculate statistics. Optionally make subplots of this data for each ice
+    shelf.
+    """
     gdf = ice_shelves.copy()
 
     pbar = tqdm(
@@ -1482,6 +1577,9 @@ def add_shelves_to_ensembles(
     seperate_inverted_shelves: bool = True,
     fontsize: float = 8,
 ):
+    """
+    Add ice shelf labels to ensemble plots.
+    """
     gdf = ice_shelves.copy()
 
     if shelves_to_label is None:
@@ -1512,6 +1610,8 @@ def add_shelves_to_ensembles(
                 add_to_label = f": {'/'.join(vals)} m"
             elif isinstance(col_to_add_to_label, str):
                 add_to_label = f": {round(row[col_to_add_to_label])} m"
+            else:
+                add_to_label = ""
         else:
             add_to_label = ""
         if seperate_inverted_shelves:
@@ -1636,130 +1736,3 @@ def add_shelves_to_ensembles(
         )
         for handle, text in zip(leg.legend_handles, leg.get_texts(), strict=False):
             text.set_color(handle.get_facecolor()[0])
-
-
-def ensemble_scatterplot(
-    x: str,
-    y: str,
-    ice_shelves: gpd.GeoDataFrame,
-    figsize=(5, 5),
-    label_shelves: bool = True,
-    shelves_to_label: list[str] | None = None,
-    col_to_add_to_label: str | None = None,
-    legend: bool = True,
-    legend_cols: int = 2,
-    legend_loc: str = "center left",
-    legend_bbox_to_anchor: tuple[float, float] = (1.3, 0.5),
-    legend_borderaxespad: float = 0,
-    xlims: tuple[float, float] | None = None,
-    ylims: tuple[float, float] | None = None,
-    logx=False,
-    logy=False,
-):
-    gdf = ice_shelves.copy()
-
-    fig, ax = plt.subplots(figsize=figsize, constrained_layout=False)
-    ax.set_xlabel(x)
-    ax.set_ylabel(y)
-
-    if shelves_to_label is None:
-        shelves_to_label = gdf.NAME.unique().tolist()
-
-    if xlims is not None:
-        gdf = gdf[(gdf[x] >= xlims[0]) & (gdf[x] <= xlims[1])]
-    if ylims is not None:
-        gdf = gdf[(gdf[y] >= ylims[0]) & (gdf[y] <= ylims[1])]
-
-    texts = []
-    for ind, (_i, row) in enumerate(gdf.iterrows()):
-        if col_to_add_to_label is not None:
-            add_to_label = f": {round(row[col_to_add_to_label])} m"
-        else:
-            add_to_label = ""
-        # plot inverted shelves as red stars and red labels
-        if row.NAME in inverted_shelves:
-            ax.scatter(
-                row[x],
-                row[y],
-                color="red",
-                marker="*",
-                s=12,
-                label=f"{ind + 1} {row.NAME.replace('_', ' ')}{add_to_label}",
-            )
-            if label_shelves:
-                texts.append(
-                    ax.text(
-                        row[x],
-                        row[y],
-                        f"{ind + 1}",
-                        fontsize=8,
-                        color="red",
-                        fontweight="normal",
-                        path_effects=[
-                            patheffects.withStroke(linewidth=1.5, foreground="white")
-                        ],
-                    )
-                )
-        # plot other shelves as black dots and black labels
-        elif row.NAME in shelves_to_label:
-            ax.scatter(
-                row[x],
-                row[y],
-                color="black",
-                s=2,
-                label=f"{ind + 1} {row.NAME.replace('_', ' ')}{add_to_label}",
-            )
-            if label_shelves:
-                texts.append(
-                    ax.text(
-                        row[x],
-                        row[y],
-                        f"{ind + 1}",
-                        fontsize=8,
-                        color="black",
-                        fontweight="normal",
-                        path_effects=[
-                            patheffects.withStroke(linewidth=1.5, foreground="white")
-                        ],
-                    )
-                )
-        else:
-            ax.scatter(
-                row[x],
-                row[y],
-                color="black",
-                s=2,
-            )
-
-    # ax.set_xlim(xlims)
-    # ax.set_ylim(ylims)
-
-    if logy:
-        ax.set_yscale("log")
-    if logx:
-        ax.set_xscale("log")
-
-    if adjust_text is None:
-        logger.error("adjust_text not found, please install adjustText")
-        return None
-    adjust_text(
-        texts,
-        arrowprops={"arrowstyle": "-", "color": "k", "lw": 0.8},
-        ax=ax,
-        expand=(1.2, 1.2),
-    )
-
-    if label_shelves and legend:
-        leg = ax.legend(
-            loc=legend_loc,
-            title="Ice Shelves",
-            bbox_to_anchor=legend_bbox_to_anchor,
-            borderaxespad=legend_borderaxespad,
-            markerscale=0,
-            fontsize=8,
-            ncol=legend_cols,
-        )
-        for handle, text in zip(leg.legend_handles, leg.get_texts(), strict=False):
-            text.set_color(handle.get_facecolor()[0])
-
-    return fig

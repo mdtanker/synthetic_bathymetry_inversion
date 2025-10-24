@@ -1,4 +1,4 @@
-import math
+import math  # pylint: disable=too-many-lines
 
 import geopandas as gpd
 import numpy as np
@@ -326,6 +326,11 @@ def constraint_layout_number(
     plot=False,
     seed=0,
 ):
+    """
+    Create a layout of constraint points within a region. Can either specify number of
+    constraints, their spacing, or the number of points in each direction (shape).
+    """
+
     full_region = region
 
     if shapefile is not None:
@@ -365,7 +370,7 @@ def constraint_layout_number(
             },
         }
         sampled_coord_dict = uncertainty.create_lhc(
-            n_samples=num_constraints,
+            n_samples=int(num_constraints),
             parameter_dict=coord_dict,
             criterion="maximin",
         )
@@ -382,6 +387,7 @@ def constraint_layout_number(
         fudge_factor = 0
         while True:
             if num_constraints is not None:
+                num_constraints = int(num_constraints)
                 num_y = int(np.ceil((num_constraints / (x / y)) ** 0.5))
                 num_x = int(np.ceil(num_constraints / num_y)) + fudge_factor
             elif shape is not None:
@@ -534,99 +540,6 @@ def constraint_layout_number(
     return constraints
 
 
-def constraint_layout_spacing(
-    spacing,
-    shift_stdev=0,
-    region=None,
-    shapefile=None,
-    padding=None,
-    plot=False,
-):
-    if shapefile is not None:
-        bounds = gpd.read_file(shapefile).bounds
-        region = [bounds.minx, bounds.maxx, bounds.miny, bounds.maxy]
-        region = [x.to_numpy()[0] for x in region]
-
-    # create regular grid, with set number of constraint points
-    reg = vd.pad_region(region, padding) if padding is not None else region
-
-    # start grid from edges
-    # x = np.arange(reg[0], reg[1], spacing)
-    # y = np.arange(reg[2], reg[3], spacing)
-
-    # start grid from center
-    x_mid = reg[0] + (reg[1] - reg[0]) / 2
-    y_mid = reg[2] + (reg[3] - reg[2]) / 2
-    x1 = np.arange(x_mid, reg[0], -spacing)
-    x2 = np.arange(x_mid + spacing, reg[1], spacing)
-    y1 = np.arange(y_mid, reg[2], -spacing)
-    y2 = np.arange(y_mid + spacing, reg[3], spacing)
-    x = np.concatenate([x1, x2])
-    y = np.concatenate([y1, y2])
-
-    coords = np.meshgrid(x, y)
-
-    # turn coordinates into dataarray
-    da = vd.make_xarray_grid(
-        coords,
-        data=np.ones_like(coords[0]) * 1e3,
-        data_names="upward",
-        dims=("northing", "easting"),
-    )
-    # turn dataarray into dataframe
-    df = vd.grid_to_table(da)
-
-    # add randomness to the points
-    rand = np.random.default_rng(seed=0)
-    constraints = df.copy()
-    constraints["northing"] = rand.normal(df.northing, shift_stdev)
-    constraints["easting"] = rand.normal(df.easting, shift_stdev)
-
-    # check whether points are inside or outside of shp
-    if shapefile is not None:
-        gdf = gpd.GeoDataFrame(
-            constraints,
-            geometry=gpd.points_from_xy(x=constraints.easting, y=constraints.northing),
-            crs="EPSG:3031",
-        )
-        constraints["inside"] = gdf.within(gpd.read_file(shapefile).geometry[0])
-        constraints = constraints.drop(columns="geometry")
-    else:
-        constraints["inside"] = True
-
-    # drop outside constraints
-    constraints = constraints[constraints.inside]
-
-    # ensure all points are within region
-    constraints = utils.points_inside_region(
-        constraints, region, names=("easting", "northing")
-    )
-
-    if plot:
-        fig = maps.basemap(
-            fig_height=8,
-            region=region,
-            frame=True,
-        )
-
-        fig.plot(
-            x=constraints.easting,
-            y=constraints.northing,
-            style="c.1c",
-            fill="black",
-        )
-
-        if shapefile is not None:
-            fig.plot(
-                shapefile,
-                pen="0.2p,black",
-            )
-
-        fig.show()
-
-    return constraints
-
-
 def airborne_survey(
     along_line_spacing: float,
     grav_observation_height: float,
@@ -641,6 +554,11 @@ def airborne_survey(
     grav_grid: xr.DataArray | None = None,
     plot: bool = False,
 ):
+    """
+    Create a synthetic airborne gravity survey within a rectangular region.
+    Specify either number of lines or line spacing in each direction.
+    """
+
     if padding is not None:
         region = vd.pad_region(region, padding)
 
