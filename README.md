@@ -9,7 +9,7 @@ The Jupyter Notebooks for all the synthetic inversions, as well as creating the 
 
 Data outputs from these notebooks are saved in `results/`, and figure outputs are saved in `paper/figures/`.
 
-These notebooks can be explored at the following website generated from this repository:
+These notebooks can be explored at the following website generated from this repository: https://mdtanker.github.io/synthetic_bathymetry_inversion/
 
 
 <!-- SPHINX-START-badges -->
