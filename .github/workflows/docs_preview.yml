@@ -43,6 +43,9 @@ jobs:
           environments: >-
             docs
 
+      - id: install_local
+        run: pip install --no-deps -e .
+
       - id: install_pandoc
         run: sudo apt-get install pandoc
 
