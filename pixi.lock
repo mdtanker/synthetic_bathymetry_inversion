@@ -17983,8 +17983,8 @@ packages:
   timestamp: 1745946173026
 - pypi: ./
   name: synthetic-bathymetry-inversion
-  version: 0.0.2.dev19+g14d460b41.d20251024
-  sha256: b6eb8eaacc8817a6d1f124a71e54c5412bff7b0726ed0f13f8360c73bcbcd33e
+  version: 0.0.2.dev4+g7d57a0af8.d20251027
+  sha256: 67e9d5b3d2374e05dfaf7d6b533589ae226f2995fe7875562540c27aedeeb019
   requires_python: '>=3.11'
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/linux-64/tbb-2022.2.0-hb60516a_1.conda
