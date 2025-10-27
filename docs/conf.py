@@ -61,7 +61,7 @@ always_document_param_types = True
 # add_function_parentheses = False
 
 
-nbsphinx_execute = "auto"
+nbsphinx_execute = "never"
 
 nbsphinx_execute_arguments = [
     "--InlineBackend.figure_formats={'png2x'}",
