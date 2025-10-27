@@ -76,7 +76,8 @@ nbsphinx = "*"
 sphinx-autobuild = ">=2024.10.3,<2025"
 
 [tool.pixi.feature.docs.tasks]
-docs = "sphinx-autobuild --open-browser -n -T -b html docs docs/_build/html"
+docs_interactive = "sphinx-autobuild --open-browser -n -T -b html docs docs/_build/html"
+docs = "sphinx-build -n -T -b html docs docs/_build/html"
 api = "sphinx-apidoc -o docs/api/ --module-first --no-toc --force src/synthetic_bathymetry_inversion"
 
 
