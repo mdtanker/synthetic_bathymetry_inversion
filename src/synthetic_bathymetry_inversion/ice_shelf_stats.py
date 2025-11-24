@@ -1157,21 +1157,23 @@ def plot_grav_anomalies(
 
     anoms = [
         "gravity_disturbance",
-        "topo_free_disturbance",
         "starting_gravity",
+        "topo_free_disturbance",
         "reg",
         "res",
     ]
     anom_titles = [
         "Gravity disturbance",
-        "Topo-free disturbance",
         "Starting gravity",
+        "Topo-free disturbance (misfit)",
         "Regional misfit",
         "Residual misfit",
     ]
     grids = [grav_grid[a] for a in anoms]
-    cmaps = ["viridis"] * (len(anoms) - 1) + ["balance+h0"]
-    reverse_cpts = [False] * (len(grids) - 1) + [True]
+    cmaps = ["balance+h0"] * len(anoms)
+    cpt_limits = [
+        utils.get_min_max(g, robust=True, absolute=True) for g in grids
+    ]
     insets = [False] * (len(grids))
     cbar_labels = [
         f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # noqa: E712 # pylint: disable=singleton-comparison
@@ -1191,21 +1193,22 @@ def plot_grav_anomalies(
         cbar_labels.insert(
             0, f"uncertainty; RMSE: {round(utils.rmse(grav_grid.error))} mGal"
         )
-        reverse_cpts.insert(0, False)
         insets.insert(0, True)
         scalebars.insert(0, False)
         point_sets.insert(0, constraints_df)
         titles.insert(0, "AntGG gravity uncertainty")
         grids.insert(0, grav_grid.error)
-
+        cpt_limits.insert(
+            0,
+            utils.get_min_max(grav_grid.error, robust=True, absolute=False),
+        )
     try:
         fig = maps.subplots(
             grids,
             fig_title=f"{name.replace('_', ' ')} Ice Shelf",
             cmaps=cmaps,
-            reverse_cpts=reverse_cpts,
+            cpt_limits=cpt_limits,
             insets=insets,
-            robust=True,
             coast=True,
             coast_version="measures-v2",
             hist=True,
@@ -1332,52 +1335,70 @@ def plot_ice_shelf_info(
 
     anoms = [
         "gravity_disturbance",
-        "topo_free_disturbance",
         "starting_gravity",
+        "topo_free_disturbance",
         "reg",
         "res",
     ]
     anom_titles = [
         "Gravity disturbance",
-        "Topo-free disturbance (misfit)",
         "Starting gravity",
+        "Topo-free disturbance (misfit)",
         "Regional misfit",
         "Residual misfit",
     ]
-    grids = [grav_grid[a] for a in anoms]
 
-    cmaps = ["viridis"] * (len(anoms) - 1) + ["balance+h0"]
-    insets = [False] * (len(grids) - 1) + [True]
+    # lists of plotting parameters
+    grids = [grav_grid[a] for a in anoms]
+    cmaps = ["balance+h0"] * len(anoms)
+    try:
+        cpt_limits = [
+            utils.get_min_max(g, robust=True, absolute=True) for g in grids
+        ]
+    except AssertionError as e:  # pylint: disable=broad-exception-caught
+        cpt_limits = [None] * len(grids)
+        logger.error(e)
+        logger.error("Failed to get cpt limits for %s", name)
+
     cbar_labels = [
         f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # pylint: disable=singleton-comparison # noqa: E712
         for a in anoms
     ]
-    point_sets = [None, None, None, None, constraints_df]
-    scalebars = [False] * (len(grids) - 1) + [True]
+    insets = [False] * (len(grids)-1) + [True]
+    scalebars = [False] * (len(grids)-1) + [True]
     titles = anom_titles
+    point_sets = [None, None, None, None, constraints_df]
 
     # add plotting elements for mindist
+    grids.insert(0, min_dist)
     cmaps.insert(0, "dense")
+    cpt_limits.insert(
+        0,
+        (0, utils.get_min_max(min_dist, robust=True, absolute=False)[1]),
+    )
     cbar_labels.insert(0, f"median; {round(np.nanmedian(min_dist), 2)} km")
     insets.insert(0, False)
     scalebars.insert(0, False)
-    point_sets.insert(0, constraints_df)
     titles.insert(0, "Constraint proximity")
-    grids.insert(0, min_dist)
+    point_sets.insert(0, constraints_df)
 
     # add plotting elements for uncertainty if available
     if np.isnan(grav_grid.error.to_numpy()).all():
         logger.error("No uncertainty data for %s", name)
     else:
+        grids.insert(1, grav_grid.error)
         cmaps.insert(1, "thermal")
+        cpt_limits.insert(
+            1,
+            utils.get_min_max(grav_grid.error, robust=True, absolute=False),
+        )
         cbar_labels.insert(
             1, f"uncertainty; RMSE: {round(utils.rmse(grav_grid.error))} mGal"
         )
         insets.insert(1, False)
         scalebars.insert(1, False)
-        point_sets.insert(1, None)
         titles.insert(1, "AntGG gravity uncertainty")
-        grids.insert(1, grav_grid.error)
+        point_sets.insert(1, None)
 
     try:
         fig = maps.subplots(
@@ -1386,10 +1407,10 @@ def plot_ice_shelf_info(
             region=region,
             fig_title=f"{name.replace('_', ' ')} Ice Shelf",
             cmaps=cmaps,
+            cpt_limits=cpt_limits,
             insets=insets,
             inset_width=0.6,
-            inset_position="jTR+jTL+o-0/1.5",  # {15*.3}c/1.5c",
-            robust=True,
+            inset_position="jTR+jTL+o-0/1.5",
             coast=True,
             coast_pen="1.2p,salmon",
             coast_version="measures-v2",  # default is depoorter-2013
@@ -1400,10 +1421,7 @@ def plot_ice_shelf_info(
             cbar_font="18p,Helvetica,black",
             points_style="p1p",
             scalebars=scalebars,
-            # scalebar_box="+gwhite",#@30+p0.5p,gray30,solid+r3p",
             scalebar_position="jTR+jTL+o0.5c/0.5c",
-            # simple_basemap=True,
-            # simple_basemap_version="measures-v2",
             modis_basemap=True,
             modis_version="125m",
             modis_transparency=60,
