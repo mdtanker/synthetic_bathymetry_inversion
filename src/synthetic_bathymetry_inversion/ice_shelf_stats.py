@@ -1175,9 +1175,7 @@ def plot_grav_anomalies(
     ]
     grids = [grav_grid[a] for a in anoms]
     cmaps = ["balance+h0"] * len(anoms)
-    cpt_limits = [
-        utils.get_min_max(g, robust=True, absolute=True) for g in grids
-    ]
+    cpt_limits = [utils.get_min_max(g, robust=True, absolute=True) for g in grids]
     insets = [False] * (len(grids))
     cbar_labels = [
         f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # noqa: E712 # pylint: disable=singleton-comparison
@@ -1356,9 +1354,7 @@ def plot_ice_shelf_info(
     grids = [grav_grid[a] for a in anoms]
     cmaps = ["balance+h0"] * len(anoms)
     try:
-        cpt_limits = [
-            utils.get_min_max(g, robust=True, absolute=True) for g in grids
-        ]
+        cpt_limits = [utils.get_min_max(g, robust=True, absolute=True) for g in grids]
     except AssertionError as e:  # pylint: disable=broad-exception-caught
         cpt_limits = [None] * len(grids)
         logger.error(e)
@@ -1368,8 +1364,8 @@ def plot_ice_shelf_info(
         f"stdev: {round(grav_df[grav_df.ice_shelf_mask == True][a].std(), 0)} mGal"  # pylint: disable=singleton-comparison # noqa: E712
         for a in anoms
     ]
-    insets = [False] * (len(grids)-1) + [True]
-    scalebars = [False] * (len(grids)-1) + [True]
+    insets = [False] * (len(grids) - 1) + [True]
+    scalebars = [False] * (len(grids) - 1) + [True]
     titles = anom_titles
     point_sets = [None, None, None, None, constraints_df]
 
