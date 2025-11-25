@@ -212,6 +212,10 @@ def combine_offshore_onshore_points(
         points = bedmap_points_grounded
 
     elif version == "bedmachine":
+        ###
+        # TODO: much of the below code should only be done once for antarctica, then
+        # points for each shelf can be subset from that!
+        ###
         number_to_source = {
             0: "no_data",
             1: "rema",
