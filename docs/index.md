@@ -6,7 +6,8 @@ While most of the code is from external packages, such as [Invert4Geom](https://
 
 All of the notebooks can be viewed at the left sidebar.
 
-<br/><br/>
+All the generated results are stored in the [Zenodo archive](https://doi.org/10.5281/zenodo.15614239).
+
 <br/><br/>
 
 # Instructions to re-run the notebooks

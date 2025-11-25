@@ -3,7 +3,7 @@ channels:
 - conda-forge
 - nodefaults
 dependencies:
-- polartoolkit >=1.2.0,<2
+- polartoolkit >=1.3.0,<2
 - xesmf >=0.8.7,<0.9
 - optuna >=4.5.0,<5
 - cmocean >=4.0.3,<5

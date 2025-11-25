@@ -34,7 +34,7 @@ Then install the environment defined in `pyproject.toml` with:
 pixi install
 ```
 
-## `conda` or `mamba`
+### `conda` or `mamba`
 
 Install the required dependencies with either `conda` or `mamba`:
 
