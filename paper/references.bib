@@ -1,0 +1,1409 @@
+
+@misc{tankersleygravity2025,
+	title = {Gravity {Inversion} for {Sub}-{Ice} {Shelf} {Bathymetry}: {Code}, {Figures}, and {Model} {Outputs}},
+	copyright = {MIT License},
+	shorttitle = {Gravity {Inversion} for {Sub}-{Ice} {Shelf} {Bathymetry}},
+	url = {https://zenodo.org/doi/10.5281/zenodo.15614239},
+	abstract = {This Zenodo release contains all the materials related to the paper "Gravity Inversion for Sub-Ice Shelf Bathymetry: Strengths, Limitations, and Insights from Synthetic Modeling" accepted for publication at The Cryosphere. 
+
+synthetic\_bathymetry\_inversion-0.1.0.zip
+
+This contains an archive of the GitHub repository https://github.com/mdtanker/synthetic\_bathymetry\_inversion at the state when the paper was accepted for publication at The Cryosphere. The repository archived is version 0.1.0. All of the notebooks contained in the repository and associated documentation can be viewed at https://mdtanker.github.io/synthetic\_bathymetry\_inversion/
+
+ice\_shelves.zip
+
+The output from the antarctic ice shelf analysis portion of the work. For all Antarctic ice shelves, this zip contains:
+
+
+
+{\textless}shelf-name{\textgreater}\_constraints.csv.gz: a CSV of existing point measurements of bathymetry/bed topography, computed here
+
+{\textless}shelf-name{\textgreater}\_grav\_anomalies.csv.gz: a CSV of observed gravity data (AntGG-2021) and computed anomalies, computed here
+
+{\textless}shelf-name{\textgreater}\_min\_dist.nc: a netCDF of a grid of distances to the nearest point measurement of bathymetry/bed topography, computed here
+
+{\textless}shelf-name{\textgreater}\_constraints.png: a plot of the grid of distances to the nearest point measurement of bathymetry/bed topography, created here
+
+{\textless}shelf-name{\textgreater}\_info.png: a plot of all the computed gravity anomaly grids and the nearest distance grid, created here
+
+
+ice\_shelf\_gravity\_stats.csv: a single CSV (1 row per ice shelf) containing statistics of the gravity anomalies and the nearest distances grids, created here.
+
+ice\_shelf\_gravity\_stats\_added\_constraints.csv: a single CSV (1 row per ice shelf) showing how the median constraint proximity values for a shelf change when a single additional constraint point is added to the location of maximum distance to the nearest constraint, created here.
+
+antarctica\_constraints.csv.gz and antarctica\_constraints.parquet: all of the constraints from each ice shelf merged into one file, created here.
+
+antarctica\_grav\_grids.nc: all the computed gravity anomalies from each shelf merged into one file, created here.
+
+antarctica\_min\_dist.nc: all the computed grid of distances to the nearest point measurement of bathymetry/bed topography merged into one file, created here.
+
+Ross\_Sea.zip
+
+The output from running all the individual inversions (1-5) and the inversion ensembles (1-4). 
+
+ice\_shelf\_stats.csv
+
+A CSV with 1 row per ice shelf giving the computed statistics regarding constraint proximity and gravity anomalies, and the predicted optimal gravity inversion RMSE and topography improvement (relative to Bedmap2), as shown here.},
+	urldate = {2025-11-25},
+	publisher = {Zenodo},
+	author = {Tankersley, Matthew D. and Horgan, Huw and Caratori Tontini, Fabio and Tinto, Kirsty},
+	month = nov,
+	year = {2025},
+	doi = {10.5281/ZENODO.15614239},
+	keywords = {Bathymetry, antarctica, gravity inversion, ice shelves, inversion, open source, python},
+}
+
+@misc{polartoolkitcommunitypolartoolkit2025,
+	title = {{PolarToolkit}: {Helpful} tools for polar researchers},
+	copyright = {MIT License},
+	shorttitle = {{PolarToolkit}},
+	url = {https://zenodo.org/doi/10.5281/zenodo.7059091},
+	abstract = {PolarToolkit is a Python package to make polar (i.e. Antarctic, Arctic, Greenland) research more efficient, reproducible, and accessible.
+Documentation: http://polartoolkit.readthedocs.io/
+Source code: https://github.com/mdtanker/polartoolkit},
+	urldate = {2025-11-25},
+	publisher = {Zenodo},
+	author = {{PolarToolkit Community} and Tankersley, Matt},
+	month = nov,
+	year = {2025},
+	doi = {10.5281/ZENODO.7059091},
+}
+
+@misc{invert4geomcommunityinvert4geom2025,
+	title = {{Invert4Geom}: {3D} geometric gravity inversions},
+	copyright = {MIT License},
+	shorttitle = {{Invert4Geom}},
+	url = {https://zenodo.org/doi/10.5281/zenodo.11951924},
+	abstract = {Invert4Geom is a Python library for performing 3D geometric gravity inversions, where the aim is to recover the geometry of a density contrast.
+Documentation: https://invert4geom.readthedocs.io/
+Source code: https://github.com/mdtanker/invert4geom},
+	urldate = {2025-11-25},
+	publisher = {Zenodo},
+	author = {{Invert4Geom Community} and Tankersley, Matt},
+	month = aug,
+	year = {2025},
+	doi = {10.5281/ZENODO.11951924},
+}
+
+@misc{fatiandoaterraprojectboule2024,
+	title = {Boule v0.5.0: {Reference} ellipsoids for geodesy and geophysics},
+	copyright = {BSD 3-Clause "New" or "Revised" License},
+	shorttitle = {Boule v0.5.0},
+	url = {https://zenodo.org/doi/10.5281/zenodo.3530749},
+	abstract = {Boule is Python library for representing reference ellipsoids and calculating their gravity fields.
+
+
+Documentation: https://www.fatiando.org/boule
+
+
+Source code: https://github.com/fatiando/boule
+
+
+Part of the Fatiando a Terra project.
+
+
+Note: Authors are listed in alphabetical order by last name.},
+	urldate = {2025-11-25},
+	publisher = {Zenodo},
+	author = {{Fatiando a Terra Project} and Bucha, Blazej and Dinneen, Chris and Gomez, Mariana and Li, Lu and Pesce, Agustina and Soler, Santiago Rubén and Uieda, Leonardo and Wieczorek, Mark},
+	month = oct,
+	year = {2024},
+	doi = {10.5281/ZENODO.3530749},
+	keywords = {geodesy, geophysics, gravity, python},
+}
+
+@misc{fatiandoaterraprojectharmonica2024,
+	title = {Harmonica v0.7.0: {Forward} modeling, inversion, and processing gravity and magnetic data},
+	copyright = {BSD 3-Clause "New" or "Revised" License},
+	shorttitle = {Harmonica v0.7.0},
+	url = {https://zenodo.org/doi/10.5281/zenodo.3628741},
+	abstract = {Harmonica is a Python library for processing and modeling gravity and magnetic data. It includes common processing steps, like calculation of Bouguer and terrain corrections, reduction to the pole, upward continuation, equivalent layers, and more. There are forward modeling functions for basic geometric shapes, like spheres, prisms, polygonal prisms, and tesseroids. The inversion methods are implemented as classes with an interface inspired by scikit-learn (like Verde).
+
+
+Documentation: https://www.fatiando.org/harmonica
+
+
+Source code: https://github.com/fatiando/harmonica
+
+
+Part of the Fatiando a Terra project.
+
+
+Note: Authors are listed in alphabetical order by last name.},
+	urldate = {2025-11-25},
+	publisher = {Zenodo},
+	author = {{Fatiando a Terra Project} and Castro, Yago M. and Esteban, Federico D. and Li, Lu and Oliveira Jr, Vanderlei C and Pesce, Agustina and Shea, Nicholas and Soler, Santiago R. and Souza-Junior, Gelson F. and Tankersley, Matthew and Uieda, Leonardo and Uppal, India},
+	month = aug,
+	year = {2024},
+	doi = {10.5281/ZENODO.3628741},
+	note = {Language: en},
+}
+
+@article{hammerterrain1939,
+	title = {Terrain corrections for gravimeter stations},
+	volume = {4},
+	issn = {0016-8033, 1942-2156},
+	url = {https://library.seg.org/doi/10.1190/1.1440495},
+	doi = {10.1190/1.1440495},
+	abstract = {In this paper the correction for the.gravitational attraction of the topography on a gravity station is considered as consistmg of two parts; (I) the restricted but conventional “Bouguer correction” which postulates as a convenient approximation that the topography consists of an infinite horizontal plain, and (2) the “Terrain correction” which is a supplementary correction taking into account the gravitational effect of the undulations of the terrain about the plane through the gravity station. The paper illustrates the necessity of making terrain corrections if precise gravity surveys are desired in hilly country and presents terrain correction tables with which this quantity may be determined to a relative accuracy of one-tenth milligal. This accuracy is required to fully utilize the high instrumental precision of modern gravimeters.},
+	language = {en},
+	number = {3},
+	urldate = {2023-02-14},
+	journal = {GEOPHYSICS},
+	author = {Hammer, Sigmund},
+	month = jul,
+	year = {1939},
+	pages = {184--194},
+}
+
+@article{bambercomparison1994,
+	title = {A comparison of satellite-altimetry and ice-thickness measurements of the {Ross} {Ice} {Shelf}, {Antarctica}},
+	volume = {20},
+	issn = {0260-3055, 1727-5644},
+	url = {https://www.cambridge.org/core/journals/annals-of-glaciology/article/comparison-of-satellitealtimetry-and-icethickness-measurements-of-the-ross-ice-shelf-antarctica/DA084705A64B5F63A4C15B20E8BD514F},
+	doi = {10.3189/1994AoG20-1-357-364},
+	abstract = {The launch of ERS-l provides coverage, by satellite altimetry, of a large part of the Ross Ice Shelf ineluding areas of input from Byrd Glacier and Ice Streams D and E. Five 35 d repeats of fast-delivery data, comprising approximately 100000 height estimates, have been used to produce a Digital Elevation Model (DEM) of the Ross Icc Shelf north of 81.5° S. Careful filtering of the altimeter data, which removed about 30\% of the measurements, ensured that only valid values were used. The data were grldded to produce a DEM with a cell size of 10km. Repeatability of the data was assessed from an analysis of crossing points of ascending and descending tracks. The rms cross-over difference for the ice shelf was 0.94 m. Using the five repeat tracks gave a random error of 0.30 m for an averaged height measurement. Regionally correlated errors in the orbit and geoid add a systematic long wavelength bias of approximately 2m to the final elevation estimate. Two of the latest geoid models, OSU91-A and JGMI, were compared with the available in situ data and hYdrostatic models based on ice and water densities.The altimetry was compared with ice-thickness data from Ross Icc Shelf Geophysical and Glaciological Survey (RIGGS) stations and Scott Polar Research Institute radio-echo-sounding surveys undertaken in the 1970s. Differences between the DEM and heights calculated from ice thicknesses and a standard density -depth equation lie, in general, within the combined measurement errors. There are, however, several areas where this is not the case. Prominent north-south stripes of different ice thickness shown on a RIGGS map apparently do not exist. Low elevations are associated with high-density ice draining from East Antarctic outlet glaciers. The grounding line of Icc Streams D and E and an ice plain behind it are clearly demarcated by the break in surface slope. Grounded ice north of Steershead is also observed},
+	language = {en},
+	urldate = {2022-12-01},
+	journal = {Annals of Glaciology},
+	author = {Bamber, Jonathan and Bentley, Charles R},
+	year = {1994},
+	note = {Publisher: Cambridge University Press},
+	pages = {357--364},
+}
+
+@article{dampneyequivalent1969,
+	title = {The equivalent source technique},
+	volume = {34},
+	doi = {https://doi.org/10.1190/1.1439996},
+	language = {en},
+	number = {1},
+	journal = {GEOPHYSICS},
+	author = {Dampney, C N G},
+	year = {1969},
+	pages = {39--53},
+}
+
+@article{paigelsqr1982,
+	title = {{LSQR}: {An} {Algorithm} for {Sparse} {Linear} {Equations} and {Sparse} {Least} {Squares}},
+	volume = {8},
+	issn = {0098-3500, 1557-7295},
+	shorttitle = {{LSQR}},
+	url = {https://dl.acm.org/doi/10.1145/355984.355989},
+	doi = {10.1145/355984.355989},
+	language = {en},
+	number = {1},
+	urldate = {2023-04-24},
+	journal = {ACM Transactions on Mathematical Software},
+	author = {Paige, Christopher C. and Saunders, Michael A.},
+	month = mar,
+	year = {1982},
+	pages = {43--71},
+}
+
+@incollection{bentleyross1984,
+	address = {Washington, D. C.},
+	title = {The {Ross} {Ice} {Shelf}: {Glaciology} and {Geophysics} {Paper} 1: {Introduction} and summary of measurements performed},
+	volume = {42},
+	isbn = {978-1-118-66473-5},
+	shorttitle = {The {Ross} {Ice} {Shelf} {Geophysical} and {Glaciological} {Survey} ({RIGGS})},
+	url = {http://doi.wiley.com/10.1029/AR042p0001},
+	abstract = {By the end of the 1960's the Ross Ice Shelf was already one of the better explored regions in Antarctica, yet glaciolog­ ical and geophysical measurements had been limited largely to studies at Little America, the International Geophysical Year traverse loop around the shelf, and an L-shaped move­ ment survey. Consequently, when plans were being made for drilling an access hole to the ocean beneath the interior of the shelf, it was decided to conduct an airlifted survey covering the entire ice shelf: the Ross Ice Shelf Geophysical and Glaciological Survey (RIGGS). Measurements of many kinds were carried out at the 200 RIGGS stations over the 5-year period 1973-1978. Quantities de­ termined included accumulation rate, strain rate, ice thickness, subglacial water depth, and gravity at 75-95\% of the sites; tempera­ tures and movement rate at 40-50\% of the sites; seismic and radio wave velocities and electrical resistivities at 10-20 sites; and radar polarization at six sites. More exten­ sive programs, including core drilling to 50-100 m, tidal-gravity recording, and long seismic refraction profiles to investigate submarine geologic structure, were carried out at 10 primary and supplementary base camps. In addition, 13,500 km of airborne radar sounding were completed. Detailed sea­ sonal tabulations of the types and locations of measurements are presented in this paper, along with a brief season-by-season narrative.},
+	language = {en},
+	urldate = {2020-01-06},
+	booktitle = {Antarctic {Research} {Series}},
+	publisher = {American Geophysical Union},
+	author = {Bentley, Charles R.},
+	editor = {Bentley, Charles R. and Hayes, Dennis E.},
+	year = {1984},
+	doi = {10.1029/AR042p0001},
+	pages = {1--20},
+}
+
+@book{blakelypotential1995,
+	address = {Cambridge [England] ; New York},
+	title = {Potential theory in gravity and magnetic applications},
+	isbn = {978-0-521-41508-8},
+	language = {en},
+	publisher = {Cambridge University Press},
+	author = {Blakely, Richard J.},
+	year = {1995},
+	keywords = {Geophysics, Potential theory (Mathematics), Technique},
+}
+
+@incollection{jansenmonte1994,
+	address = {Dordrecht},
+	title = {Monte {Carlo} {Estimation} of {Uncertainty} {Contributions} from {Several} {Independent} {Multivariate} {Sources}},
+	isbn = {978-94-010-4416-5},
+	url = {http://link.springer.com/10.1007/978-94-011-0962-8_28},
+	abstract = {An efficient random sampling method is introduced to estimate the contributions of several sources of uncertainty to prediction variance of (computer) models. Prediction uncertainty is caused by uncertainty about the initial state, parameters, unknown (e.g. future) exogenous variables, noises, etcetera. Such uncertainties are modelled here as random inputs into a deterministic model, which translates input uncertainty into output uncertainty. The goal is to pinpoint the major causes of output uncertainty. The method presented is particularly suitable for cases where uncertainty is present in a large number of inputs (such as future weather conditions). The expected reduction of output variance is estimated for the case that various (groups of) inputs should become fully determined. The method can be applied if the input sources fall into stochastically independent groups. The approach is more flexible than conventional methods based on approximations of the model. An agronomic example illustrates the method. A deterministic model is used to advise farmers on control of brown rust in wheat. Empirical data were used to estimate the distributions of uncertain inputs. Analysis shows that effective improvement of the precision of the model's prediction requires alternative submodels describing pest population dynamics, rather than better determination of initial conditions and parameters.},
+	language = {en},
+	urldate = {2023-05-27},
+	booktitle = {Predictability and {Nonlinear} {Modelling} in {Natural} {Sciences} and {Economics}},
+	publisher = {Springer Netherlands},
+	author = {Jansen, Michiel J. W. and Rossing, Walter A. H. and Daamen, Richard A.},
+	editor = {Grasman, J. and van Straten, G.},
+	year = {1994},
+	doi = {10.1007/978-94-011-0962-8_28},
+	pages = {334--343},
+}
+
+@article{scambosglacier2004,
+	title = {Glacier acceleration and thinning after ice shelf collapse in the {Larsen} {B} embayment, {Antarctica}},
+	volume = {31},
+	issn = {0094-8276},
+	url = {http://doi.wiley.com/10.1029/2004GL020670},
+	doi = {10.1029/2004GL020670},
+	language = {en},
+	number = {18},
+	urldate = {2020-02-25},
+	journal = {Geophysical Research Letters},
+	author = {Scambos, T. A. and Bohlander, J. and Shuman, C. and Skvarca, P.},
+	year = {2004},
+	pages = {L18402},
+}
+
+@article{nagygravitational2000,
+	title = {The gravitational potential and its derivatives for the prism},
+	volume = {74},
+	issn = {0949-7714, 1432-1394},
+	url = {http://link.springer.com/10.1007/s001900000116},
+	doi = {10.1007/s001900000116},
+	abstract = {As a simple building block, the right rectangular parallelepiped (prism) has an important role mostly in local gravity ®eld modelling studies when the so called ¯at-Earth approximation is sucient. Its primary (methodological) advantage follows from the simplicity of the rigorous and consistent analytical forms describing the dierent gravitation-related quantities. The analytical forms provide numerical values for these quantities which satisfy the functional connections existing between these quantities at the level of numerical precision applied. Closed expressions for the gravitational potential of the prism and its derivatives (up to the third order) are listed for easy reference.},
+	language = {en},
+	number = {7-8},
+	urldate = {2022-05-02},
+	journal = {Journal of Geodesy},
+	author = {Nagy, D. and Papp, G. and Benedek, J.},
+	month = nov,
+	year = {2000},
+	pages = {552--560},
+}
+
+@article{liellipsoid2001,
+	title = {Ellipsoid, geoid, gravity, geodesy, and geophysics},
+	volume = {66},
+	issn = {0016-8033, 1942-2156},
+	url = {https://library.seg.org/doi/10.1190/1.1487109},
+	doi = {10.1190/1.1487109},
+	abstract = {Geophysics uses gravity to learn about the density variations of the Earth’s interior, whereas classical geodesy uses gravity to deﬁne the geoid. This difference in purpose has led to some confusion among geophysicists, and this tutorial attempts to clarify two points of the confusion. First, it is well known now that gravity anomalies after the “free-air” correction are still located at their original positions. However, the “free-air” reduction was thought historically to relocate gravity from its observation position to the geoid (mean sea level). Such an understanding is a geodetic ﬁction, invalid and unacceptable in geophysics. Second, in gravity corrections and gravity anomalies, the elevation has been used routinely. The main reason is that, before the emergence and widespread use of the Global Positioning System (GPS), height above the geoid was the only height measurement we could make accurately (i.e., by leveling).},
+	language = {en},
+	number = {6},
+	urldate = {2022-04-12},
+	journal = {Geophysics},
+	author = {Li, Xiong and Götze, Hans‐Jürgen},
+	month = nov,
+	year = {2001},
+	pages = {1660--1668},
+}
+
+@incollection{brancolinidescriptive1995,
+	address = {Washington, D. C.},
+	series = {Antarctic research series},
+	title = {Descriptive text for the seismic stratigraphic atlas of the {Ross} {Sea}, {Antarctica}},
+	volume = {68},
+	isbn = {978-1-118-66901-3},
+	language = {en},
+	urldate = {2020-09-03},
+	booktitle = {Geology and {Seismic} {Stratigraphy} of the {Antarctic} {Margin}},
+	publisher = {American Geophysical Union},
+	author = {Brancolini, G. and Busetti, M and Marchetti, A. and Santis, L De and Zanolla, C. and Cooper, A. K. and Cochrane, G. R. and Zayatz, I. and Belyaev, V. and Knyazev, M. and Vinnikovskaya, O. and Davey, F J and Hinze, K.},
+	editor = {Cooper, A. K. and Barker, P. F. and Brancolini, G.},
+	year = {1995},
+	doi = {https://doi.org/10.1002/9781118669013.app1},
+	pages = {A271--A286},
+}
+
+@article{dupontassessment2005,
+	title = {Assessment of the importance of ice-shelf buttressing to ice-sheet flow},
+	volume = {32},
+	doi = {doi:10.1029/2004GL022024},
+	abstract = {Reduction or loss of a restraining ice shelf will cause
+speed-up of flow from contiguous ice streams, contributing
+to sea-level rise, with greater changes from ice streams that
+are wider, have stickier beds, or have higher driving stress.
+Loss of buttressing offsetting half of the tendency for icestream/
+ice-shelf spreading for an ice stream similar to Pine
+Island Glacier, West Antarctica is modeled to contribute at
+least 1 mm of sea-level rise over a few decades. These
+results come from a new, simple model that includes
+relevant stresses in a boundary-layer formulation, and
+allows rapid estimation of ice-shelf impacts for a wide
+range of configurations. Citation: Dupont, T. K., and R. B.
+Alley (2005), Assessment of the importance of ice-shelf
+buttressing to ice-sheet flow, Geophys. Res. Lett., 32, L04503,
+doi:10.1029/2004GL022024.},
+	journal = {Geophysical Research Letters},
+	author = {Dupont, T. K. and Alley, R. B.},
+	year = {2005},
+	pages = {1--4},
+}
+
+@article{hinzenew2005,
+	title = {New standards for reducing gravity data: {The} {North} {American} gravity database},
+	volume = {70},
+	issn = {0016-8033, 1942-2156},
+	shorttitle = {New standards for reducing gravity data},
+	url = {https://library.seg.org/doi/10.1190/1.1988183},
+	doi = {10.1190/1.1988183},
+	abstract = {The North American gravity database as well as data-bases from Canada, Mexico, and the United States are being revised to improve their coverage, versatility, and accuracy. An important part of this effort is revising procedures for calculating gravity anomalies, taking into account our enhanced computational power, improved terrain databases and datums, and increased interest in more accurately defining long-wavelength anomaly components. Users of the databases may note minor differences between previous and revised database values as a result of these procedures. Generally, the differences do not impact the interpretation of local anomalies but do improve regional anomaly studies. The most striking revision is the use of the internationally accepted terrestrial ellipsoid for the height datum of gravity stations rather than the conventionally used geoid or sea level. Principal facts of gravity observations and anomalies based on both revised and previous procedures together with germane metadata will be available on an interactive Web-based data system as well as from national agencies and data centers. The use of the revised procedures is encouraged for gravity data reduction because of the widespread use of the global positioning system in gravity fieldwork and the need for increased accuracy and precision of anomalies and consistency with North American and national databases. Anomalies based on the revised standards should be preceded by the adjective “ellipsoidal” to differentiate anomalies calculated using heights with respect to the ellipsoid from those based on conventional elevations referenced to the geoid.},
+	language = {en},
+	number = {4},
+	urldate = {2022-04-12},
+	journal = {GEOPHYSICS},
+	author = {Hinze, William J. and Aiken, Carlos and Brozena, John and Coakley, Bernard and Dater, David and Flanagan, Guy and Forsberg, René and Hildenbrand, Thomas and Keller, G. Randy and Kellogg, James and Kucks, Robert and Li, Xiong and Mainville, Andre and Morin, Robert and Pilkington, Mark and Plouff, Donald and Ravat, Dhananjay and Roman, Daniel and Urrutia-Fucugauchi, Jamie and Véronneau, Marc and Webring, Michael and Winester, Daniel},
+	month = jul,
+	year = {2005},
+	pages = {J25--J32},
+}
+
+@article{heltonsurvey2006,
+	title = {Survey of sampling-based methods for uncertainty and sensitivity analysis},
+	volume = {91},
+	issn = {09518320},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0951832005002292},
+	doi = {10.1016/j.ress.2005.11.017},
+	abstract = {Sampling-based methods for uncertainty and sensitivity analysis are reviewed. The following topics are considered: (i) deﬁnition of probability distributions to characterize epistemic uncertainty in analysis inputs, (ii) generation of samples from uncertain analysis inputs, (iii) propagation of sampled inputs through an analysis, (iv) presentation of uncertainty analysis results, and (v) determination of sensitivity analysis results. Special attention is given to the determination of sensitivity analysis results, with brief descriptions and illustrations given for the following procedures/techniques: examination of scatterplots, correlation analysis, regression analysis, partial correlation analysis, rank transformations, statistical tests for patterns based on gridding, entropy tests for patterns based on gridding, nonparametric regression analysis, squared rank differences/rank correlation coefﬁcient test, two-dimensional Kolmogorov–Smirnov test, tests for patterns based on distance measures, top down coefﬁcient of concordance, and variance decomposition.},
+	language = {en},
+	number = {10-11},
+	urldate = {2023-05-27},
+	journal = {Reliability Engineering \& System Safety},
+	author = {Helton, J.C. and Johnson, J.D. and Sallaberry, C.J. and Storlie, C.B.},
+	month = oct,
+	year = {2006},
+	pages = {1175--1209},
+}
+
+@inproceedings{oldenburggeophysical2007,
+	title = {Geophysical inversion for mineral exploration: a decade of progress in theory and practice},
+	abstract = {Developments in instrumentation, data collection, computer performance, and visualisation have been catalysts for significant advances in
+modelling and inversion of geophysical data. Forward modelling, which is fundamental to intuitive geological understanding and
+practical inversion methods, has progressed from representations using simple 3D models to whole earth models using voxels and discrete
+surfaces. Inversion has achieved widespread acceptance as a valid interpretation tool and major progress has been made by integrating
+geological models as constraints for both voxel and multi-body parametric methods. As a consequence, potential field, IP and
+electromagnetic inversion methods have become an essential part of most mineral exploration programs. In this paper we summarize some
+of the progress made over the last decade for each of these data types. Inversion applications are divided into three categories: (a) Type I
+(discrete body), (b) Type II (pure property) and (c) Type III (lithologic). Potential field inversions are the most advanced and thus most
+commonly used. 3D DC resistivity and IP inversions are becoming more prevalent. 3D EM inversions, in both time and frequency domains,
+are just emerging. Inversion examples are drawn from a number of groups and over different geological targets. However, we make
+extensive use of the geophysical data set from San Nicolas, since 3D inversions of all data types have been carried out there. The paper is
+essentially non-mathematical but we have incorporated some generic detail regarding how the inversions are carried out and the
+computations needed. We conclude the paper with our views of where research will be focused for the next decade and also provide our
+assessment of the challenges that the industry must address to make maximum use of inversion methodologies.},
+	booktitle = {Proceedings of {Exploration} 07},
+	author = {Oldenburg, Douglas W. and Pratt, D.A.},
+	editor = {Milkereit, B},
+	year = {2007},
+	pages = {61--95},
+}
+
+@article{barbosagravity2007,
+	title = {Gravity data as a tool for detecting faults: {In}-depth enhancement of subtle {Almada}’s basement faults, {Brazil}},
+	volume = {72},
+	issn = {0016-8033, 1942-2156},
+	shorttitle = {Gravity data as a tool for detecting faults},
+	url = {https://library.seg.org/doi/10.1190/1.2713226},
+	doi = {10.1190/1.2713226},
+	abstract = {We demonstrate the potential of gravity data to detect and to locate in-depth subtle normal faults in the basement relief of a sedimentary basin. This demonstration is accomplished by inverting the gravity data with the constraint that the estimated basement relief presents local abrupt faults and is smooth elsewhere. We inverted the gravity data from the onshore Almada Basin in northeastern Brazil, and we mapped several normal faults whose locations and plane geometries were already known from seismic imaging. The inversion method delineated well both the discontinuities with small or large slips and a sequence of step faults. Using synthetic data, we performed a systematic search of normal fault slips versus fault displacement depths to map the fault-detectable region in this space. This mapping helps to assess the ability of gravity inversion to detect normal faults. Mapping shows that normal faults with small ͑Ͻ0.5 km͒, medium ͑about 1 km͒, and large ͑about 2 km͒ vertical slips can be detected if the maximum midpoint depths of the fault planes are smaller than 1.8, 3.8, and 6.8 km, respectively.},
+	language = {en},
+	number = {3},
+	urldate = {2023-04-15},
+	journal = {GEOPHYSICS},
+	author = {Barbosa, Valeria C. and Menezes, Paulo T. and Silva, João B.},
+	month = may,
+	year = {2007},
+	pages = {B59--B68},
+}
+
+@book{jacobygravity2009,
+	address = {Berlin},
+	title = {Gravity interpretation: fundamentals and application of gravity inversion and geological interpretation ; with {CD}-{ROM}},
+	isbn = {978-3-540-85328-2},
+	shorttitle = {Gravity interpretation},
+	language = {en},
+	publisher = {Springer},
+	author = {Jacoby, Wolfgang and Smilde, Peter Lubertus},
+	year = {2009},
+	note = {OCLC: 845389531},
+}
+
+@article{perezipython2007,
+	title = {{IPython}: a system for interactive scientific computing},
+	volume = {9},
+	issn = {1521-9615},
+	url = {https://ipython.org},
+	doi = {10.1109/MCSE.2007.53},
+	number = {3},
+	journal = {Computing in Science and Engineering},
+	author = {Pérez, Fernando and Granger, Brian E.},
+	month = may,
+	year = {2007},
+	note = {Publisher: IEEE Computer Society},
+	pages = {21--29},
+}
+
+@book{hastieelements2009,
+	address = {New York},
+	edition = {2nd ed},
+	series = {Springer series in statistics},
+	title = {The elements of statistical learning: data mining, inference, and prediction},
+	isbn = {978-0-387-84858-7},
+	shorttitle = {The elements of statistical learning},
+	abstract = {"During the past decade there has been an explosion in computation and information technology. With it have come vast amounts of data in a variety of fields such as medicine, biology, finance, and marketing. The challenge of understanding these data has led to the development of new tools in the field of statistics, and spawned new areas such as data mining, machine learning, and bioinformatics. Many of these tools have common underpinnings but are often expressed with different terminology. This book describes the important ideas in these areas in a common conceptual framework. While the approach is statistical, the emphasis is on concepts rather than mathematics. Many examples are given, with a liberal use of color graphics"--Jacket},
+	language = {eng},
+	publisher = {Springer},
+	author = {Hastie, Trevor J. and Tibshirani, Robert and Friedman, Jerome H.},
+	year = {2009},
+}
+
+@article{fretwellbedmap22013,
+	title = {Bedmap2: improved ice bed, surface and thickness datasets for {Antarctica}},
+	volume = {7},
+	url = {http://www.the-cryosphere.net/7/375/2013/},
+	doi = {10.5194/tc-7-375-2013},
+	number = {1},
+	journal = {The Cryosphere},
+	author = {Fretwell, P. and Pritchard, H. D. and Vaughan, D. G. and Bamber, J. L. and Barrand, N. E. and Bell, R. and Bianchi, C. and Bingham, R. G. and Blankenship, D. D. and Casassa, G. and Catania, G. and Callens, D. and Conway, H. and Cook, A. J. and Corr, H. F. J. and Damaske, D. and Damm, V. and Ferraccioli, F. and Forsberg, R. and Fujita, S. and Gim, Y. and Gogineni, P. and Griggs, J. A. and Hindmarsh, R. C. A. and Holmlund, P. and Holt, J. W. and Jacobel, R. W. and Jenkins, A. and Jokat, W. and Jordan, T. and King, E. C. and Kohler, J. and Krabill, W. and Riger-Kusk, M. and Langley, K. A. and Leitchenkov, G. and Leuschen, C. and Luyendyk, B. P. and Matsuoka, K. and Mouginot, J. and Nitsche, F. O. and Nogi, Y. and Nost, O. A. and Popov, S. V. and Rignot, E. and Rippin, D. M. and Rivera, A. and Roberts, J. and Ross, N. and Siegert, M. J. and Smith, A. M. and Steinhage, D. and Studinger, M. and Sun, B. and Tinto, B. K. and Welch, B. C. and Wilson, D. and Young, D. A. and Xiangbin, C. and Zirizzotti, A.},
+	year = {2013},
+	pages = {375--393},
+}
+
+@article{tintoprogressive2011,
+	title = {Progressive unpinning of {Thwaites} {Glacier} from newly identified offshore ridge: {Constraints} from aerogravity},
+	volume = {38},
+	issn = {00948276},
+	shorttitle = {Progressive unpinning of {Thwaites} {Glacier} from newly identified offshore ridge},
+	url = {http://doi.wiley.com/10.1029/2011GL049026},
+	doi = {10.1029/2011GL049026},
+	language = {en},
+	urldate = {2020-02-12},
+	journal = {Geophysical Research Letters},
+	author = {Tinto, K. J. and Bell, R. E.},
+	month = oct,
+	year = {2011},
+	pages = {1--6},
+}
+
+@article{pritchardantarctic2012,
+	title = {Antarctic ice-sheet loss driven by basal melting of ice shelves},
+	volume = {484},
+	issn = {0028-0836, 1476-4687},
+	url = {http://www.nature.com/articles/nature10968},
+	doi = {10.1038/nature10968},
+	language = {en},
+	number = {7395},
+	urldate = {2020-01-06},
+	journal = {Nature},
+	author = {Pritchard, H. D. and Ligtenberg, S. R. M. and Fricker, H. A. and Vaughan, D. G. and van den Broeke, M. R. and Padman, L.},
+	month = apr,
+	year = {2012},
+	pages = {502--505},
+}
+
+@book{hinzegravity2013,
+	address = {New York},
+	title = {Gravity and magnetic exploration: principles, practices, and applications},
+	isbn = {978-0-521-87101-3},
+	shorttitle = {Gravity and magnetic exploration},
+	url = {https://doi.org/10.1017/CBO9780511843129},
+	abstract = {"This combination textbook and reference manual provides a comprehensive account of the principles, practices, and application of gravity and magnetic methods for exploring the subsurface using surface, marine, airborne, and satellite measurements. Key current topics and techniques are described, including high-resolution magnetic investigations, time-variation gravity analysis from surface and satellite gravity measurements, absolute and gradient gravimetry, and the role of GPS in mapping gravity and magnetic fields. The book also describes the physical properties of rocks and other earth materials that are critical to the effective design, implementation and interpretation of surveys, and presents a thorough overview of digital data analysis methods used to process and interpret anomalies for subsurface information. This book is an ideal text for advanced undergraduate and graduate courses, but also serves as a reference for research academics, professional geophysicists, and managers of exploration programs that include gravity and magnetic methods. It is a valuable resource for all those interested in petroleum, engineering, mineral, environmental, geological and archeological exploration of the lithosphere"--},
+	language = {en},
+	publisher = {Cambridge University Press},
+	author = {Hinze, William J. and Von Frese, R. and Saad, Afif H.},
+	year = {2013},
+	keywords = {Geomagnetism, Gravity, Magnetic measurements, Measurement, SCIENCE / Geophysics},
+}
+
+@article{brisbourneseabed2014,
+	title = {Seabed topography beneath {Larsen} {C} {Ice} {Shelf} from seismic soundings},
+	volume = {8},
+	issn = {1994-0424},
+	url = {https://www.the-cryosphere.net/8/1/2014/},
+	doi = {10.5194/tc-8-1-2014},
+	abstract = {Seismic reﬂection soundings of ice thickness and seabed depth were acquired on the Larsen C Ice Shelf in order to test a sub-ice shelf bathymetry model derived from the inversion of IceBridge gravity data. A series of lines was collected, from the Churchill Peninsula in the north to the Joerg Peninsula in the south, and also towards the ice front. Sites were selected using the bathymetry model derived from the inversion of free-air gravity data to indicate key regions where sub-ice shelf oceanic circulation may be affected by ice draft and seabed depth. The seismic velocity proﬁle in the upper 100 m of ﬁrn and ice was derived from shallow refraction surveys at a number of locations. Measured temperatures within the ice column and at the ice base were used to deﬁne the velocity proﬁle through the remainder of the ice column. Seismic velocities in the water column were derived from previous in situ measurements. Uncertainties in ice and water cavity thickness are in general {\textless}10 m. Compared with the seismic measurements, the rootmean-square error in the gravimetrically derived bathymetry at the seismic sites is 162 m. The seismic proﬁles prove the non-existence of several bathymetric features that are indicated in the gravity inversion model, signiﬁcantly modifying the expected oceanic circulation beneath the ice shelf. Similar features have previously been shown to be highly significant in affecting basal melt rates predicted by ocean models. The discrepancies between the gravity inversion results and the seismic bathymetry are attributed to the assumption of uniform geology inherent in the gravity inversion process and also the sparsity of IceBridge ﬂight lines. Results indicate that care must be taken when using bathymetry models derived by the inversion of free-air gravity anomalies. The bathymetry results presented here will be used to improve existing sub-ice shelf ocean circulation models.},
+	language = {en},
+	number = {1},
+	urldate = {2020-01-06},
+	journal = {The Cryosphere},
+	author = {Brisbourne, A. M. and Smith, A. M. and King, E. C. and Nicholls, K. W. and Holland, P. R. and Makinson, K.},
+	month = jan,
+	year = {2014},
+	pages = {1--13},
+}
+
+@article{alleyoceanic2015,
+	title = {Oceanic {Forcing} of {Ice}-{Sheet} {Retreat}: {West} {Antarctica} and {More}},
+	volume = {43},
+	shorttitle = {Oceanic {Forcing} of {Ice}-{Sheet} {Retreat}},
+	url = {https://doi.org/10.1146/annurev-earth-060614-105344},
+	doi = {10.1146/annurev-earth-060614-105344},
+	abstract = {Ocean-ice interactions have exerted primary control on the Antarctic Ice Sheet and parts of the Greenland Ice Sheet, and will continue to do so in the near future, especially through melting of ice shelves and calving cliffs. Retreat in response to increasing marine melting typically exhibits threshold behavior, with little change for forcing below the threshold but a rapid, possibly delayed shift to a reduced state once the threshold is exceeded. For Thwaites Glacier, West Antarctica, the threshold may already have been exceeded, although rapid change may be delayed by centuries, and the reduced state will likely involve loss of most of the West Antarctic Ice Sheet, causing {\textgreater}3 m of sea-level rise. Because of shortcomings in physical understanding and available data, uncertainty persists about this threshold and the subsequent rate of change. Although sea-level histories and physical understanding allow the possibility that ice-sheet response could be quite fast, no strong constraints are yet available on the worst-case scenario. Recent work also suggests that the Greenland and East Antarctic Ice Sheets share some of the same vulnerabilities to shrinkage from marine influence.},
+	number = {1},
+	urldate = {2024-02-01},
+	journal = {Annual Review of Earth and Planetary Sciences},
+	author = {Alley, Richard B. and Anandakrishnan, Sridhar and Christianson, Knut and Horgan, Huw J. and Muto, Atsu and Parizek, Byron R. and Pollard, David and Walker, Ryan T.},
+	year = {2015},
+	note = {\_eprint: https://doi.org/10.1146/annurev-earth-060614-105344},
+	keywords = {Antarctica, Greenland, ice sheet, sea level, stability},
+	pages = {207--231},
+}
+
+@article{cockettsimpeg2015,
+	title = {{SimPEG}: {An} open source framework for simulation and gradient based parameter estimation in geophysical applications},
+	volume = {85},
+	issn = {00983004},
+	shorttitle = {{SimPEG}},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S009830041530056X},
+	doi = {10.1016/j.cageo.2015.09.015},
+	abstract = {Inverse modeling is a powerful tool for extracting information about the subsurface from geophysical data. Geophysical inverse problems are inherently multidisciplinary, requiring elements from the relevant physics, numerical simulation, and optimization, as well as knowledge of the geologic setting, and a comprehension of the interplay between all of these elements. The development and advancement of inversion methodologies can be enabled by a framework that supports experimentation, is ﬂexible and extensible, and allows the knowledge generated to be captured and shared. The goal of this paper is to propose a framework that supports many different types of geophysical forward simulations and deterministic inverse problems. Additionally, we provide an open source implementation of this framework in Python called SIMPEG (Simulation and Parameter Estimation in Geophysics, http://simpeg.xyz). Included in SIMPEG are staggered grid, mimetic ﬁnite volume discretizations on a number of structured and semi-structured meshes, convex optimization programs, inversion routines, model parameterizations, useful utility codes, and interfaces to standard numerical solver packages. The framework and implementation are modular, allowing the user to explore, experiment with, and iterate over a variety of approaches to the inverse problem. SIMPEG provides an extensible, documented, and well-tested framework for inverting many types of geophysical data and thereby helping to answer questions in geoscience applications. Throughout the paper we use a generic direct current resistivity problem to illustrate the framework and functionality of SIMPEG.},
+	language = {en},
+	urldate = {2020-02-29},
+	journal = {Computers \& Geosciences},
+	author = {Cockett, Rowan and Kang, Seogi and Heagy, Lindsey J. and Pidlisecky, Adam and Oldenburg, Douglas W.},
+	month = dec,
+	year = {2015},
+	pages = {142--154},
+}
+
+@article{matsuokaantarctic2015,
+	title = {Antarctic ice rises and rumples: {Their} properties and significance for ice-sheet dynamics and evolution},
+	volume = {150},
+	issn = {00128252},
+	shorttitle = {Antarctic ice rises and rumples},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0012825215300416},
+	doi = {10.1016/j.earscirev.2015.09.004},
+	abstract = {Locally grounded features in ice shelves, called ice rises and rumples, play a key role buttressing discharge from the Antarctic Ice Sheet and regulating its contribution to sea level. Ice rises typically rise several hundreds of meters above the surrounding ice shelf; shelf ﬂow is diverted around them. On the other hand, shelf ice ﬂows across ice rumples, which typically rise only a few tens of meters above the ice shelf. Ice rises contain rich histories of deglaciation and climate that extend back over timescales ranging from a few millennia to beyond the last glacial maximum. Numerical model results have shown that the buttressing effects of ice rises and rumples are signiﬁcant, but details of processes and how they evolve remain poorly understood. Fundamental information about the conditions and processes that cause transitions between ﬂoating ice shelves, ice rises and ice rumples is needed in order to assess their impact on ice-sheet behavior. Targeted high-resolution observational data are needed to evaluate and improve prognostic numerical models and parameterizations of the effects of small-scale pinning points on grounding-zone dynamics.},
+	language = {en},
+	urldate = {2021-05-27},
+	journal = {Earth-Science Reviews},
+	author = {Matsuoka, Kenichi and Hindmarsh, Richard C.A. and Moholdt, Geir and Bentley, Michael J. and Pritchard, Hamish D. and Brown, Joel and Conway, Howard and Drews, Reinhard and Durand, Gaël and Goldberg, Daniel and Hattermann, Tore and Kingslake, Jonathan and Lenaerts, Jan T.M. and Martín, Carlos and Mulvaney, Robert and Nicholls, Keith W. and Pattyn, Frank and Ross, Neil and Scambos, Ted and Whitehouse, Pippa L.},
+	month = nov,
+	year = {2015},
+	pages = {724--745},
+}
+
+@article{schnaidtbootstrap2015,
+	title = {Bootstrap resampling as a tool for uncertainty analysis in 2-{D} magnetotelluric inversion modelling},
+	volume = {203},
+	issn = {0956-540X, 1365-246X},
+	url = {https://academic.oup.com/gji/article-lookup/doi/10.1093/gji/ggv264},
+	doi = {10.1093/gji/ggv264},
+	abstract = {Uncertainty estimation is a vital part of geophysical numerical modelling. There exist a variety of methods aimed at uncertainty estimation, which are often complicated and difﬁcult to implement. We present an inversion technique that produces multiple solutions, based on bootstrap resampling, to create a qualitative uncertainty measure for 2-D magnetotelluric inversion models. The approach is easy to implement, can be used with almost any inversion code, and does not require access to the inversion software’s source code. It is capable of detecting the effect of data uncertainties on the model result rather than just analysing the effect of model variations on the model response. To obtain uncertainty estimates for an inversion model, the original data set is resampled repeatedly and alternate data set realizations are created and inverted. This ensemble of solutions is then statistically analysed to determine the variability between the different solutions. The process yields interpretable uncertainty maps for the inversion model and we demonstrate its effectiveness to qualitatively quantify uncertainty in synthetic model tests and a case study.},
+	language = {en},
+	number = {1},
+	urldate = {2023-04-11},
+	journal = {Geophysical Journal International},
+	author = {Schnaidt, Sebastian and Heinson, Graham},
+	month = oct,
+	year = {2015},
+	pages = {92--106},
+}
+
+@article{santosefficient2015,
+	title = {Efficient gravity inversion of discontinuous basement relief},
+	volume = {80},
+	issn = {0016-8033, 1942-2156},
+	url = {https://library.seg.org/doi/10.1190/geo2014-0513.1},
+	doi = {10.1190/geo2014-0513.1},
+	abstract = {We have developed a gravity inversion method to estimate a discontinuous basement relief based on an extended version of Bott’s method that allows variable density contrasts between sediments and basement, optimizes the modulus of the solution correction at each iteration, and provides for solution stabilization. Initially, we obtain a linear approximation stabilized by the total variation functional that correctly maps the horizontal positions of the existing high-angle faults but produced poor estimates of the basin depths. Subsequent iterations update the depth estimates toward the correct values, at the same time preserving the correct fault horizontal positions. Additionally, we stabilize each solution correction by the smoothness constraint without inverting any matrix. The method was substantially more efficient than the nonlinear method, which solves a system of linear equations by the conjugate gradient method at each iteration. For 3000 parameters, it is almost four times faster than the conjugate gradient, and this ratio increased with the number of parameters.},
+	language = {en},
+	number = {4},
+	urldate = {2023-04-15},
+	journal = {GEOPHYSICS},
+	author = {Santos, Darcicléa F. and Silva, João B. C. and Martins, Cristiano M. and dos Santos, Raphael Di Carlo S. and Ramos, Laisse C. and de Araújo, Ana Carolina M.},
+	month = jul,
+	year = {2015},
+	pages = {G95--G106},
+}
+
+@article{tintobathymetry2015,
+	title = {Bathymetry in {Petermann} fjord from {Operation} {IceBridge} aerogravity},
+	volume = {422},
+	issn = {0012821X},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0012821X15002216},
+	doi = {10.1016/j.epsl.2015.04.009},
+	abstract = {Petermann Glacier is a major glacier in northern Greenland, maintaining one of the few remaining ﬂoating ice tongues in Greenland. Monitoring programs, such as NASA’s Operation IceBridge have surveyed Petermann Glacier over several decades and have found it to be stable in terms of mass balance, velocity and grounding-line position. The future vulnerability of this large glacier to changing ocean temperatures and climate depends on the ocean–ice interactions beneath its ﬂoating tongue. These cannot currently be predicted due to a lack of knowledge of the bathymetry underneath the ice tongue. Here we use aerogravity data from Operation IceBridge, together with airborne radar and laser data and shipborne bathymetry-soundings to model the bathymetry beneath the Petermann ice tongue. We ﬁnd a basement-cored inner sill at 540–610 m depth that results in a water cavity with minimum thickness of 400 m about 25 km from the grounding line. The sill is coincident with the location of the melt rate minimum. Seaward of the sill the fjord is strongly asymmetric. The deepest point occurs on the eastern side of the fjord at 1150 m, 600 m deeper than on the western side. This asymmetry is due to a sedimentary deposit on the western side of the fjord. A 350–410 m-deep outer sill, also mapped by marine surveys, marks the seaward end of the fjord. This outer sill is aligned with the proposed Last Glacial Maximum (LGM) grounding-line position for Petermann Glacier. The inner sill likely provided a stable pinning point for the grounding line in the past, punctuating the retreat of Petermann Glacier since the LGM.},
+	language = {en},
+	urldate = {2020-01-13},
+	journal = {Earth and Planetary Science Letters},
+	author = {Tinto, Kirsty J. and Bell, R. E. and Cochran, James R. and Münchow, Andreas},
+	month = jul,
+	year = {2015},
+	pages = {58--66},
+}
+
+@article{mutosubglacial2016,
+	title = {Subglacial bathymetry and sediment distribution beneath {Pine} {Island} {Glacier} ice shelf modeled using aerogravity and in situ geophysical data: {New} results},
+	volume = {433},
+	issn = {0012821X},
+	shorttitle = {Subglacial bathymetry and sediment distribution beneath {Pine} {Island} {Glacier} ice shelf modeled using aerogravity and in situ geophysical data},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0012821X1500672X},
+	doi = {10.1016/j.epsl.2015.10.037},
+	abstract = {Pine Island Glacier (PIG) in the Amundsen Sea sector of the West Antarctic Ice Sheet (WAIS) is losing mass and contributing to global sea-level rise at an accelerating rate. Although recent observations and modeling have identiﬁed the incursion of relatively warm Circumpolar Deep Water (CDW) beneath the PIG ice shelf (PIGIS) as the main driver of this ice-mass loss, the lack of precise bathymetry limits furthering our understanding of the ice–ocean interactions and improving the accuracy of modeling. Here we present updated bathymetry and sediment distribution beneath the PIGIS, modeled by the inversion of aerogravity data with constraints from active-source seismic data, observations from an autonomous underwater vehicle, and the regional gravity-anomaly ﬁeld derived from satellite gravity observations. Modeled bathymetry shows a submarine ridge beneath the middle of PIGIS that rises ∼350 to 400 m above the surrounding sea ﬂoor, with a minimum water-column thickness of ∼200 m above it. This submarine ridge continues across the whole width of the 45-km wide ice shelf, with no deep troughs crossing it, conﬁrming the general features of the previously predicted sub-ice-shelf ocean circulation. However, the relatively low resolution of the aerogravity data and limitations in our inversion method leave a possibility that there is an undetected, few-kilometerswide or narrower trough that may alter the predicted sub-ice-shelf ocean circulation. Modeled sediment distribution indicates a sedimentary basin of up to ∼800 m thick near the current grounding zone of the main PIG trunk and extending farther inland, and a region seaward of the submarine ridge where sediments are thin or absent with exposed crystalline basement that extends seaward into Pine Island Bay. Therefore, the submarine ridge marks the transition from a thick sedimentary basin providing a smooth interface over which ice could ﬂow easily by sliding or sediment deformation, to a region with no to little sediments and instead a rough interface over which ice ﬂows mainly by deformation. We hypothesize that the post-Last Glacial Maximum retreat of PIG stabilized at this location because of the spatial transition in basal conditions. This in turn supports the hypothesis that the recent retreat of PIG was strongly forced, probably by changes in ocean circulation, rather than occurring because of ongoing response to the end of the ice age or other changes inland of or beneath PIG.},
+	language = {en},
+	urldate = {2020-02-25},
+	journal = {Earth and Planetary Science Letters},
+	author = {Muto, Atsuhiro and Peters, Leo E. and Gohl, Karsten and Sasgen, Ingo and Alley, Richard B. and Anandakrishnan, Sridhar and Riverman, Kiya L.},
+	month = jan,
+	year = {2016},
+	pages = {63--75},
+}
+
+@phdthesis{mccubbineairborne2016,
+	title = {Airborne {Gravity} {Across} {New} {Zealand} - {For} {An} {Improved} {Vertical} {Datum}},
+	url = {http://hdl.handle.net/10063/5264},
+	language = {en},
+	school = {Victoria University of Wellington},
+	author = {McCubbine, Jack},
+	year = {2016},
+}
+
+@article{robertscrossvalidation2017,
+	title = {Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure},
+	volume = {40},
+	issn = {1600-0587},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.02881},
+	doi = {10.1111/ecog.02881},
+	abstract = {Ecological data often show temporal, spatial, hierarchical (random effects), or phylogenetic structure. Modern statistical approaches are increasingly accounting for such dependencies. However, when performing cross-validation, these structures are regularly ignored, resulting in serious underestimation of predictive error. One cause for the poor performance of uncorrected (random) cross-validation, noted often by modellers, are dependence structures in the data that persist as dependence structures in model residuals, violating the assumption of independence. Even more concerning, because often overlooked, is that structured data also provides ample opportunity for overfitting with non-causal predictors. This problem can persist even if remedies such as autoregressive models, generalized least squares, or mixed models are used. Block cross-validation, where data are split strategically rather than randomly, can address these issues. However, the blocking strategy must be carefully considered. Blocking in space, time, random effects or phylogenetic distance, while accounting for dependencies in the data, may also unwittingly induce extrapolations by restricting the ranges or combinations of predictor variables available for model training, thus overestimating interpolation errors. On the other hand, deliberate blocking in predictor space may also improve error estimates when extrapolation is the modelling goal. Here, we review the ecological literature on non-random and blocked cross-validation approaches. We also provide a series of simulations and case studies, in which we show that, for all instances tested, block cross-validation is nearly universally more appropriate than random cross-validation if the goal is predicting to new data or predictor space, or for selecting causal predictors. We recommend that block cross-validation be used wherever dependence structures exist in a dataset, even if no correlation structure is visible in the fitted model residuals, or if the fitted models account for such correlations.},
+	language = {en},
+	number = {8},
+	urldate = {2025-05-01},
+	journal = {Ecography},
+	author = {Roberts, David R. and Bahn, Volker and Ciuti, Simone and Boyce, Mark S. and Elith, Jane and Guillera-Arroita, Gurutzeta and Hauenstein, Severin and Lahoz-Monfort, José J. and Schröder, Boris and Thuiller, Wilfried and Warton, David I. and Wintle, Brendan A. and Hartig, Florian and Dormann, Carsten F.},
+	year = {2017},
+	note = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/ecog.02881},
+	pages = {913--929},
+}
+
+@article{ruckerpygimli2017,
+	title = {{pyGIMLi}: {An} open-source library for modelling and inversion in geophysics},
+	volume = {109},
+	issn = {00983004},
+	shorttitle = {{pyGIMLi}},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0098300417300584},
+	doi = {10.1016/j.cageo.2017.07.011},
+	abstract = {Many tasks in applied geosciences cannot be solved by single measurements, but require the integration of geophysical, geotechnical and hydrological methods. Numerical simulation techniques are essential both for planning and interpretation, as well as for the process understanding of modern geophysical methods. These trends encourage open, simple, and modern software architectures aiming at a uniform interface for interdisciplinary and ﬂexible modelling and inversion approaches. We present pyGIMLi (Python Library for Inversion and Modelling in Geophysics), an open-source framework that provides tools for modelling and inversion of various geophysical but also hydrological methods. The modelling component supplies discretization management and the numerical basis for ﬁnite-element and ﬁnitevolume solvers in 1D, 2D and 3D on arbitrarily structured meshes. The generalized inversion framework solves the minimization problem with a Gauss-Newton algorithm for any physical forward operator and provides opportunities for uncertainty and resolution analyses. More general requirements, such as ﬂexible regularization strategies, time-lapse processing and different sorts of coupling individual methods are provided independently of the actual methods used. The usage of pyGIMLi is ﬁrst demonstrated by solving the steady-state heat equation, followed by a demonstration of more complex capabilities for the combination of different geophysical data sets. A fully coupled hydrogeophysical inversion of electrical resistivity tomography (ERT) data of a simulated tracer experiment is presented that allows to directly reconstruct the underlying hydraulic conductivity distribution of the aquifer. Another example demonstrates the improvement of jointly inverting ERT and ultrasonic data with respect to saturation by a new approach that incorporates petrophysical relations in the inversion. Potential applications of the presented framework are manifold and include time-lapse, constrained, joint, and coupled inversions of various geophysical and hydrological data sets.},
+	language = {en},
+	urldate = {2020-03-04},
+	journal = {Computers \& Geosciences},
+	author = {Rücker, Carsten and Günther, Thomas and Wagner, Florian M.},
+	month = dec,
+	year = {2017},
+	pages = {106--123},
+}
+
+@article{uiedafast2017,
+	title = {Fast nonlinear gravity inversion in spherical coordinates with application to the {South} {American} {Moho}},
+	volume = {208},
+	issn = {0956-540X, 1365-246X},
+	url = {https://academic.oup.com/gji/article-lookup/doi/10.1093/gji/ggw390},
+	doi = {10.1093/gji/ggw390},
+	abstract = {Estimating the relief of the Moho from gravity data is a computationally intensive nonlinear inverse problem. What is more, the modelling must take the Earths curvature into account when the study area is of regional scale or greater. We present a regularized nonlinear gravity inversion method that has a low computational footprint and employs a spherical Earth approximation. To achieve this, we combine the highly efﬁcient Bott’s method with smoothness regularization and a discretization of the anomalous Moho into tesseroids (spherical prisms). The computational efﬁciency of our method is attained by harnessing the fact that all matrices involved are sparse. The inversion results are controlled by three hyperparameters: the regularization parameter, the anomalous Moho density-contrast, and the reference Moho depth. We estimate the regularization parameter using the method of hold-out cross-validation. Additionally, we estimate the density-contrast and the reference depth using knowledge of the Moho depth at certain points. We apply the proposed method to estimate the Moho depth for the South American continent using satellite gravity data and seismological data. The ﬁnal Moho model is in accordance with previous gravity-derived models and seismological data. The misﬁt to the gravity and seismological data is worse in the Andes and best in oceanic areas, central Brazil and Patagonia, and along the Atlantic coast. Similarly to previous results, the model suggests a thinner crust of 30–35 km under the Andean foreland basins. Discrepancies with the seismological data are greatest in the Guyana Shield, the central Solimo˜es and Amazonas Basins, the Parana´ Basin, and the Borborema province. These differences suggest the existence of crustal or mantle density anomalies that were unaccounted for during gravity data processing.},
+	language = {en},
+	number = {1},
+	urldate = {2022-05-01},
+	journal = {Geophysical Journal International},
+	author = {Uieda, Leonardo and Barbosa, Valéria C.F.},
+	month = jan,
+	year = {2017},
+	pages = {162--176},
+}
+
+@misc{mouginotmeasures2017,
+	title = {{MEaSUREs} {Antarctic} {Boundaries} for {IPY} 2007-2009 from {Satellite} {Radar}, {Version} 2},
+	url = {https://nsidc.org/data/nsidc-0709/versions/2},
+	language = {en},
+	urldate = {2023-05-09},
+	journal = {National Snow and Ice Data Center},
+	author = {Mouginot, J. and Scheuchl, B. and Rignot, E.},
+	year = {2017},
+	note = {https://doi.org/10.5067/AXE4121732AD},
+}
+
+@book{asterparameter2018,
+	address = {Cambridge, MA},
+	title = {Parameter estimation and inverse problems},
+	isbn = {978-0-12-804651-7},
+	url = {https://doi.org/10.1016/C2009-0-61134-X},
+	language = {en},
+	publisher = {Elsevier},
+	author = {Aster, R. C. and Borchers, B. and Thurber, C. H.},
+	year = {2018},
+}
+
+@article{millanvulnerability2018,
+	title = {Vulnerability of {Southeast} {Greenland} {Glaciers} to {Warm} {Atlantic} {Water} {From} {Operation} {IceBridge} and {Ocean} {Melting} {Greenland} {Data}},
+	volume = {45},
+	issn = {00948276},
+	shorttitle = {Vulnerability of {Southeast} {Greenland} {Glaciers} to {Warm} {Atlantic} {Water} {From} {Operation} {IceBridge} and {Ocean} {Melting} {Greenland} {Data}},
+	url = {http://doi.wiley.com/10.1002/2017GL076561},
+	doi = {10.1002/2017GL076561},
+	abstract = {We employ National Aeronautics and Space Administration (NASA)’s Operation IceBridge high-resolution airborne gravity from 2016, NASA’s Ocean Melting Greenland bathymetry from 2015, ice thickness from Operation IceBridge from 2010 to 2015, and BedMachine v3 to analyze 20 major southeast Greenland glaciers. The results reveal glacial fjords several hundreds of meters deeper than previously thought; the full extent of the marine-based portions of the glaciers; deep troughs enabling warm, salty Atlantic Water (AW) to reach the glacier fronts and melt them from below; and few shallow sills that limit the access of AW. The new oceanographic and topographic data help to fully resolve the complex pattern of historical ice front positions from the 1930s to 2017: glaciers exposed to AW and resting on retrograde beds have retreated rapidly, while glaciers perched on shallow sills or standing in colder waters or with major sills in the fjords have remained stable.},
+	language = {en},
+	number = {6},
+	urldate = {2020-01-13},
+	journal = {Geophysical Research Letters},
+	author = {Millan, R. and Rignot, E. and Mouginot, J. and Wood, M. and Bjørk, A. A. and Morlighem, M.},
+	month = mar,
+	year = {2018},
+	pages = {2688--2696},
+}
+
+@inproceedings{akibaoptuna2019,
+	address = {New York, NY, USA},
+	series = {{KDD} '19},
+	title = {Optuna: {A} {Next}-generation {Hyperparameter} {Optimization} {Framework}},
+	isbn = {978-1-4503-6201-6},
+	shorttitle = {Optuna},
+	url = {https://doi.org/10.1145/3292500.3330701},
+	doi = {10.1145/3292500.3330701},
+	abstract = {The purpose of this study is to introduce new design-criteria for next-generation hyperparameter optimization software. The criteria we propose include (1) define-by-run API that allows users to construct the parameter search space dynamically, (2) efficient implementation of both searching and pruning strategies, and (3) easy-to-setup, versatile architecture that can be deployed for various purposes, ranging from scalable distributed computing to light-weight experiment conducted via interactive interface. In order to prove our point, we will introduce Optuna, an optimization software which is a culmination of our effort in the development of a next generation optimization software. As an optimization software designed with define-by-run principle, Optuna is particularly the first of its kind. We will present the design-techniques that became necessary in the development of the software that meets the above criteria, and demonstrate the power of our new design through experimental results and real world applications. Our software is available under the MIT license (https://github.com/pfnet/optuna/).},
+	urldate = {2023-02-19},
+	booktitle = {Proceedings of the 25th {ACM} {SIGKDD} {International} {Conference} on {Knowledge} {Discovery} \& {Data} {Mining}},
+	publisher = {Association for Computing Machinery},
+	author = {Akiba, Takuya and Sano, Shotaro and Yanase, Toshihiko and Ohta, Takeru and Koyama, Masanori},
+	month = jul,
+	year = {2019},
+	keywords = {Bayesian optimization, black-box optimization, hyperparameter optimization, machine learning system},
+	pages = {2623--2631},
+}
+
+@article{anbathymetry2019,
+	title = {Bathymetry of {Northwest} {Greenland} {Using} “{Ocean} {Melting} {Greenland}” ({OMG}) {High}-{Resolution} {Airborne} {Gravity} and {Other} {Data}},
+	volume = {11},
+	issn = {2072-4292},
+	url = {http://www.mdpi.com/2072-4292/11/2/131},
+	doi = {10.3390/rs11020131},
+	abstract = {Marine-terminating glaciers dominate the evolution of the Greenland Ice Sheet (GrIS) and its contribution to sea-level rise. Widespread glacier acceleration has been linked to the warming of ocean waters around the periphery of Greenland but a lack of information on the bathymetry of the continental shelf and glacial fjords has limited our ability to understand how subsurface, warm, salty ocean waters of Atlantic origin (AW) reach the glaciers and melt them from below. Here, we employ high-resolution, airborne gravity data (AIRGrav) in combination with multibeam echo sounding (MBES) data, to infer the bathymetry of the coastal areas of Northwest Greenland for NASA’s Ocean Melting Greenland (OMG) mission. High-resolution, AIRGrav data acquired on a 2 km spacing, 150 m ground clearance, with 1.5 mGal crossover error, is inverted in three dimensions to map the bathymetry. To constrain the inversion away from MBES data, we compare two methods: one based on the Direct Current (DC) shift of the gravity ﬁeld (absolute minus observed gravity) and another based on the density of the bedrock. We evaluate and compare the two methods in areas with complete MBES coverage. We ﬁnd the lowest standard error in bed elevation (±60 m) using the DC shift method. When applied to the entire coast of Northwest Greenland, the three-dimensional inversion reveals a complex network of connected sea bed channels, not known previously, that provide natural and varied pathways for AW to reach the glaciers across the continental shelf. The study demonstrates that the gravity approach offers an efﬁcient and practical alternative to extensive ship mapping in ice-ﬁlled waters to obtain information critical to understanding and modeling ice-ocean interaction along ice sheet margins.},
+	language = {en},
+	number = {2},
+	urldate = {2023-06-05},
+	journal = {Remote Sensing},
+	author = {An, Lu and Rignot, Eric and Millan, Romain and Tinto, Kirsty and Willis, Josh},
+	month = jan,
+	year = {2019},
+	pages = {131},
+}
+
+@article{anbathymetry2019a,
+	title = {Bathymetry of {Southeast} {Greenland} {From} {Oceans} {Melting} {Greenland} ({OMG}) {Data}},
+	volume = {46},
+	issn = {0094-8276, 1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1029/2019GL083953},
+	doi = {10.1029/2019GL083953},
+	abstract = {Southeast Greenland has been a major participant in the ice sheet mass loss over the last several decades. Interpreting the evolution of glacier fronts requires information about their depth below sea level and ocean thermal forcing, which are incompletely known in the region. Here, we combine airborne gravity and multibeam echo sounding data from the National Aeronautics and Space Administration's Oceans Melting Greenland (OMG) mission with ocean probe and ﬁshing boat depth data to reconstruct the bathymetry extending from the glacier margins to the edges of the continental shelf. We perform a three‐dimensional inversion of the gravity data over water and merge the solution with a mass conservation reconstruction of bed topography over land. In contrast with other parts of Greenland, we ﬁnd few deep troughs connecting the glaciers to the sources of warm Atlantic Water, amidst a relatively uniform, shallow (350 m) continental shelf. The deep channels include the Kangerlugssuaq, Sermilik, Gyldenløve, and Tingmiarmiut Troughs.},
+	language = {en},
+	number = {20},
+	urldate = {2020-06-29},
+	journal = {Geophysical Research Letters},
+	author = {An, Lu and Rignot, Eric and Chauche, Nolwenn and Holland, David M. and Holland, Denise and Jakobsson, Martin and Kane, Emily and Wood, Michael and Klaucke, Ingo and Morlighem, Mathieu and Velicogna, Isabella and Weinrebe, Wilhelm and Willis, Josh K.},
+	month = oct,
+	year = {2019},
+	pages = {11197--11205},
+}
+
+@article{uiedaverde2018,
+	title = {Verde: {Processing} and gridding spatial data using {Green}'s functions},
+	volume = {3},
+	issn = {2475-9066},
+	doi = {10.21105/joss.00957},
+	number = {29},
+	journal = {Journal of Open Source Software},
+	author = {Uieda, Leonardo},
+	year = {2018},
+	pages = {957},
+}
+
+@article{cochrandetailed2020,
+	title = {Detailed {Bathymetry} of the {Continental} {Shelf} {Beneath} the {Getz} {Ice} {Shelf}, {West} {Antarctica}},
+	volume = {125},
+	issn = {2169-9003, 2169-9011},
+	url = {https://onlinelibrary.wiley.com/doi/10.1029/2019JF005493},
+	doi = {10.1029/2019JF005493},
+	abstract = {The Getz Ice Shelf (GIS) produces major amounts of basal meltwater due to intrusions of warm modiﬁed Circumpolar Deep Water (mCDW) beneath the ice shelf. However, multiple cavity openings and complex geography mean that knowledge of bathymetry beneath the GIS is required to understand ice/ocean interactions. We invert NASA airborne gravity data to obtain bathymetry beneath the ice shelf. Our gravity/geology‐constrained bathymetry is a signiﬁcant advance on Bedmap2 bathymetry. The sub‐ice shelf bathymetry consists of three cavities separated by topographic ridges extending from the ice shelf front to the grounding line. Passages allowing limited circulation of shallow (≲400 meters below sea level [mbsl]) water between cavities are present, but deeper water is conﬁned to individual cavities. Within each cavity, bathymetric troughs ({\textgreater}900 mbsl) extend from the ice shelf front to subglacial valleys beneath the ice sheet. Our analysis of the gravity data also allows us to infer the presence of thick ({\textgreater}500 m) sediments near the grounding line through much of the GIS, as well as variations in the density and/or thickness of the crust underlying the ice shelf. Plain Language Summary Floating ice shelves surrounding Antarctica slow the ﬂow of the Antarctic Ice Sheet toward the ocean. West Antarctic ice shelves, including the large Getz Ice Shelf, have thinned signiﬁcantly over the past 20 years, due in part to increased ﬂow of warming ocean water into the ocean cavities beneath them. This thinning results in acceleration of ice ﬂowing into the ocean, so that more ice goes aﬂoat, raising sea level. We mapped the shape of the ocean ﬂoor beneath the Getz Ice Shelf, which controls water circulation under the ice shelf. We found the ice shelf has three separate portions each with deep troughs that provide pathways for warm water to the edge of the ice sheet.},
+	language = {en},
+	number = {10},
+	urldate = {2023-04-23},
+	journal = {Journal of Geophysical Research: Earth Surface},
+	author = {Cochran, James R. and Tinto, Kirsty J. and Bell, Robin E.},
+	month = oct,
+	year = {2020},
+}
+
+@article{hodgsonfuture2019,
+	title = {Past and future dynamics of the {Brunt} {Ice} {Shelf} from seabed bathymetry and ice shelf geometry},
+	volume = {13},
+	issn = {1994-0424},
+	url = {https://www.the-cryosphere.net/13/545/2019/},
+	doi = {10.5194/tc-13-545-2019},
+	abstract = {Abstract. The recent rapid growth of rifts in the Brunt Ice Shelf appears to
+signal the onset of its largest calving event since records began in 1915.
+The aim of this study is to determine whether this calving event will lead to
+a new steady state in which the Brunt Ice Shelf remains in contact with the bed,
+or an unpinning from the bed, which could predispose it to accelerated flow
+or possible break-up. We use a range of geophysical data to reconstruct the
+sea-floor bathymetry and ice shelf geometry, to examine past ice sheet
+configurations in the Brunt Basin, and to define the present-day geometry of
+the contact between the Brunt Ice Shelf and the bed. Results show that during
+past ice advances grounded ice streams likely converged in the Brunt Basin
+from the south and east. As the ice retreated, it was likely pinned on at
+least three former grounding lines marked by topographic highs, and
+transverse ridges on the flanks of the basin. These may have subsequently
+formed pinning points for developing ice shelves. The ice shelf geometry and
+bathymetry measurements show that the base of the Brunt Ice Shelf now only
+makes contact with one of these topographic highs. This contact is limited to
+an area of less than 1.3 to 3 km2 and results in a compressive regime
+that helps to maintain the ice shelf's integrity. The maximum overlap between ice shelf
+draft and the bathymetric high is 2–25 m and is contingent on the presence
+of incorporated iceberg keels, which protrude beneath the base of the ice
+shelf. The future of the ice shelf depends on whether the expected calving
+event causes full or partial loss of contact with the bed and whether the
+subsequent response causes re-grounding within a predictable period or a
+loss of structural integrity resulting from properties inherited at the
+grounding line.},
+	language = {en},
+	number = {2},
+	urldate = {2020-01-13},
+	journal = {The Cryosphere},
+	author = {Hodgson, Dominic A. and Jordan, T. A. and De Rydt, Jan and Fretwell, Peter T. and Seddon, Samuel A. and Becker, David and Hogan, Kelly A. and Smith, Andrew M. and Vaughan, David G.},
+	month = feb,
+	year = {2019},
+	pages = {545--556},
+}
+
+@article{tintoross2019,
+	title = {Ross {Ice} {Shelf} response to climate driven by the tectonic imprint on seafloor bathymetry},
+	volume = {12},
+	issn = {1752-0894, 1752-0908},
+	doi = {https://doi.org/10.1038/s41561-019-0370-2},
+	language = {en},
+	number = {6},
+	urldate = {2020-01-06},
+	journal = {Nature Geoscience},
+	author = {Tinto, K. J. and Padman, L. and Siddoway, Christine S. and Springer, S. R. and Fricker, H. A. and Das, I. and Caratori-Tontini, Fabio and Porter, D. F. and Frearson, N. P. and Howard, S. L. and Siegfried, M. R. and Mosbeux, C. and Becker, M. K. and Bertinato, C. and Boghosian, A. and Brady, N. and Burton, B. L. and Chu, W. and Cordero, S. I. and Dhakal, T. and Dong, L. and Gustafson, C. D. and Keeshin, S. and Locke, C. and Lockett, A. and O’Brien, G. and Spergel, J. J. and Starke, S. E. and Tankersley, Matthew and Wearing, M. G. and Bell, R. E.},
+	year = {2019},
+	pages = {441--449},
+}
+
+@article{rignotfour2019,
+	title = {Four decades of {Antarctic} {Ice} {Sheet} mass balance from 1979–2017},
+	volume = {116},
+	url = {https://www.pnas.org/doi/full/10.1073/pnas.1812883116},
+	doi = {10.1073/pnas.1812883116},
+	abstract = {We use updated drainage inventory, ice thickness, and ice velocity data to calculate the grounding line ice discharge of 176 basins draining the Antarctic Ice Sheet from 1979 to 2017. We compare the results with a surface mass balance model to deduce the ice sheet mass balance. The total mass loss increased from 40
+±
+±
+ 9 Gt/y in 1979–1990 to 50
+±
+±
+ 14 Gt/y in 1989–2000, 166
+±
+±
+ 18 Gt/y in 1999–2009, and 252
+±
+±
+ 26 Gt/y in 2009–2017. In 2009–2017, the mass loss was dominated by the Amundsen/Bellingshausen Sea sectors, in West Antarctica (159
+±
+±
+ 8 Gt/y), Wilkes Land, in East Antarctica (51
+±
+±
+ 13 Gt/y), and West and Northeast Peninsula (42
+±
+±
+ 5 Gt/y). The contribution to sea-level rise from Antarctica averaged 3.6
+±
+±
+ 0.5 mm per decade with a cumulative 14.0
+±
+±
+ 2.0 mm since 1979, including 6.9
+±
+±
+ 0.6 mm from West Antarctica, 4.4
+±
+±
+ 0.9 mm from East Antarctica, and 2.5
+±
+±
+ 0.4 mm from the Peninsula (i.e., East Antarctica is a major participant in the mass loss). During the entire period, the mass loss concentrated in areas closest to warm, salty, subsurface, circumpolar deep water (CDW), that is, consistent with enhanced polar westerlies pushing CDW toward Antarctica to melt its floating ice shelves, destabilize the glaciers, and raise sea level.},
+	number = {4},
+	urldate = {2022-11-30},
+	journal = {Proceedings of the National Academy of Sciences},
+	author = {Rignot, Eric and Mouginot, Jérémie and Scheuchl, Bernd and van den Broeke, Michiel and van Wessem, Melchior J. and Morlighem, Mathieu},
+	month = jan,
+	year = {2019},
+	note = {Publisher: Proceedings of the National Academy of Sciences},
+	pages = {1095--1103},
+}
+
+@article{adusumilliinterannual2020,
+	title = {Interannual variations in meltwater input to the {Southern} {Ocean} from {Antarctic} ice shelves},
+	volume = {13},
+	issn = {1752-0894, 1752-0908},
+	url = {https://www.nature.com/articles/s41561-020-0616-z},
+	doi = {10.1038/s41561-020-0616-z},
+	language = {en},
+	number = {9},
+	urldate = {2022-06-21},
+	journal = {Nature Geoscience},
+	author = {Adusumilli, Susheel and Fricker, Helen Amanda and Medley, Brooke and Padman, Laurie and Siegfried, Matthew R.},
+	month = sep,
+	year = {2020},
+	pages = {616--620},
+}
+
+@article{constantinoseafloor2020,
+	title = {Seafloor {Depth} of {George} {VI} {Sound}, {Antarctic} {Peninsula}, {From} {Inversion} of {Aerogravity} {Data}},
+	volume = {47},
+	issn = {0094-8276, 1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/10.1029/2020GL088654},
+	doi = {10.1029/2020GL088654},
+	abstract = {George VI Sound is an {\textasciitilde}600 km‐long curvilinear channel on the west coast of the southern Antarctic Peninsula separating Alexander Island from Palmer Land. The Sound is a geologically complex region presently covered by the George VI Ice Shelf. Here we model the bathymetry using aerogravity data. Our model is constrained by water depths from seismic measurements. We present a crustal density model for the region, propose a relocation for a major fault in the Sound, and reveal a dense body, {\textasciitilde}200 km long, ﬂanking the Palmer Land side. The southern half of the Sound consists of two distinct basins {\textasciitilde}1,100 m deep, separated by a −650 m‐deep ridge. This constricting ridge presents a potential barrier to ocean circulation beneath the ice shelf and may account for observed differences in temperature‐salinity (T‐S) proﬁles. Plain Language Summary Knowing the seaﬂoor depth beneath ice shelves is crucial for understanding the interaction between the ocean and the overlying ice, as the shape of the sea ﬂoor inﬂuences water circulation pathways. We present a new bathymetric model of the seaﬂoor beneath George VI Ice Shelf on the Antarctica Peninsula. The data for our model were collected from airborne surveys, including the ice surface elevation, ice thickness, and gravity ﬁeld measurements. We ﬁrst present a new geological model of the Sound and use our improved data coverage to relocate a previously interpreted geological fault. The new bathymetry model shows that in the southern segment of the Sound, an area with shallow bathymetry and deep ice might be acting as a barrier to the water ﬂow. This information can change our understanding of the circulation between the northern and southern segments of the Sound and can be used in models of how this impacts the melt in the base of the ice shelf.},
+	language = {en},
+	number = {21},
+	urldate = {2020-11-01},
+	journal = {Geophysical Research Letters},
+	author = {Constantino, Renata R. and Tinto, Kirsty J. and Bell, Robin E. and Porter, David F. and Jordan, Tom A.},
+	month = nov,
+	year = {2020},
+}
+
+@article{jordannew2020,
+	title = {New gravity-derived bathymetry for the {Thwaites}, {Crosson}, and {Dotson} ice shelves revealing two ice shelf populations},
+	volume = {14},
+	issn = {1994-0424},
+	url = {https://tc.copernicus.org/articles/14/2869/2020/},
+	doi = {10.5194/tc-14-2869-2020},
+	abstract = {Abstract. Ice shelves play a critical role in the long-term
+stability of ice sheets through their buttressing effect. The underlying
+bathymetry and cavity thickness are key inputs for modelling future ice
+sheet evolution. However, direct observation of sub-ice-shelf bathymetry is
+time-consuming, logistically risky, and in some areas simply not possible.
+Here we use new compilations of airborne and marine gravity, radar depth
+sounding, and swath bathymetry to provide new estimates of sub-ice-shelf
+bathymetry outboard of the rapidly changing West Antarctic Thwaites Glacier
+and beneath the adjacent Dotson and Crosson ice shelves. This region is of
+special interest, as the low-lying inland reverse slope of the Thwaites
+Glacier system makes it vulnerable to marine ice sheet instability, with
+rapid grounding line retreat observed since 1993 suggesting this process may
+be underway. Our results confirm a major marine channel {\textgreater}800 m
+deep extends tens of kilometres to the front of Thwaites Glacier, while the
+adjacent ice shelves are underlain by more complex bathymetry. Comparison of
+our new bathymetry with ice shelf draft reveals that ice shelves formed
+since 1993 comprise a distinct population where the draft conforms closely
+to the underlying bathymetry, unlike the older ice shelves, which show a more
+uniform depth of the ice base. This indicates that despite rapid basal
+melting in some areas, these recently floated parts of the ice shelf are not
+yet in dynamic equilibrium with their retreated grounding line positions and
+the underlying ocean system, a factor which must be included in future
+models of this region's evolution.},
+	language = {en},
+	number = {9},
+	urldate = {2021-01-12},
+	journal = {The Cryosphere},
+	author = {Jordan, Tom A. and Porter, David and Tinto, Kirsty and Millan, Romain and Muto, Atsuhiro and Hogan, Kelly and Larter, Robert D. and Graham, Alastair G. C. and Paden, John D.},
+	month = sep,
+	year = {2020},
+	pages = {2869--2882},
+}
+
+@article{eisermannbathymetry2020,
+	title = {Bathymetry {Beneath} {Ice} {Shelves} of {Western} {Dronning} {Maud} {Land}, {East} {Antarctica}, and {Implications} on {Ice} {Shelf} {Stability}},
+	volume = {47},
+	issn = {0094-8276, 1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1029/2019GL086724},
+	doi = {10.1029/2019GL086724},
+	abstract = {Antarctica's ice shelves play a key role in stabilizing the ice streams that feed them. Since basal melting largely depends on ice‐ocean interactions, it is vital to attain consistent bathymetry models to estimate water and heat exchange beneath ice shelves. We have constructed bathymetry models beneath the ice shelves of western Dronning Maud Land by inverting airborne gravity data and incorporating seismic, multibeam, and radar depth references. Our models reveal deep glacial troughs beneath the ice shelves and terminal moraines close to the continental shelf breaks, which currently limit the entry of Warm Deep Water from the Southern Ocean. The ice shelves buttress a catchment that comprises an ice volume equivalent to nearly 1 m of eustatic sea level rise, partly susceptible to ocean forcing. Changes in water temperature and thermocline depth may accelerate marine‐based ice sheet drainage and constitute an underestimated contribution to future global sea level rise. Plain Language Summary The grounded ice sheets of Antarctica are stabilized by ﬂoating ice shelves. Any loss in ice shelf mass is matched by an increase in ice sheet drainage, which contributes to rising sea level. The ice shelves of western Dronning Maud Land are currently in balance with an inland ice volume that has the potential to raise global sea level by nearly 1 m. Ice shelves lose most of their mass from their bases when warm water intrudes from the surrounding ocean. The extent to which this occurs depends on the depth and shape of the seaﬂoor beneath the ice shelves. We have modeled water depths beneath the ice shelves of Dronning Maud Land using airborne gravity data and depth measurements from seismic, multibeam, and radar data. Our bathymetric models show deep troughs beneath the ice shelves and shallow sills close to the continental shelf. These sills currently limit water mass exchange with Warm Deep Water from the Southern Ocean and so protect the ice shelves from signiﬁcant melting at their bases. A changing climate with increasing ocean temperatures or a shallowing of warm water masses may increase ice shelf melting and lead to an increased sea level contribution.},
+	language = {en},
+	number = {12},
+	urldate = {2020-06-15},
+	journal = {Geophysical Research Letters},
+	author = {Eisermann, Hannes and Eagles, Graeme and Ruppel, Antonia and Smith, Emma Clare and Jokat, Wilfried},
+	month = jun,
+	year = {2020},
+}
+
+@article{weigetz2020,
+	title = {Getz {Ice} {Shelf} melt enhanced by freshwater discharge from beneath the {West} {Antarctic} {Ice} {Sheet}},
+	volume = {14},
+	issn = {1994-0424},
+	url = {https://tc.copernicus.org/articles/14/1399/2020/},
+	doi = {10.5194/tc-14-1399-2020},
+	abstract = {Antarctica’s Getz Ice Shelf has been rapidly thinning in recent years, producing more meltwater than any other ice shelf in the world. The inﬂux of fresh water is known to substantially inﬂuence ocean circulation and biological productivity, but relatively little is known about the factors controlling basal melt rate or how basal melt is spatially distributed beneath the ice shelf. Also unknown is the relative importance of subglacial discharge from the grounded ice sheet in contributing to the export of fresh water from the ice shelf cavity. Here we compare the observed spatial distribution of basal melt rate to a new sub-iceshelf bathymetry map inferred from airborne gravity surveys and to locations of subglacial discharge from the grounded ice sheet. We ﬁnd that melt rates are high where bathymetric troughs provide a pathway for warm Circumpolar Deep Water to enter the ice shelf cavity and that melting is enhanced where subglacial discharge fresh water ﬂows across the grounding line. This is the ﬁrst study to address the relative importance of meltwater production of the Getz Ice Shelf from both ocean and subglacial sources.},
+	language = {en},
+	number = {4},
+	urldate = {2021-10-10},
+	journal = {The Cryosphere},
+	author = {Wei, Wei and Blankenship, Donald D. and Greenbaum, Jamin S. and Gourmelen, Noel and Dow, Christine F. and Richter, Thomas G. and Greene, Chad A. and Young, Duncan A. and Lee, SangHoon and Kim, Tae-Wan and Lee, Won Sang and Assmann, Karen M.},
+	month = apr,
+	year = {2020},
+	pages = {1399--1408},
+}
+
+@article{virtanenscipy2020,
+	title = {{SciPy} 1.0: {Fundamental} algorithms for scientific computing in python},
+	volume = {17},
+	doi = {10.1038/s41592-019-0686-2},
+	journal = {Nature Methods},
+	author = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and Haberland, Matt and Reddy, Tyler and Cournapeau, David and Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and Bright, Jonathan and van der Walt, Stéfan J. and Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and Kern, Robert and Larson, Eric and Carey, C J and Polat, İlhan and Feng, Yu and Moore, Eric W. and VanderPlas, Jake and Laxalde, Denis and Perktold, Josef and Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and Harris, Charles R. and Archibald, Anne M. and Ribeiro, Antônio H. and Pedregosa, Fabian and van Mulbregt, Paul and {SciPy 1.0 Contributors}},
+	year = {2020},
+	note = {tex.adsurl: https://rdcu.be/b08Wh},
+	pages = {261--272},
+}
+
+@article{millanconstraining2020,
+	title = {Constraining an {Ocean} {Model} {Under} {Getz} {Ice} {Shelf}, {Antarctica}, {Using} {A} {Gravity}‐{Derived} {Bathymetry}},
+	volume = {47},
+	issn = {0094-8276, 1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1029/2019GL086522},
+	doi = {10.1029/2019GL086522},
+	abstract = {Getz Ice Shelf, the largest producer of ice shelf meltwater in Antarctica, buttresses glaciers that hold enough ice to raise sea level by 22 cm. We present a new bathymetry of its sub‐ice shelf cavity using a three‐dimensional inversion of airborne gravity data constrained by multibeam bathymetry at sea and a reconstruction of the bedrock from mass conservation on land. The new bathymetry is deeper than previously estimated with differences exceeding 500 m in a number of regions. When incorporated into an ocean model, it yields a better description of the spatial distribution of ice shelf melt, speciﬁcally along glacier grounding lines. While the melt intensity is overestimated because of a positive bias in ocean thermal forcing, the study reveals the main pathways along which warm oceanic water enters the cavity and corroborates the observed rapid retreat of Berry Glacier along a deep channel with a retrograde bed slope. Plain Language Summary The Getz Ice Shelf is a major ice shelf in West Antarctica that is rapidly melting. Its exposure to warm oceanic water has made it the largest producer of ice shelf meltwater in Antarctica. To understand its evolution and the impact on sea level rise of the glaciers that ﬂow into it, it is essential to obtain a better description of the bathymetry beneath its hundreds of meters of ﬂoating ice. We use a combination of airborne gravity and other data to infer the depth of the cavity. We ﬁnd the seabed to be in several regions more than 500 m deeper than previously reported, hence revealing one of the deepest ice shelf cavities in West Antarctica. When used in combination with an ocean model, the bathymetry helps to better explain the spatial variability in melt observed from remote sensing data, the pathways for warm waters to reach the ice shelf, and the recent evolution of selected glaciers.},
+	language = {en},
+	number = {13},
+	urldate = {2020-09-21},
+	journal = {Geophysical Research Letters},
+	author = {Millan, Romain and St‐Laurent, Pierre and Rignot, Eric and Morlighem, Mathieu and Mouginot, Jeremie and Scheuchl, Bernd},
+	month = jul,
+	year = {2020},
+}
+
+@article{olivieruqpy2020,
+	title = {{UQpy}: {A} general purpose {Python} package and development environment for uncertainty quantification},
+	volume = {47},
+	issn = {1877-7503},
+	shorttitle = {{UQpy}},
+	url = {https://www.sciencedirect.com/science/article/pii/S1877750320305056},
+	doi = {10.1016/j.jocs.2020.101204},
+	abstract = {This paper presents the UQpy software toolbox, an open-source Python package for general uncertainty quantification (UQ) in mathematical and physical systems. The software serves as both a user-ready toolbox that includes many of the latest methods for UQ in computational modeling and a convenient development environment for Python programmers advancing the field of UQ. The paper presents an introduction to the software's architecture and existing capabilities, divided in the code in a set of modules centered around different UQ tasks such as sampling methods, generation of random processes and random fields, probabilistic inverse modeling, reliability analysis, surrogate modeling, and active learning. The paper also highlights the importance of the RunModel module, which is used to drive simulations in the uncertainty analyses performed in UQpy. This module conveniently allows the user to define computational models directly in Python, or to run simulations from a third-party software in serial or in parallel. To illustrate the various capabilities, two examples are tracked throughout the paper and analyzed repeatedly for various UQ tasks. The first is a Python model solving a nonlinear structural dynamics problem, used to illustrate UQpy's capabilities in sampling and forward propagation of high dimensional random vectors (stochastic processes), and probabilistic inference. The second model is a third-party Abaqus finite element model solving the thermomechanical response of a beam structure. This example is used to illustrate UQpy's capabilities in variance reduction sampling techniques, reliability analysis, surrogate modeling and active learning techniques.},
+	urldate = {2024-11-05},
+	journal = {Journal of Computational Science},
+	author = {Olivier, Audrey and Giovanis, Dimitris G. and Aakash, B. S. and Chauhan, Mohit and Vandanapu, Lohit and Shields, Michael D.},
+	month = nov,
+	year = {2020},
+	keywords = {Computational modeling, High-performance computing, Python, Software, Uncertainty quantification},
+	pages = {101204},
+}
+
+@article{eisermannbathymetric2021,
+	title = {Bathymetric {Control} on {Borchgrevink} and {Roi} {Baudouin} {Ice} {Shelves} in {East} {Antarctica}},
+	volume = {126},
+	issn = {2169-9003, 2169-9011},
+	url = {https://onlinelibrary.wiley.com/doi/10.1029/2021JF006342},
+	doi = {10.1029/2021JF006342},
+	abstract = {The stability of ice shelves and drainage of ice sheets they buttress is largely determined by melting at their atmospheric and oceanic interfaces. Subglacial bathymetry can impact ice shelf stability because it influences the onset and the pattern of warm ocean water incursions into the cavities between them and the seafloor. Bathymetry is further important at pinning points, which significantly retard the flow of ice shelves. This effect can be lost instantaneously if basal and surface melting cause an ice sheet to thin and lift off its pinning points. With all this in mind, we have developed a model of bathymetry beneath the western Roi Baudouin and central and eastern Borchgrevink ice shelves in Dronning Maud Land based on inversion from gravity data and tied to available depth references offshore and subglacial topography inland of the grounding line. The model shows deep glacial troughs beneath the ice shelves and bathymetric sills close to the continental shelf. The central Borchgrevink Ice Shelf overhangs the continental slope by around 50 km, exposing its northern parts to the open ocean and higher ocean temperatures. Continuous troughs traverse the central Borchgrevink and western Roi Baudouin ice shelves at depths greater than the offshore thermocline and thus present a risk of Warm Deep Water intrusions into their cavities under the current and future oceanographic regimes. Differing bathymetric characteristics might explain the ice shelves' contrasting dominant mass loss processes.},
+	language = {en},
+	number = {10},
+	urldate = {2023-06-07},
+	journal = {Journal of Geophysical Research: Earth Surface},
+	author = {Eisermann, Hannes and Eagles, Graeme and Ruppel, Antonia Stefanie and Läufer, Andreas and Jokat, Wilfried},
+	month = oct,
+	year = {2021},
+}
+
+@article{yangbathymetry2021,
+	title = {Bathymetry {Beneath} the {Amery} {Ice} {Shelf}, {East} {Antarctica}, {Revealed} by {Airborne} {Gravity}},
+	volume = {48},
+	issn = {0094-8276, 1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/10.1029/2021GL096215},
+	doi = {10.1029/2021GL096215},
+	abstract = {The bathymetry under the Amery Ice Shelf steers the flow of ocean currents transporting ocean heat, and thus is a prerequisite for precise modeling of ice-ocean interactions. However, hampered by thick ice, direct observations of sub-ice-shelf bathymetry are rare, limiting our ability to quantify the evolution of this sector and its future contribution to global mean sea level rise. We estimated the bathymetry of this region from airborne gravity anomaly using simulated annealing. Unlike the current model which shows a comparatively flat seafloor beneath the calving front, our estimation results reveal a 255-m-deep shoal at the western side and a 1,050-m-deep trough at the eastern side, which are important topographic features controlling the ocean heat transport into the sub-ice cavity. The new model also reveals previously unknown depressions and sills that are critical to an improved modeling of the sub-ice-shelf ocean circulation and induced basal melting.},
+	language = {en},
+	number = {24},
+	urldate = {2022-05-02},
+	journal = {Geophysical Research Letters},
+	author = {Yang, Junjun and Guo, Jingxue and Greenbaum, Jamin S. and Cui, Xiangbin and Tu, Liangcheng and Li, Lin and Jong, Lenneke M. and Tang, Xueyuan and Li, Bingrui and Blankenship, Donald D. and Roberts, Jason L. and Ommen, Tas and Sun, Bo},
+	month = dec,
+	year = {2021},
+}
+
+@misc{uiedapygmt2021,
+	title = {{PyGMT}: {A} {Python} interface for the {Generic} {Mapping} {Tools}},
+	shorttitle = {{PyGMT}},
+	url = {https://zenodo.org/record/5607255/export/hx},
+	abstract = {PyGMT is a library for processing geospatial and geophysical data and making publication quality maps and figures. It provides a Pythonic interface for the Generic Mapping Tools (GMT), a command-line program widely used in the Earth Sciences.},
+	urldate = {2022-03-13},
+	publisher = {Zenodo},
+	author = {Uieda, Leonardo and Tian, Dongdong and Leong, Wei Ji and Jones, Meghan and Schlitzer, William and Toney, Liam and Grund, Michael and Yao, Jiayuan and Magen, Yohai and Materna, Kathryn and Newton, Tyler and Anant, Abhishek and Ziebarth, Malte and Wessel, Paul and Quinn, Jamie},
+	year = {2021},
+	doi = {10.5281/zenodo.5607255},
+	note = {Language: eng},
+}
+
+@article{solergradientboosted2021,
+	title = {Gradient-boosted equivalent sources},
+	volume = {227},
+	issn = {0956-540X, 1365-246X},
+	url = {https://academic.oup.com/gji/article/227/3/1768/6356957},
+	doi = {10.1093/gji/ggab297},
+	abstract = {The equivalent source technique is a powerful and widely used method for processing gravity and magnetic data. Nevertheless, its major drawback is the large computational cost in terms of processing time and computer memory. We present two techniques for reducing the computational cost of equivalent source processing: block-averaging source locations and the gradient-boosted equivalent source algorithm. Through block-averaging, we reduce the number of source coefﬁcients that must be estimated while retaining the minimum desired resolution in the ﬁnal processed data. With the gradient-boosting method, we estimate the sources coefﬁcients in small batches along overlapping windows, allowing us to reduce the computer memory requirements arbitrarily to conform to the constraints of the available hardware. We show that the combination of block-averaging and gradient-boosted equivalent sources is capable of producing accurate interpolations through tests against synthetic data. Moreover, we demonstrate the feasibility of our method by gridding a gravity data set covering Australia with over 1.7 million observations using a modest personal computer.},
+	language = {en},
+	number = {3},
+	urldate = {2022-05-01},
+	journal = {Geophysical Journal International},
+	author = {Soler, Santiago R and Uieda, Leonardo},
+	month = aug,
+	year = {2021},
+	pages = {1768--1783},
+}
+
+@article{dorschelinternational2022a,
+	title = {The {International} {Bathymetric} {Chart} of the {Southern} {Ocean} {Version} 2},
+	volume = {9},
+	issn = {2052-4463},
+	url = {https://www.nature.com/articles/s41597-022-01366-7},
+	doi = {10.1038/s41597-022-01366-7},
+	abstract = {Abstract
+            The Southern Ocean surrounding Antarctica is a region that is key to a range of climatic and oceanographic processes with worldwide effects, and is characterised by high biological productivity and biodiversity. Since 2013, the International Bathymetric Chart of the Southern Ocean (IBCSO) has represented the most comprehensive compilation of bathymetry for the Southern Ocean south of 60°S. Recently, the IBCSO Project has combined its efforts with the Nippon Foundation – GEBCO Seabed 2030 Project supporting the goal of mapping the world’s oceans by 2030. New datasets initiated a second version of IBCSO (IBCSO v2). This version extends to 50°S (covering approximately 2.4 times the area of seafloor of the previous version) including the gateways of the Antarctic Circumpolar Current and the Antarctic circumpolar frontal systems. Due to increased (multibeam) data coverage, IBCSO v2 significantly improves the overall representation of the Southern Ocean seafloor and resolves many submarine landforms in more detail. This makes IBCSO v2 the most authoritative seafloor map of the area south of 50°S.},
+	language = {en},
+	number = {1},
+	urldate = {2022-06-07},
+	journal = {Scientific Data},
+	author = {Dorschel, Boris and Hehemann, Laura and Viquerat, Sacha and Warnke, Fynn and Dreutter, Simon and Tenberge, Yvonne Schulze and Accettella, Daniela and An, Lu and Barrios, Felipe and Bazhenova, Evgenia and Black, Jenny and Bohoyo, Fernando and Davey, Craig and De Santis, Laura and Dotti, Carlota Escutia and Fremand, Alice C. and Fretwell, Peter T. and Gales, Jenny A. and Gao, Jinyao and Gasperini, Luca and Greenbaum, Jamin S. and Jencks, Jennifer Henderson and Hogan, Kelly and Hong, Jong Kuk and Jakobsson, Martin and Jensen, Laura and Kool, Johnathan and Larin, Sergei and Larter, Robert D. and Leitchenkov, German and Loubrieu, Benoît and Mackay, Kevin and Mayer, Larry and Millan, Romain and Morlighem, Mathieu and Navidad, Francisco and Nitsche, Frank O. and Nogi, Yoshifumi and Pertuisot, Cécile and Post, Alexandra L. and Pritchard, Hamish D. and Purser, Autun and Rebesco, Michele and Rignot, Eric and Roberts, Jason L. and Rovere, Marzia and Ryzhov, Ivan and Sauli, Chiara and Schmitt, Thierry and Silvano, Alessandro and Smith, Jodie and Snaith, Helen and Tate, Alex J. and Tinto, Kirsty and Vandenbossche, Philippe and Weatherall, Pauline and Wintersteller, Paul and Yang, Chunguo and Zhang, Tao and Arndt, Jan Erik},
+	month = dec,
+	year = {2022},
+	note = {IBCSO},
+	pages = {275},
+}
+
+@misc{dorschelinternational2022,
+	title = {The {International} {Bathymetric} {Chart} of the {Southern} {Ocean} {Version} 2 ({IBCSO} v2)},
+	copyright = {info:eu-repo/semantics/openAccess},
+	url = {https://doi.pangaea.de/10.1594/PANGAEA.937574},
+	doi = {10.1594/PANGAEA.937574},
+	abstract = {Dorschel, Boris; Hehemann, Laura; Viquerat, Sacha; Warnke, Fynn; Dreutter, Simon; Schulze Tenberge, Yvonne; Accettella, Daniela; An, Lu; Barrios, Felipe; Bazhenova, Evgenia A; Black, Jenny; Bohoyo, Fernando; Davey, Craig; de Santis, Laura; Escutia Dotti, Carlota; Fremand, Alice C; Fretwell, Peter T; Gales, Jenny A; Gao, Jinyao; Gasperini, Luca; Greenbaum, Jamin S; Henderson Jencks, Jennifer; Hogan, Kelly A; Hong, Jong Kuk; Jakobsson, Martin; Jensen, Laura; Kool, Johnathan; Larin, Sergei; Larter, Robert D; Leitchenkov, German L; Loubrieu, Benoît; Mackay, Kevin; Mayer, Larry; Millan, Romain; Morlighem, Mathieu; Navidad, Francisco; Nitsche, Frank-Oliver; Nogi, Yoshifumi; Pertuisot, Cécile; Post, Alexandra L; Pritchard, Hamish D; Purser, Autun; Rebesco, Michele; Rignot, Eric; Roberts, Jason L; Rovere, Marzia; Ryzhov, Ivan; Sauli, Chiara; Schmitt, Thierry; Silvano, Alessandro; Smith, Jodie E; Snaith, Helen; Tate, Alex J; Tinto, Kirsty; Vandenbossche, Philippe; Weatherall, Pauline; Wintersteller, Paul; Yang, Chunguo; Zhang, Tao; Arndt, Jan Erik (2022): The International Bathymetric Chart of the Southern Ocean Version 2 (IBCSO v2). PANGAEA, https://doi.org/10.1594/PANGAEA.937574},
+	language = {en},
+	urldate = {2024-01-31},
+	publisher = {PANGAEA},
+	author = {Dorschel, Boris and Hehemann, Laura and Viquerat, Sacha and Warnke, Fynn and Dreutter, Simon and Schulze Tenberge, Yvonne and Accettella, Daniela and An, Lu and Barrios, Felipe and Bazhenova, Evgenia A. and Black, Jenny and Bohoyo, Fernando and Davey, Craig and de Santis, Laura and Escutia Dotti, Carlota and Fremand, Alice C. and Fretwell, Peter T. and Gales, Jenny A. and Gao, Jinyao and Gasperini, Luca and Greenbaum, Jamin S. and Henderson Jencks, Jennifer and Hogan, Kelly A. and Hong, Jong Kuk and Jakobsson, Martin and Jensen, Laura and Kool, Johnathan and Larin, Sergei and Larter, Robert D. and Leitchenkov, German L. and Loubrieu, Benoît and Mackay, Kevin and Mayer, Larry and Millan, Romain and Morlighem, Mathieu and Navidad, Francisco and Nitsche, Frank-Oliver and Nogi, Yoshifumi and Pertuisot, Cécile and Post, Alexandra L. and Pritchard, Hamish D. and Purser, Autun and Rebesco, Michele and Rignot, Eric and Roberts, Jason L. and Rovere, Marzia and Ryzhov, Ivan and Sauli, Chiara and Schmitt, Thierry and Silvano, Alessandro and Smith, Jodie E. and Snaith, Helen and Tate, Alex J. and Tinto, Kirsty and Vandenbossche, Philippe and Weatherall, Pauline and Wintersteller, Paul and Yang, Chunguo and Zhang, Tao and Arndt, Jan Erik},
+	year = {2022},
+}
+
+@article{borghimoho2022,
+	title = {Moho depths for {Antarctica} {Region} by the inversion of ground-based gravity data},
+	volume = {231},
+	issn = {0956-540X, 1365-246X},
+	url = {https://academic.oup.com/gji/article/231/2/1404/6620834},
+	doi = {10.1093/gji/ggac249},
+	abstract = {In the last years the scientiﬁc literature has been enriched with new models of the Moho depth in the Antarctica Continent derived by the seismic reﬂection technique and refraction proﬁles, receiver functions and seismic surface waves, but also by gravimetric observations over the continent. In particular, the gravity satellite missions of the last two decades have provided data in this remote region of the Earth and have allowed the investigation of the crust properties. Meanwhile, other important contributions in this direction has been given by the fourth International Polar Year (IPY, 2007–2008) which started seismographic and geodetic networks of unprecedented duration and scale, including airborne gravimetry over largely unexplored Antarctic frontiers. In this study, a new model for the Antarctica Moho depths is proposed. This new estimation is based on no satellite gravity measures, thanks to the availability of the gravity database ANTGG2015, that collects gravity data from ground-base, airborne and shipborne campaigns. In this new estimate of the Moho depths the contribution of the gravity measures has been maximized reducing any correction of the gravity measures and avoiding constraints of the solution to seismological observations and to geological evidence. With this approach a pure gravimetric solution has been determined. The model obtained is pretty in agreement with other Moho models and thanks to the use of independent data it can be exploited also for cross-validating different Moho depths solutions.},
+	language = {en},
+	number = {2},
+	urldate = {2022-10-18},
+	journal = {Geophysical Journal International},
+	author = {Borghi, Alessandra},
+	month = aug,
+	year = {2022},
+	pages = {1404--1420},
+}
+
+@article{constantinocook2023,
+	title = {Cook {Ice} {Shelf} and {Ninnis} {Glacier} {Tongue} {Bathymetry} {From} {Inversion} of {Operation} {Ice} {Bridge} {Airborne} {Gravity} {Data}},
+	volume = {50},
+	issn = {0094-8276, 1944-8007},
+	url = {https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL103815},
+	doi = {10.1029/2023GL103815},
+	abstract = {The seafloor depths under the Cook Ice Shelf and Ninnis Glacier Tongue have not been directly measured, despite their importance for understanding ocean circulation and ice shelf change. We model the bathymetry underneath the floating ice and surrounding ocean using airborne gravity data. Our model is constrained by few ship-based seafloor measurements near the ice front and by ice-base measurements over areas of grounded ice from radar data. Localized basins (∼1,400 m deep) are found beneath both ice shelves. The shallowest modeled bathymetry (∼200 m) represents the offshore extension of Cape Freshfield. Near the grounding line, seafloor depths are found to be deeper than the observed depth of the modified Circumpolar Deep water in the region ({\textless}350 m), key factor for basal melt analyses. From transit flight gravity anomalies, we suggest the relocation of the mapped edge of the continental shelf and a narrowing of the Cook Shelf Depression.},
+	language = {en},
+	number = {11},
+	urldate = {2023-06-17},
+	journal = {Geophysical Research Letters},
+	author = {Constantino, Renata R. and Tinto, Kirsty J.},
+	month = jun,
+	year = {2023},
+	pages = {e2023GL103815},
+}
+
+@article{otosakamass2023,
+	title = {Mass balance of the {Greenland} and {Antarctic} ice sheets from 1992 to 2020},
+	volume = {15},
+	issn = {1866-3516},
+	url = {https://essd.copernicus.org/articles/15/1597/2023/},
+	doi = {10.5194/essd-15-1597-2023},
+	abstract = {Ice losses from the Greenland and Antarctic ice sheets have accelerated since the 1990s, accounting for a signiﬁcant increase in the global mean sea level. Here, we present a new 29-year record of ice sheet mass balance from 1992 to 2020 from the Ice Sheet Mass Balance Inter-comparison Exercise (IMBIE). We compare and combine 50 independent estimates of ice sheet mass balance derived from satellite observations of temporal changes in ice sheet ﬂow, in ice sheet volume, and in Earth’s gravity ﬁeld. Between 1992 and 2020, the ice sheets contributed 21.0 ± 1.9 mm to global mean sea level, with the rate of mass loss rising from 105 Gt yr−1 between 1992 and 1996 to 372 Gt yr−1 between 2016 and 2020. In Greenland, the rate of mass loss is 169 ± 9 Gt yr−1 between 1992 and 2020, but there are large inter-annual variations in mass balance, with mass loss ranging from 86 Gt yr−1 in 2017 to 444 Gt yr−1 in 2019 due to large variability in surface mass balance. In Antarctica, ice losses continue to be dominated by mass loss from West Antarctica (82 ± 9 Gt yr−1) and, to a lesser extent, from the Antarctic Peninsula (13 ± 5 Gt yr−1). East Antarctica remains close to a state of balance, with a small gain of 3 ± 15 Gt yr−1, but is the most uncertain component of Antarctica’s mass balance. The dataset is publicly available at https://doi.org/10.5285/77B64C55-7166-4A06-9DEF-2E400398E452 (IMBIE Team, 2021).},
+	language = {en},
+	number = {4},
+	urldate = {2023-06-23},
+	journal = {Earth System Science Data},
+	author = {Otosaka, Inès N. and Shepherd, Andrew and Ivins, Erik R. and Schlegel, Nicole-Jeanne and Amory, Charles and van den Broeke, Michiel R. and Horwath, Martin and Joughin, Ian and King, Michalea D. and Krinner, Gerhard and Nowicki, Sophie and Payne, Anthony J. and Rignot, Eric and Scambos, Ted and Simon, Karen M. and Smith, Benjamin E. and Sørensen, Louise S. and Velicogna, Isabella and Whitehouse, Pippa L. and A, Geruo and Agosta, Cécile and Ahlstrøm, Andreas P. and Blazquez, Alejandro and Colgan, William and Engdahl, Marcus E. and Fettweis, Xavier and Forsberg, Rene and Gallée, Hubert and Gardner, Alex and Gilbert, Lin and Gourmelen, Noel and Groh, Andreas and Gunter, Brian C. and Harig, Christopher and Helm, Veit and Khan, Shfaqat Abbas and Kittel, Christoph and Konrad, Hannes and Langen, Peter L. and Lecavalier, Benoit S. and Liang, Chia-Chun and Loomis, Bryant D. and McMillan, Malcolm and Melini, Daniele and Mernild, Sebastian H. and Mottram, Ruth and Mouginot, Jeremie and Nilsson, Johan and Noël, Brice and Pattle, Mark E. and Peltier, William R. and Pie, Nadege and Roca, Mònica and Sasgen, Ingo and Save, Himanshu V. and Seo, Ki-Weon and Scheuchl, Bernd and Schrama, Ernst J. O. and Schröder, Ludwig and Simonsen, Sebastian B. and Slater, Thomas and Spada, Giorgio and Sutterley, Tyler C. and Vishwakarma, Bramha Dutt and van Wessem, Jan Melchior and Wiese, David and van der Wal, Wouter and Wouters, Bert},
+	month = apr,
+	year = {2023},
+	pages = {1597--1616},
+}
+
+@misc{morlighemmeasures2022,
+	title = {{MEaSUREs} {BedMachine} {Antarctica}, {Version} 3},
+	url = {https://nsidc.org/data/nsidc-0756/versions/3},
+	language = {en},
+	urldate = {2023-05-25},
+	publisher = {NASA Snow and Ice Data Center Distributed Active Archive Center},
+	author = {Morlighem, M.},
+	year = {2022},
+	note = {https://doi.org/10.5067/FPSU0V1MWUB6},
+}
+
+@article{vankovahigh2023,
+	title = {High {Spatial} {Melt} {Rate} {Variability} {Near} the {Totten} {Glacier} {Grounding} {Zone} {Explained} by {New} {Bathymetry} {Inversion}},
+	volume = {50},
+	issn = {0094-8276, 1944-8007},
+	url = {https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL102960},
+	doi = {10.1029/2023GL102960},
+	abstract = {Totten Glacier is a fast-moving East Antarctic outlet with the potential for significant future sea-level contributions. We deployed four autonomous phase-sensitive radars on its ice shelf to monitor ice-ocean interactions near its grounding zone and made active source seismic observations to constrain gravity-derived bathymetry models. We observe an asymmetry in basal melting with mean melt rates along the grounding zone differing by up to 20 m/a. Our new bathymetry model reveals that this melt rate asymmetry coincides with an asymmetry in water column thickness and that the low-melting ice-shelf portion is shielded from the main cavity circulation. A 2-year record yields year-to-year melt rate variability of 7–9 m/a with no seasonal cycle. Our results highlight the key role of bathymetry near grounding lines for accurate modeling of ice-shelf melt, and the importance of sustained multi-year monitoring, especially at ice-shelf cavities where the dominant melt rate drivers vary primarily inter-annually.},
+	language = {en},
+	number = {10},
+	urldate = {2023-06-07},
+	journal = {Geophysical Research Letters},
+	author = {Vaňková, Irena and Winberry, J. Paul and Cook, Sue and Nicholls, Keith W. and Greene, Chad A. and Galton‐Fenzi, Benjamin K.},
+	month = may,
+	year = {2023},
+	pages = {e2023GL102960},
+}
+
+@article{milesprogressive2024,
+	title = {Progressive unanchoring of {Antarctic} ice shelves since 1973},
+	volume = {626},
+	copyright = {2024 The Author(s)},
+	issn = {1476-4687},
+	url = {https://www.nature.com/articles/s41586-024-07049-0},
+	doi = {10.1038/s41586-024-07049-0},
+	abstract = {Mass loss of the Antarctic Ice Sheet has been driven primarily by the thinning of the floating ice shelves that fringe the ice sheet1, reducing their buttressing potential and causing land ice to accelerate into the ocean2. Observations of ice-shelf thickness change by satellite altimetry stretch back only to 1992 (refs. 1,3–5) and previous information about thinning remains unquantified. However, extending the record of ice-shelf thickness change is possible by proxy, by measuring the change in area of the surface expression of pinning points—local bathymetric highs on which ice shelves are anchored6. Here we measure pinning-point change over three epochs spanning the periods 1973–1989, 1989–2000 and 2000−2022, and thus by proxy infer changes to ice-shelf thickness back to 1973–1989. We show that only small localized pockets of ice shelves were thinning between 1973 and 1989, located primarily in the Amundsen Sea Embayment and the Wilkes Land coastline. Ice-shelf thinning spreads rapidly into the 1990s and 2000s and is best characterized by the proportion of pinning points reducing in extent. Only 15\% of pinning points reduced from 1973 to 1989, before increasing to 25\% from 1989 to 2000 and 37\% from 2000 to 2022. A continuation of this trend would further reduce the buttressing potential of ice shelves, enhancing ice discharge and accelerating the contribution of Antarctica to sea-level rise.},
+	language = {en},
+	number = {8000},
+	urldate = {2024-11-26},
+	journal = {Nature},
+	author = {Miles, Bertie W. J. and Bingham, Robert G.},
+	month = feb,
+	year = {2024},
+	note = {Publisher: Nature Publishing Group},
+	keywords = {Climate change, Cryospheric science},
+	pages = {785--791},
+}
+
+@article{eisermanncoastal2024,
+	title = {Coastal bathymetry in central {Dronning} {Maud} {Land} controls ice shelf stability},
+	volume = {14},
+	copyright = {2024 The Author(s)},
+	issn = {2045-2322},
+	url = {https://www.nature.com/articles/s41598-024-51882-2},
+	doi = {10.1038/s41598-024-51882-2},
+	abstract = {Knowledge of the bathymetry of Antarctica’s margins is crucial for models and interpretations of ice-ocean interactions and their influence on ongoing and future sea level change, but remains patchy where ice shelves and multi-year sea ice block measurements. Here, we present a bathymetric model for the central Dronning Maud Land margin, based on a constrained inversion of airborne gravity data. It shows the cavities beneath the region’s two ice shelves to be much deeper than in existing bathymetric compilations, but to be shielded from Warm Deep Water ingress and basal melting by the presence of shallow bathymetric sills along the continental shelf. Over areas of multi-year sea ice, the model returns bathymetric estimates of similar accuracy to gravity interpolation-based methods over open water. Airborne gravity thus presents an opportunity to bathymetrically map hundreds of thousands of square kilometres of the most inaccessible margins of Antarctica at resolutions adequate for regional and global oceanographic and glaciological modelling and interpretation.},
+	language = {en},
+	number = {1},
+	urldate = {2024-02-13},
+	journal = {Scientific Reports},
+	author = {Eisermann, H. and Eagles, G. and Jokat, W.},
+	month = jan,
+	year = {2024},
+	note = {Number: 1
+Publisher: Nature Publishing Group},
+	keywords = {Cryospheric science, Geophysics},
+	pages = {1367},
+}
+
+@article{tankersleypolartoolkit2024,
+	title = {{PolarToolkit}: {Python} {Tools} for {Convenient}, {Reproducible}, and {Open} {Polar} {Science}},
+	volume = {9},
+	issn = {2475-9066},
+	shorttitle = {{PolarToolkit}},
+	url = {https://joss.theoj.org/papers/10.21105/joss.06502},
+	doi = {10.21105/joss.06502},
+	abstract = {Tankersley, M. D., (2024). PolarToolkit: Python Tools for Convenient, Reproducible, and Open Polar Science. Journal of Open Source Software, 9(100), 6502, https://doi.org/10.21105/joss.06502},
+	language = {en},
+	number = {100},
+	urldate = {2024-11-05},
+	journal = {Journal of Open Source Software},
+	author = {Tankersley, Matthew D.},
+	month = aug,
+	year = {2024},
+	pages = {6502},
+}
+
+@misc{scheinertantarctic2024,
+	title = {Antarctic gravity anomaly and height anomaly grids ({AntGG2021})},
+	copyright = {info:eu-repo/semantics/openAccess},
+	url = {https://doi.pangaea.de/10.1594/PANGAEA.971238?format=html#download},
+	doi = {10.1594/PANGAEA.971238},
+	abstract = {Scheinert, Mirko; Zingerle, Philipp; Schaller, Theresa; Pail, Roland (2024): Antarctic gravity anomaly and height anomaly grids (AntGG2021) [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.971238},
+	language = {en},
+	urldate = {2024-11-06},
+	publisher = {PANGAEA},
+	author = {Scheinert, Mirko and Zingerle, Philipp and Schaller, Theresa and Pail, Roland},
+	year = {2024},
+}
+
+@article{lockenovel2025,
+	title = {Novel {Record} of {Intermittent} {Grounding} of the {Venable} {Ice} {Shelf} {Since} 1935 {From} {Operation} {IceBridge} {Airborne}-{Gravity}-{Derived} {Bathymetry} and {Landsat} {Imagery}},
+	volume = {52},
+	copyright = {© 2025. The Author(s).},
+	issn = {1944-8007},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1029/2024GL114071},
+	doi = {10.1029/2024GL114071},
+	abstract = {Future projections and past reconstructions of Antarctic Ice Sheet stability and sea-level rise depend on knowledge of continental shelf bathymetry, which controls water circulation under floating ice and interactions between the ice shelf and seafloor. We present a bathymetry model of the Venable Ice Shelf (VIS) in the Bellingshausen Sea sector from an inversion of airborne gravity data. The new model reveals troughs up to ∼1.6 km deeper than previously mapped, providing pathways for warm Circumpolar Deep Water to access the grounding line. A bathymetric high beneath the western VIS is identified as a former pinning point. From crevasse patterns in Landsat satellite imagery, we infer intermittent grounding of the ice shelf on this high since ∼1935, and we interpret these patterns as evidence of mid-20th century ice-shelf thinning, in addition to a regrounding between 1970 and 1988, extending the ice-shelf thickness record beyond the satellite era.},
+	language = {en},
+	number = {9},
+	urldate = {2025-11-24},
+	journal = {Geophysical Research Letters},
+	author = {Locke, C. D. and Tinto, K. J. and Porter, D. F. and Constantino, R. R.},
+	year = {2025},
+	note = {\_eprint: https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/2024GL114071},
+	keywords = {Abbot Ice Shelf, Venable Ice Shelf, bathymetry, gravity, ice shelves, west Antarctica},
+	pages = {e2024GL114071},
+}
+
+@article{birdgravityderived2025,
+	title = {Gravity-derived {Antarctic} bathymetry using the {Tomofast}-x open-source code: a case study of {Vincennes} {Bay}},
+	volume = {19},
+	issn = {1994-0416},
+	shorttitle = {Gravity-derived {Antarctic} bathymetry using the {Tomofast}-x open-source code},
+	url = {https://tc.copernicus.org/articles/19/3355/2025/},
+	doi = {10.5194/tc-19-3355-2025},
+	abstract = {Vincennes Bay is a region of East Antarctica that is vulnerable to sub-ice-shelf basal melting from warm ocean water intrusions. The sub-ice-shelf bathymetry in this region is largely unknown despite its importance for ocean dynamics within ice shelf cavities and associated sub-ice-shelf basal melting. Here, we present an open-source approach to deriving open-ocean and sub-ice-shelf bathymetry from airborne gravity data using the Tomofast-x inversion platform. Using existing datasets of bed topography, bathymetry, ice geometry, instrumented seal dives, and airborne gravity data, we perform a constrained gravity inversion to generate a new bathymetry for Vincennes Bay. Our new bathymetry reveals large-scale bathymetric features, some of which were previously known to exist but were not resolved in existing regional bathymetry datasets, including the deep marine trough recently mapped offshore the Vanderford Glacier. A smaller and previously unknown bathymetric trough that reaches depths of more than 1500 m offshore the Adams Glacier is also identified. Ocean modelling using the new bathymetry simulates a 37 \% increase in sub-ice-shelf melt rates compared with estimates generated using existing regional bathymetry datasets, highlighting the importance of more accurate bathymetry estimates in this region.},
+	language = {English},
+	number = {8},
+	urldate = {2025-10-24},
+	journal = {The Cryosphere},
+	author = {Bird, Lawrence A. and Ogarko, Vitaliy and Ailleres, Laurent and Grose, Lachlan and Giraud, Jérémie and McCormack, Felicity S. and Gwyther, David E. and Roberts, Jason L. and Jones, Richard S. and Mackintosh, Andrew N.},
+	month = aug,
+	year = {2025},
+	note = {Publisher: Copernicus GmbH},
+	pages = {3355--3380},
+}
+
+@article{pritchardbedmap32025,
+	title = {Bedmap3 updated ice bed, surface and thickness gridded datasets for {Antarctica}},
+	volume = {12},
+	copyright = {2025 The Author(s)},
+	issn = {2052-4463},
+	url = {https://www.nature.com/articles/s41597-025-04672-y},
+	doi = {10.1038/s41597-025-04672-y},
+	abstract = {We present Bedmap3, the latest suite of gridded products describing surface elevation, ice-thickness and the seafloor and subglacial bed elevation of the Antarctic south of 60 °S. Bedmap3 incorporates and adds to all post-1950s datasets previously used for Bedmap2, including 84 new aero-geophysical surveys by 15 data providers, an additional 52 million data points and 1.9 million line-kilometres of measurement. These efforts have filled notable gaps including in major mountain ranges and the deep interior of East Antarctica, along West Antarctic coastlines and on the Antarctic Peninsula. Our new Bedmap3/RINGS grounding line similarly consolidates multiple recent mappings into a single, spatially coherent feature. Combined with updated maps of surface topography, ice shelf thickness, rock outcrops and bathymetry, Bedmap3 reveals in much greater detail the subglacial landscape and distribution of Antarctica’s ice, providing new opportunities to interpret continental-scale landscape evolution and to model the past and future evolution of the Antarctic ice sheets.},
+	language = {en},
+	number = {1},
+	urldate = {2025-05-01},
+	journal = {Scientific Data},
+	author = {Pritchard, Hamish D. and Fretwell, Peter T. and Fremand, Alice C. and Bodart, Julien A. and Kirkham, James D. and Aitken, Alan and Bamber, Jonathan and Bell, Robin and Bianchi, Cesidio and Bingham, Robert G. and Blankenship, Donald D. and Casassa, Gino and Christianson, Knut and Conway, Howard and Corr, Hugh F. J. and Cui, Xiangbin and Damaske, Detlef and Damm, Volkmar and Dorschel, Boris and Drews, Reinhard and Eagles, Graeme and Eisen, Olaf and Eisermann, Hannes and Ferraccioli, Fausto and Field, Elena and Forsberg, René and Franke, Steven and Goel, Vikram and Gogineni, Siva Prasad and Greenbaum, Jamin and Hills, Benjamin and Hindmarsh, Richard C. A. and Hoffman, Andrew O. and Holschuh, Nicholas and Holt, John W. and Humbert, Angelika and Jacobel, Robert W. and Jansen, Daniela and Jenkins, Adrian and Jokat, Wilfried and Jong, Lenneke and Jordan, Tom A. and King, Edward C. and Kohler, Jack and Krabill, William and Maton, Joséphine and Gillespie, Mette Kusk and Langley, Kirsty and Lee, Joohan and Leitchenkov, German and Leuschen, Cartlon and Luyendyk, Bruce and MacGregor, Joseph A. and MacKie, Emma and Moholdt, Geir and Matsuoka, Kenichi and Morlighem, Mathieu and Mouginot, Jérémie and Nitsche, Frank O. and Nost, Ole A. and Paden, John and Pattyn, Frank and Popov, Sergey and Rignot, Eric and Rippin, David M. and Rivera, Andrés and Roberts, Jason L. and Ross, Neil and Ruppel, Antonia and Schroeder, Dustin M. and Siegert, Martin J. and Smith, Andrew M. and Steinhage, Daniel and Studinger, Michael and Sun, Bo and Tabacco, Ignazio and Tinto, Kirsty J. and Urbini, Stefano and Vaughan, David G. and Wilson, Douglas S. and Young, Duncan A. and Zirizzotti, Achille},
+	month = mar,
+	year = {2025},
+	note = {Publisher: Nature Publishing Group},
+	keywords = {Cryospheric science, Geomorphology, Hydrology},
+	pages = {414},
+}
+
+@article{charrassinbathymetry2025,
+	title = {Bathymetry of the {Antarctic} continental shelf and ice shelf cavities from circumpolar gravity anomalies and other data},
+	volume = {15},
+	copyright = {2024 The Author(s)},
+	issn = {2045-2322},
+	url = {https://www.nature.com/articles/s41598-024-81599-1},
+	doi = {10.1038/s41598-024-81599-1},
+	abstract = {Bathymetry critically influences the intrusion of warm Circumpolar Deep Water onto the continental shelf and under ice shelf cavities in Antarctica, thereby forcing ice melting, grounding line retreat, and sea level rise. We present a novel and comprehensive bathymetry of Antarctica that includes all ice shelf cavities and previously unmeasured continental shelf areas. The new bathymetry is based on a 3D inversion of a circumpolar compilation of gravity anomalies constrained by measurements from the International Bathymetric Chart of the Southern Ocean, BedMachine Antarctica, and discrete seafloor measurements from seismic and ocean robotic probes. Previously unknown troughs with thicker ice shelf cavities are revealed in many parts of Antarctica, especially East Antarctica. The greater depths of troughs on the continental shelf and ice shelf cavities imply that many glaciers are more vulnerable to ocean subsurface warming than previously thought, which may increase the projections of sea level rise from Antarctica.},
+	language = {en},
+	number = {1},
+	urldate = {2025-01-24},
+	journal = {Scientific Reports},
+	author = {Charrassin, Raphaelle and Millan, Romain and Rignot, Eric and Scheinert, Mirko},
+	month = jan,
+	year = {2025},
+	note = {Publisher: Nature Publishing Group},
+	keywords = {Cryospheric science, Physical oceanography},
+	pages = {1214},
+}
