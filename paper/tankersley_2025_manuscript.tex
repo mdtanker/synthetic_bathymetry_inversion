@@ -1,0 +1,1239 @@
+%% Copernicus Publications Manuscript Preparation Template for LaTeX Submissions
+%% ---------------------------------
+%% This template should be used for copernicus.cls
+%% The class file and some style files are bundled in the Copernicus Latex Package, which can be downloaded from the different journal webpages.
+%% For further assistance please contact Copernicus Publications at: production@copernicus.org
+%% https://publications.copernicus.org/for_authors/manuscript_preparation.html
+
+
+%% Please use the following documentclass and journal abbreviations for preprints and final revised papers.
+
+%% 2-column papers and preprints
+\documentclass[tc, manuscript]{copernicus}
+
+
+%% Journal abbreviations (please use the same for preprints and final revised papers)
+% The Cryosphere (tc)
+
+%% \usepackage commands included in the copernicus.cls:
+%\usepackage[german, english]{babel}k
+
+%\usepackage{cancel}
+%\usepackage{multirow}
+%\usepackage{supertabular}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{amsthm}
+%\usepackage{float}
+%\usepackage{subfig}
+%\usepackage{rotating}
+\usepackage[export]{adjustbox}
+\renewcommand*{\bibfont}{\normalfont\footnotesize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{wrapfig} % allow wrapping text around figures
+\usepackage{tcolorbox} % create fancy boxes
+\DeclareGraphicsExtensions{.eps,.pdf,.png}
+\usepackage{mathtools}
+\usepackage{esvect} % for vector notation
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{tabularray}
+\usepackage{lineno}
+
+\linenumbers
+% make figure captions small and bold
+\usepackage[font={footnotesize}]{caption}
+\usepackage[labelfont=bf]{caption}
+
+% \usepackage[printfigures]{figcaps} % printfigures to display figure floats
+%\figcapsoff % enable to keep floats in their positions
+
+\begin{document}
+
+% \title{Gravity inversion for sub-ice shelf bathymetry; best practices, uncertainty estimates, and open-source software}
+% \title{On the use of gravity data for modeling Antarctica's sub-ice shelf bathymetry}
+
+\title{Gravity Inversion for Sub-Ice Shelf Bathymetry: Strengths, Limitations, and Insights from Synthetic Modeling}
+% Gravity Inversion for Sub-Ice Shelf Bathymetry: Synthetic Insights into Data Quality, Coverage, and Regional Field Strength
+% Toward Improved Antarctic Bathymetry: A Synthetic Study of Airborne Gravity Inversion and Its Limitations
+% Gravity Inversion for Antarctic Bathymetry: Strengths, Limitations, and Synthetic Insights
+
+% Gravity inversion for sub-ice shelf bathymetry; best practices, uncertainty estimates, and open-source software
+% Gravity inversion for revealing Antarctica's sub-ice shelf bathymetry
+% Optimizing Ice Shelf Bathymetry from Airborne Gravity: A Synthetic Study
+% Gravity Inversion for Sub-Ice Shelf Bathymetry: A Synthetic Benchmarking Study
+% A Synthetic Evaluation of Gravity-Based Inversion for Antarctic Ice Shelf Bathymetry
+% Improving Antarctic Ice Shelf Bathymetry Using Airborne Gravity: Synthetic Tests and Field Guidance
+% Gravity Inversion Potential for Antarctic Bathymetry: What Works Where?
+% Sub-Ice Shelf Bathymetry from Gravity: Synthetic Tests with an Open-Source Geometry Inversion Tool
+% Developing and Validating a Geometric Gravity Inversion Algorithm for Ice Shelf Bathymetry
+% Inversion Performance for Ice Shelf Bathymetry: Effects of Data Quality, Coverage, and Regional Field Strength
+% When Does Gravity Inversion Work? Synthetic Tests for Antarctic Bathymetric Recovery
+% Synthetic Evaluation of Airborne Gravity Inversion for Sub-Ice Shelf Bathymetry in Antarctica
+% Estimating Sub-Ice Shelf Bathymetry from Airborne Gravity: A Synthetic Assessment of Inversion Performance and Uncertainty
+% Gravity Inversion for Sub-Ice Shelf Bathymetry: Synthetic Evaluation Across Antarctic Ice Shelves
+
+% * The Cryosphere
+%     * research articles, short communications, and review papers on all aspects of frozen water and ground on Earth and on other planetary bodies
+%     * 4.4 impact factor
+%     * 23 days to first decision
+%     * 241 days to acceptance
+%     * typically < 12 pgs
+
+% Possible journals
+% AGU Earth and Space Science (Notebooks Now)
+    % * 2.9 impact factor
+    % * 55% acceptance
+    % * 25 days acceptance to publication
+
+% * AGU Advances
+%     * a cross-disciplinary, open access journal publishing full length, high-impact research articles across all of the Earth and space sciences.
+%     * 8.3 impact factor
+%     * 20 days to first decision
+%     * 126 days to acceptance
+%     * 29 days acceptance to publication
+%     * 20% acceptance rate
+
+% * AGU Geochemistry Geophysics Geosystems
+%     *  an open access journal that publishes original research papers on Earth and planetary processes with a focus on understanding the Earth as a system
+%     * 2.9 impact factor
+%     * 57 days to first decision
+%     * 122 days to acceptance
+
+% * AGU Journal of Geophysical Research: Earth Surface
+%     * original research articles on the physical, chemical and biological processes that affect the form and function of the surface of the solid Earth over all temporal and spatial scales.
+%     * 3.5 impact factor
+%     * 58 days to first decision
+%     * 173 days to acceptance
+
+% * Geophysical Journal International
+%     * 2.8 impact factor
+%     * 60 days to first decision
+%     * 246 days to acceptance
+
+% * Journal of Applied Geophysics
+%     * methodological developments and innovative applications of geophysical techniques for addressing environmental, engineering, and hydrological problems.
+%     * 2.2 impact factor
+%     * 13 days to first decision
+%     * 194 days to acceptance
+% * Geoscientific Model Development
+%     * description, development, and evaluation of numerical models of the Earth system and its components.
+%     * 4 impact factor
+%     * 28 days to first decision
+%     * 212 days to acceptance
+
+% \Author[affil]{given_name}{surname}
+
+\Author[1,2,3][matt.tankersley@ifg.uni-kiel.de]{Matthew}{Tankersley} %% correspondence author
+\Author[2,4,5]{Huw}{Horgan} %% correspondence author
+\Author[6]{Fabio}{Caratori Tontini}
+\Author[3]{Kirsty}{Tinto}
+\affil[1]{Institute of Geoscience, Kiel University, Kiel, Germany}
+\affil[2]{Antarctic Research Centre, Victoria University of Wellington, Wellington, New Zealand}
+\affil[3]{Lamont-Doherty Earth Observatory, Columbia University, Palisades, NY, USA}
+\affil[4]{VAW - ETH Zurich, Switzerland}
+\affil[5]{WSL, Sion, Switzerland}
+\affil[6]{University of Genova, Genova, Italy}
+
+%% The [] brackets identify the author with the corresponding affiliation. 1, 2, 3, etc. should be inserted.
+
+%% If an author is deceased, please mark the respective author name(s) with a dagger, e.g. "\Author[2,$\dag$]{Anton}{Smith}", and add a further "\affil[$\dag$]{deceased, 1 July 2019}".
+
+%% If authors contributed equally, please mark the respective author names with an asterisk, e.g. "\Author[2,*]{Anton}{Smith}" and "\Author[3,*]{Bradley}{Miller}" and add a further affiliation: "\affil[*]{These authors contributed equally to this work.}".
+
+
+\runningtitle{}
+
+\runningauthor{}
+
+
+
+
+
+\received{}
+\pubdiscuss{} %% only important for two-stage journals
+\revised{}
+\accepted{}
+\published{}
+
+%% These dates will be inserted by Copernicus Publications during the typesetting process.
+
+
+\firstpage{1}
+
+\maketitle% \copyrightstatement{TEXT} %% This section is optional and can be used for copyright transfers.
+
+% Gravity inversion: a tool for bathymetry modeling
+
+\section*{Abstract}
+Sub-ice-shelf bathymetry strongly influences ice shelf stability by guiding melt-inducing water masses and through pinning points that resist the flow of the overriding ice. Collecting sub-ice-shelf bathymetry data using active source seismic surveying or direct observations is accurate but time-consuming and often impractical. Gravity methods provide a pragmatic, but more uncertain, alternative, by which observed variations in Earth's gravitational field are used to estimate the underlying bathymetry. We utilize a new open-source gravity inversion algorithm developed specifically for modeling sub-ice-shelf bathymetry and estimating the spatially variable uncertainty in the results. The inversion is tested on a suite of models created with high-resolution multibeam bathymetry data. These tests enable 1) determination of the best practices for conducting bathymetric inversions, 2) recognition of the limitations of the inversion and uncertainty quantification, and 3) identification of where community efforts should be focused for the future determination of Antarctica's sub-ice-shelf bathymetry. With an airborne gravity survey with 10 km spacing, 3 mGal of errors, a distribution of known bathymetry measurements, and a regional gravity field representative of the average Antarctic ice shelf, we achieve a root mean squared error of the inverted bathymetry of 23 m. We find that estimating and removing the regional component of gravity before the inversion is the largest source of error in the resulting bathymetry model, but this error can be greatly reduced with additional known bathymetry points. We analyzed Antarctic ice shelves and predict that, if high-resolution gravity data were available, gravity inversion could potentially improve bathymetry models for 95\% of them compared to interpolated products like Bedmap2.
+
+\section*{Plain Language Summary}
+The shape and depth of the continental shelf seafloor surrounding Antarctica dictate where warm water masses can reach the ocean cavities beneath floating ice shelves. Once in the ocean cavity, the sub-ice shelf bathymetry controls if and where these water mass can reach the grounding zone, where the ice is at its deepest, steepest, and highest pressure, and thus vulnerable to significant basal melting. This basal melt can affect the stability of ice shelves due to the long-term retreat of their grounding lines. Conventional methods of collecting bathymetry data using echo sounders or seismic surveying are often impractical or expensive when applied to the vast ice shelves that fringe Antarctica's ice sheets. One alternative method of acquiring sea floor depths is a method called gravity inversion. Variations in bathymetry can be detected by measurements of Earth's gravity over an ice shelf as a result of the difference in density between seawater and the seafloor. Here, we present a new open-source software for performing gravity inversions and test the method on synthetic data to examine its effectiveness, allowing us to learn which parts of the inversion are most prone to errors. We find that removing the portion of the gravity data that results from deep geologic structures is the largest source of error. To limit the impact of this and other sources of error in the inversion, we suggest that researchers focus on collecting as many point measurements of bathymetry depth (e.g., from seismic surveys) as possible and attempt to limit the noise in the gravity data as much as possible. By comparing our synthetic tests to real data, we predict that for the majority of Antarctic ice shelves, gravity inversion would result in an improvement to bathymetry models created from the interpolation of point-measurements.
+
+\paragraph*{Key Points:}
+\begin{enumerate}
+    \item We present a new geometric gravity inversion algorithm specifically designed for modeling sub-ice shelf bathymetry and its uncertainty.
+    \item Synthetic testing, derived from real Antarctic data, shows the relative importance of known bathymetry point measurements, gravity data quantity and quality, and regional gravity field variability.
+    \item For regional fields with low variability, we suggest a focus on collecting gravity data, while for highly-variable regional fields, we suggest a focus on collecting additional seismic bathymetry measurements.
+\end{enumerate}
+
+\section{Introduction}
+
+Over the past few decades (1992-2020), Antarctica has been losing a significant amount of ice, averaging 92 billion tons per year, adding over 7 mm to global sea-level rise \citep{otosakamass2023}. Most of this ice loss is happening in places where relatively warm ocean waters come into contact with the floating ice shelves that fringe the continent \citep{rignotfour2019}. These ice shelves exert a resistive force, buttressing, slowing the flow of inland ice into the ocean. This buttressing comes from lateral drag and resistive stresses where the ice touches the sea floor at pinning points \citep{dupontassessment2005, matsuokaantarctic2015}. But in the past 20 years, about 37\% of these pinning points have shrunk due to ice shelf thinning \citep{milesprogressive2024}, reducing this buttressing effect and increasing ice flux into the ocean \citep[e.g.][]{pritchardantarctic2012, scambosglacier2004}. Because of Antarctica's cold climate and limited surface melting, most ice shelf thinning occurs from below, through basal melting. The largest ice shelves, like Ross, Ronne-Filchner, and Amery, are considered "cold-water" shelves, based on the ocean conditions beneath them \citep{adusumilliinterannual2020}.
+
+In these cold-water shelves, basal melt tends to happen at the ice front and along the deep grounding zones, the region where ice transitions from grounded to floating. This grounding zone melt occurs because the melting point of ice drops under pressure, so even cold, salty waters can melt ice at depth \citep{alleyoceanic2015}. This cold and salty water, such as High Salinity Shelf Water (formed during sea ice formation), travels along seafloor troughs towards the grounding zones \citep[e.g.][]{tintoross2019}. This highlights sub-ice shelf bathymetry as a strong control on the future of the Antarctic Ice Sheet through its routing of melt-inducing waters and the control on pinning point geometry.
+
+Techniques for collecting sub-ice-shelf bathymetry data are limited. Radar (ground or airborne) cannot image through the ocean cavity due to signal attenuation caused by water. Conventional over-ice seismic surveys provide accurate measurements, but can only cover small spatial scales (10's of kilometers), unless significant funding and time are available \citep[e.g., the RIGGS survey;][]{bentleyross1984}. Similarly, direct observations through drill holes or Autonomous Underwater Vehicles (AUVs) are impractical for adequate coverage of large ice shelves. However, because the seafloor is much denser than water and ice, it creates a detectable signal in Earth's gravity field. This signal can be observed from airborne or ground-based gravity surveys and then used in a method called gravity inversion to model the shape of the sub-ice shelf seafloor. This technique is commonly used throughout Greenland \citep[e.g.][]{millanvulnerability2018, anbathymetry2019a} and Antarctica \citep[e.g.][]{vankovahigh2023,lockenovel2025,constantinocook2023, charrassinbathymetry2025} for modeling bathymetry where it is otherwise impractical to measure.
+
+There are two main types of gravity inversions. Density inversions estimate how density changes underground, often used in mineral exploration. Geometry inversions (also called structural inversions) estimate the shape of a surface which represents a change in density, like the seafloor beneath an ice shelf. They are commonly used to model the boundary between Earth's crust and mantle \citep[e.g][]{uiedafast2017, borghimoho2022}, or the contact between sediment and basement rock \citep[e.g.][]{santosefficient2015, barbosagravity2007}. Density inversions are common, well-supported by open-source software, and widely used in industry \citep{oldenburggeophysical2007, cockettsimpeg2015, ruckerpygimli2017}. Geometry inversions, on the other hand, don't have reliable, freely available tools. Researchers often rely on expensive, proprietary software that is hard to customize. These tools also struggle to handle uncertainty or use known measurements to improve accuracy.
+
+We use an open-source Python-based geometry inversion tool called \textit{Invert4Geom}. It is designed specifically to model topography from gravity data and to estimate spatially variable uncertainty in the results.  We run a set of synthetic tests to see how well it performs under different conditions, such as noisy gravity data, different spacing between measurements, and the presence of a long-wavelength geologic component of the gravity field. We analyze all Antarctic ice shelves to predict inversion performance based on the results of these synthetic tests. We discuss the general assets and limitations of using gravity inversions to recover bathymetry and provide guidance for field data collection. Finally, we highlight ice shelves for which bathymetry would be improved using a gravity inversion, and ice shelves where inversion would degrade the bathymetry reliability.
+
+\section{Methods}
+
+\subsection{Geophysical inversion}
+
+Geophysical inversion involves determining a set of physical parameters that, when forward modeled, produce predicted data that closely match observed measurements. Forward modeling is the calculation of what data would be observed given a model of physical parameters.  In this study, we perform a least-squares inversion to solve the matrix equation
+
+\begin{equation}\label{eq:matrix}
+     \mathbb{J} \vv{x} = \vv{m},
+\end{equation}
+
+where $\mathbb{J}$ is the Jacobian (or sensitivity) matrix, $\vv{x}$ represents the perturbations applied to the model's physical parameters, and $\vv{m}$ are the data misfit values. Each element of the Jacobian quantifies the sensitivity of a predicted data value to a small change in a physical parameter, i.e., $\dfrac{\partial f_j}{\partial p_i}$, which is the partial derivative of the j\textsuperscript{th} predicted data with respect to the i\textsuperscript{th} physical parameter. In our application, the physical parameter of interest is seafloor topography, and the observed data are variations in Earth's gravity field, specifically the residual component of the gravity misfit, described below. Solving Equation \ref{eq:matrix} for $\vv{x}$ using an iterative least-squares approach yields corrections to the initial bathymetry model that reduce the mismatch between observed and modeled gravity. A detailed mathematical derivation is provided in Appendix \ref{app:inversion}.
+
+\subsection{Gravity reduction}
+Prior to inversion, gravity data must be reduced to isolate the signal relevant to the density contrast of interest. The reduction and preprocessing workflow (Figure \ref{fig:workflow}a) comprises the following steps:
+
+\begin{enumerate}
+    \item Field corrections: Measured gravity is corrected for instrument drift, flight line leveling inconsistencies, aircraft maneuvers, and the effects of measuring gravity on a moving platform (E\"{o}tv\"{o}s correction) \citep{hinzenew2005, hinzegravity2013}. These corrections yield \textit{observed gravity} ($g_{obs}$), which reflects the combined effect of Earth's gravitational field and its rotation.
+    \item Normal gravity correction: We then subtract the gravity of a reference Earth model (denoted $\gamma$), which accounts for variations due to latitude and elevation. This yields the \textit{gravity disturbance} ($\delta g$), sometimes referred to as the free-air anomaly, which contains only gravity effects resulting from deviations between the actual Earth and the reference model (Figure \ref{fig:terrain_effects}).
+    \item Terrain correction: To isolate internal density structure, the effects of known topographic masses are removed from the disturbance. These terrain mass effects reflect all topographic deviations between the \textit{normal} Earth and the real Earth, where the \textit{normal} Earth is defined by air above the ellipsoid and crust below it (Figure \ref{fig:terrain_effects}a). Once calculated and removed (see Appendix \ref{app:reduction} for details), the remaining gravity signal is the topography-corrected disturbance ($\delta g_{TC}$), sometimes referred to as the complete Bouguer anomaly. This contains only gravity effects from density variations within the Earth.
+\end{enumerate}
+
+Lastly, \textit{Invert4Geom} uses gravity data on a regular grid, as opposed to scattered observation points. We use the equivalent source technique to interpolate the scattered gravity data onto a regular grid. Equivalent sources find a set of point sources at depth which, when forward-modeled, reproduce the measured gravity data \citep{solergradientboosted2021, dampneyequivalent1969}. These sources can then be used to predict the gravity anomaly at any desired point, such as each location on an even grid.
+
+\begin{figure}[!ht]
+    \centering
+     \includegraphics[width=0.7\textwidth]{figures/fig1.png}
+    \caption{Defining the terrain mass effect \textbf{(a-d)} and discretizing the components \textbf{(e-h)}.
+    \textbf{a)} The normal Earth model,
+    \textbf{b)} the simplified real Earth model, with air, ice, water, and earth,
+    \textbf{c)} terrain masses separated into components above and below the ellipsoid,
+    \textbf{d)} real Earth topographic masses which are anomalous relative to the normal Earth and their corresponding assigned density contrasts, which, combined, make the Terrain Mass Effect,
+    \textbf{e)} prisms between the ellipsoid and the ice surface,
+    \textbf{f)} prisms between the ellipsoid and the water surface (ice base),
+    \textbf{g)} prisms between the ellipsoid and the rock surface (topography onshore and bathymetry offshore).
+    \textbf{h)} the combination of prisms of \textbf{e-g}, where overlapping sets of prisms create the different shades and corresponding densities.}
+    \label{fig:terrain_effects}
+\end{figure}
+
+For conventional gravity inversions targeting internal interfaces (e.g., the Moho or sediment-basement contact), $\delta g_{TC}$ is typically used. However, for bathymetry inversions, we retain the gravitational signal from the topography itself, and therefore apply only a \textit{partial} terrain correction. The resulting gravity anomaly, which we refer to as the \textit{partial topography-corrected disturbance} ($\delta g_{TC\_partial}$), is given by:
+
+\begin{equation} \label{eq:reduction}
+    \delta g_{TC\_partial} = g_{obs} - \gamma - g_{ice} - g_{water}.
+\end{equation}
+
+This removes the gravitational effects of ice and water, while retaining the effects of the rock surface (onshore topography and offshore bathymetry). A rigorous discussion of this formulation and its implementation is provided in Appendix \ref{app:reduction}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/fig2.png}
+    \caption{Schematic workflow diagram for \textbf{a)} gravity processing steps and \textbf{b)} running the inversion. Blue boxes show the input datasets, green boxes show the key processes, and red lines signify iterative components of the inversion.}
+    \label{fig:workflow}
+\end{figure}
+
+\subsubsection{Forward modeling}
+Both gravity reduction and inversion require forward modeling of the gravity field associated with a given topographic surface. The surface is discretized into an array of adjacent vertical rectangular prisms, and the total gravitational field at any given observation point is computed as the sum of the individual contributions of each prism. For prisms of constant density, gravity is calculated using the analytical solutions of \citet{nagygravitational2000}. We use a density-contrast approach (Figure \ref{fig:discretization}e) rather than using absolute densities (Figure \ref{fig:discretization}b). This approach reduces computational costs (using one rather than two prism layers per topographic interface) and minimizes gravitational edge effects due to thinner prisms and lower absolute density values. Further details are provided in Appendix \ref{app:discretization}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.3\textwidth]{figures/fig3.png}
+    \caption{Equivalent methods of discretizing a density contrast
+    (\textbf{a}) across a surface.
+    \textbf{b)} Two prism layers, each assigned absolute densities. One prism layer either above
+    (\textbf{c}) or below
+    (\textbf{d}) the surface, using density contrast values.
+    \textbf{e)} One prism layer around a reference surface, with prisms above having a positive density contrast and prisms below a negative contrast.}
+    \label{fig:discretization}
+\end{figure}
+
+\subsubsection{Gravity misfit}
+The gravity misfit used in the inversion is defined as
+
+\begin{equation} \label{eq:misfit}
+    m = \delta g_{TC\_partial} - f(p_0)
+\end{equation}
+
+where $f(p_0)$ is the gravity predicted from the initial bathymetry model. Note that as the initial model approaches the truth, the misfit is equivalent to the topography-corrected disturbance ($\delta g_{TC}$), or the complete Bouguer anomaly. This misfit comprises two components: 1) a residual component caused by differences between the actual and modeled bathymetry, and 2) a regional component due to deeper subsurface density variations not accounted for in the model. Because the inversion targets corrections to bathymetry alone, it is essential to isolate the residual component by estimating and removing the regional component before inversion. Further details are provided in Appendix \ref{app:misfit}.
+
+\subsubsection{Regional separation}
+The regional component of the gravity misfit can be estimated using several methods, most of which assume that the regional field consists of longer-wavelength anomalies, while the residual field dominates the short-wavelength components. This assumption underpins techniques such as upwards continuation or the use of high-altitude gravity data to estimate the long-wavelength signals \citep[e.g.][]{tintobathymetry2015, mutosubglacial2016}, as well as low-pass filtering of the gravity data \citep[e.g.][]{eisermannbathymetry2020}. Alternatively, the regional field can be forward-modeled from a geologic model, developed using other geophysical data \citep{hodgsonfuture2019}, prior geologic knowledge \citep{tintoprogressive2011}, or crustal density models derived from gravity inversion \citep{tintoross2019, cochrandetailed2020, anbathymetry2019}.
+
+The last method, which we utilize in this paper, leverages locations with known bathymetry depths, referred to as \textit{constraint points}. The inversion defines the residual misfit as the gravity effect due to differences between the true and starting bathymetry. At constraint points, where the two bathymetries are nearly identical (within measurement error), the residual misfit should be zero. Consequently, the entire misfit at these points is attributed to the regional component. By sampling the misfit at each constraint point and interpolating these values, we estimate the regional field.
+
+This technique has key advantages. It imposes a form of smallness regularization, preventing significant changes to the depth at constraint points. Aside from the choice of interpolation method, it avoids the subjective parameter selection required by the other techniques, such as low-pass filter widths or upward continuation heights. However, it assumes the wavelength of the regional field is larger than the spacing between constraint points; shorter-wavelength regional anomalies will not be captured and may be absorbed into the residual (i.e., the inverted bathymetry). This approach, often referred to as a "DC-shift" \citep{millanconstraining2020, yangbathymetry2021, anbathymetry2019}, is here termed \textit{Constraint Point Minimization} to emphasize that it estimates a spatially variable regional field. Estimating the regional field is among the most challenging steps of a bathymetric inversion, particularly in areas of sparse constraint coverage \citep{brisbourneseabed2014}. Over or underestimating the regional field directly biases the inversion. Once the regional field is estimated, it is removed from the total misfit to yield the residual misfit:
+
+\begin{equation} \label{eq:residual_misfit}
+    m_{residual} = \delta g_{TC\_partial} - f(p_0) - m_{regional}.
+\end{equation}
+
+Combining with Equation \ref{eq:reduction}:
+
+\begin{equation} \label{eq:residual_misfit2}
+    m_{residual} = g_{obs} - \gamma - g_{ice} - g_{water} - f(p_0)  - m_{regional},
+\end{equation}
+
+where $g_{obs}$ is the observed gravity, $\gamma$, $g_{ice}$, $g_{water}$ are forward-calculated, $f(p_0)$ is the forward-calculate effect of the starting model, and $m_{regional}$ is the estimated regional field. The remaining residual ideally reflects only the discrepancy between the initial and true bathymetries.
+
+\subsection{Running the inversion}
+
+\subsubsection{Jacobian matrix}
+The first step of the inversion (Figure \ref{fig:workflow}b) is computing the sensitivity matrix, or Jacobian (Equation \ref{eq:matrix}). Each entry in the Jacobian is the partial derivative of gravity produced by a specific prism at a given observation point, with respect to the prism's thickness. Although an analytical solution exists for this derivative \citep{nagygravitational2000}, we use an approximation to reduce the computational cost. Each vertical prism is approximated as a sector of an annulus (a cylindrical shell), whose vertical derivative can be calculated more efficiently \citep{mccubbineairborne2016}. See Appendix \ref{app:annulus} for a derivation of this approximation.
+
+\subsubsection{Least-squares solver}
+With the Jacobian and the gravity residuals, Equation \ref{eq:matrix} is solved to find the set of surface corrections ($\Delta p$) that minimizes the objective function (Figure \ref{fig:workflow}b). We use a damped iterative least squares solver \citep[LSQR;][]{paigelsqr1982}, which finds the minimum-norm solution, that is, the one with the smallest $||\Delta p||^2$ among all solutions that fit the data equally well.
+
+\subsubsection{Regularization}
+Inversion problems involving potential fields are inherently ill-posed: many solutions can satisfy the data. Regularization helps stabilize the solution by incorporating prior knowledge or desirable properties \citep{asterparameter2018}. We use two forms: 1) \textit{smallness}, which constrains the inversion to remain close to known bathymetry measurements, and 2) \textit{smoothness}, which suppresses unrealistic roughness in the inverted surface.
+
+\paragraph*{Smallness}
+\textit{Invert4Geom} provides two smallness regularization techniques. The first comes from the Constraint Point Minimization method used for estimating the regional field. This method ensures that near constraint points, most of the gravity misfit is accounted for in the regional field, resulting in minimal bathymetric correction near those locations. An optional second method uses a spatial weighting grid to taper surface corrections towards zero at constraint points. The grid assigns a weight of 0 at constraint points, increasing smoothly to 1 with distance. This weight is multiplied element-wise with each iteration's surface correction grid before it is applied (Figure \ref{fig:workflow}b), ensuring a smooth transition from constrained to unconstrained areas. While effective, this increases both the number of interactions and total runtime. Both methods require constraint points, but in most applications, at least some are available from radar, outcrops, or shipboard surveys.
+
+\paragraph*{Smoothness}
+Smoothness regularization is enforced through damping in the LSQR solver. The damping parameter restricts the magnitude of surface corrections in each iteration, reducing noise and promoting realistic bathymetry. While this gives smoother results, it requires extra iterations. Section \ref{hyperparameters} outlines how to choose an optimal damping value.\\
+
+After each iteration, the surface corrections (possibly weighted) are applied to update the bathymetry. The new model is re-discretized into prisms, forward-modeled, and a new residual is computed. This process repeats until one of the termination conditions is met.
+
+\subsection{Stopping criteria}
+
+The inversion terminates when the first of the following conditions is met:
+
+\begin{enumerate}
+    \item The maximum number of iterations ($N$) is reached;
+    \item The $\ell^2$-norm of the residual ($||\vv{m}||_2$, Equation \ref{eq:residual_misfit}) falls below a defined threshold;
+    \item The changed in $\ell^2$-norm between iterations ($\Delta\ell^2$-norm) is below a defined tolerance.
+\end{enumerate}
+
+\subsection{Hyperparameter estimation}\label{hyperparameters}
+
+Hyperparameters are parameters whose values need to be chosen (not calculated) and that also have a significant effect. Two key hyperparameters affect inversion quality: the regularization damping parameter and the uniform density contrast value (if it is not previously known). Below, we describe how to determine their optimal values.
+
+\subsubsection{Damping value cross-validation}
+The damping parameter balances solution stability and data misfit. Too high a value, the solution under-fits the data; too low a value, the data are overfit and noisy results are produced. To find an optimal value, we use cross-validation of the input gravity data \citep[Figure \ref{fig:hyperparameters}a;][]{uiedafast2017}. The gravity data are split into \textit{training} and \textit{testing} sets. The inversion is run using the training set for a candidate damping value. The root mean square (RMS) misfit between the unused testing gravity points (the partial topography-corrected disturbance minus the estimated regional gravity) and the forward-modeled gravity effect of the resulting bathymetry gives a \textit{score}. This is repeated for multiple damping values, and the one with the lowest score is selected.
+
+To construct the training and testing sets, the data are interpolated onto a grid at half the target resolution using equivalent sources \citep{solergradientboosted2021}. The training set is those points that fall on the desired-resolution grid, and the remaining interleaved points become the testing set.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/fig4.png}
+    \caption{Workflows for selecting the optimal values for the two inversion parameters:
+    \textbf{a)} the regularization damping value and
+    \textbf{b)} the density contrast value. Both workflows follow the general methods of \citet{uiedafast2017}. Blue boxes show input datasets and green boxes show the key processes.}
+    \label{fig:hyperparameters}
+\end{figure}
+
+\subsubsection{Density contrast estimation} \label{density_contrast_estimation}
+If no seafloor density contrast is known, it can be estimated via the inversion (Figure \ref{fig:hyperparameters}b). For a candidate density contrast value, the full inversion is run, including the creation of the starting bathymetry and the regional estimation, and the output bathymetry is compared to known constraint point depths. The RMS of these differences is the score. The optimal density contrast minimizes this score. If the Constraint Point Minimization method is used for regional separation, these scores become biased, since Constraint Point Minimization enforces a zero residual at constraint points. Two alternatives are:
+\begin{itemize}
+    \item Cross-validation: Split constraints into K-folds of training and testing subsets \citep{hastieelements2009}, using spatial blocks to minimize autocorrelation \citep{robertscrossvalidation2017}. For each fold, the training set is used in the inversion, and the testing set is used for scoring.
+    \item Alternative regional estimation: Temporarily use a different regional field method during optimization, then revert to Constraint Point Minimization once the best density contrast is found.
+\end{itemize}
+
+\subsubsection{Optimization routines}
+Both hyperparameter estimation methods rely on computing a score for each candidate value. \textit{Invert4Geom} supports two search strategies: 1) a grid search, where values are tested uniformly across a defined range, and 2) an adaptive optimizing approach, which uses prior scores to refine the search space, converging more efficiently on the optimal value \citep{akibaoptuna2019}.
+
+\subsection{Uncertainty quantification}
+We use a Bayesian framework, specifically Monte Carlo simulation, to assess the spatial uncertainty of the inverted bathymetry \citep{jansenmonte1994}. For a generalized problem of inputs $\vv{x}$ and a function $y(\vv{x})$, Monte Carlo simulation estimates the probability distribution of $y(\vv{x})$ when you know the probability distribution of $\vv{x}$ \citep{heltonsurvey2006}. For a set of parameters, we draw $N$ samples from their input distributions (Figure \ref{fig:Monte_Carlo_workflow}b) and run the full inversion workflow for each set (Figure \ref{fig:Monte_Carlo_workflow}c). The resulting $N$ bathymetry models are used to compute a cell-wise weighted standard deviation (Figure \ref{fig:Monte_Carlo_workflow}d). Each model is weighted by the inverse square of its RMSE with constraint points (Appendix \ref{app:uncertainties}). This standard deviation grid serves as our spatial uncertainty estimate. To evaluate each parameter’s individual effect, separate Monte Carlo runs can isolate their influence by sampling one parameter at a time.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/fig5.png}
+    \caption{Schematic workflow diagram for the Monte Carlo uncertainty analysis.
+    \textbf{a)} The Monte Carlo simulation, consisting of
+    \textbf{b)} sampling the inputs from their respective distributions, and
+    \textbf{c)} implementing the various components of the workflow, depending on which inputs have been sampled. This process is repeated $N$ times, yielding $N$ inverted bathymetry grids.
+    \textbf{d)} Weighted cell-specific statistics are computed. Each inverted bathymetry grid (large purple boxes) is weighted by the respective inversion's constraint depth RMSE. These weights are used to compute the weighted mean and weighted standard deviation of each grid cell (bold purple squares).}
+    \label{fig:Monte_Carlo_workflow}
+\end{figure}
+
+\subsubsection{Parameter distributions}
+Defining input parameter distributions is critical. For point data (gravity, constraints), we assume normal distributions based on user-provided or estimated uncertainties. For gravity, uncertainties often come from survey crossover errors; for constraints, uncertainty may be based on data source or be proportional to depth. For hyperparameters (density contrast and damping), the results of the optimizations can be used to define each parameter's distribution. For a well-defined best score, a normal distribution centered on that value with a small standard deviation can be used. For an even distribution of similar scores, a uniform (Boxcar) distribution can be used with the width defined by the range of the similar scores. To assess uncertainty in the regional field, we also assign distributions to parameters used in its estimation (e.g., equivalent source depth or damping in Constraint Point Minimization). Probability distributions for these parameters can be derived from the respective optimization procedures.
+
+\subsubsection{Sampling strategy}
+Since full inversion workflows are computationally intensive, we use Latin Hypercube Sampling to efficiently cover the input parameter space with a small number of runs \citep{jansenmonte1994, heltonsurvey2006}. In Latin Hypercube Sampling, each input distribution is divided into $N$ equal-probability intervals, and one value is sampled from each. The $N$ samples for each parameter are randomly combined into $N$ total input sets. For point-wise-sampled inputs (e.g., gravity data), regular random sampling suffices.
+
+\subsection{Metrics}
+In this study, we use a few unique metrics to describe the distribution of data and assess model performance. There are many ways to describe how data points are spaced out, whether it is airborne gravity data or over-ice seismic survey points, but not all metrics work equally well for all survey types. For example, spacing (usually the average distance between points) only makes sense if your data are evenly spread across a grid. If data follow tracks, like flight lines or ship surveys, the mean distance between points is skewed toward unrealistically small values. Spatial density (how many points fall within a certain area) has a similar issue; it is strongly affected by the sampling frequency along those tracks. Line spacing, the average distance between survey lines, only works well for grid-based surveys and does not handle gaps, tie lines, or irregular coverage very well. To enable robust comparisons of data distribution with varying collection types and spatial distributions, we use a metric we call \textit{median proximity}, which describes the median distance of each grid point in a region to the nearest data point. To calculate this, we create a grid for the region of interest with a small cell size ($\sim$100 m) and for each cell, calculate the distance to the nearest data point. We then calculate the median value of all the grid cells.
+This approach avoids the pitfalls of sampling frequency, uneven line spacing, and coverage gaps, and gives a more consistent picture of how well an area is constrained by data. We use median proximity to describe how bathymetry constraints (Figure \ref{fig:model}d) and gravity data (Figure \ref{fig:Ross_Sea_03_grav_errors}e) are distributed, which helps us compare the spatial distributions of data between various Antarctic ice shelves and synthetic datasets created here.
+
+To evaluate the performance of various techniques in our synthetic tests, we use root mean square error (RMSE). RMSE is useful because it ignores the sign of the errors and is less sensitive to outliers than the mean. For example, the RMSE between a “true” bathymetry grid and an inverted grid tells us how far off our model is, on average. Finally, we introduce a \textit{topographic improvement score} to measure whether the inversion gives better results than just interpolating the sparse bathymetry points. This score is the difference between the RMSE of the interpolated starting model and the RMSE of the inverted model: $RMSE_{starting{\_} bathymetry} - RMSE_{inverted{\_} bathymetry}$. A score of 0 means no improvement, while a positive value shows that the inversion helped reduce error and improve the bathymetry.
+
+Lastly, throughout this study, we discuss the relative amplitudes of regional gravity fields. Mathematically, we quantify this as the standard deviation of the regional field, but in text we use the term \textit{variability}. This refers to the amplitude of variation in the signal, regardless of the mean level, allowing a comparison between different regional gravity fields.
+
+\subsection{Antarctic ice shelf analysis} \label{ice_shelf_analysis}
+
+To set up our synthetic tests realistically, we needed to choose values for several key parts of the bathymetry inversion process, such as how accurate the data are, how the data are spread out, and how variable the regional gravity field is. To choose which values to test, we analyzed all 164 Antarctic ice shelves to figure out the typical ranges for these variables. For each shelf, we collected nearby bed measurements from IBCSO v2 \citep{dorschelinternational2022a} and BedMachine v3 \citep{morlighemmeasures2022}. These included data from multibeam and single-beam sonar, over-ice seismic surveys, airborne and surface-based radar, and exposed rock outcrops. We left out any points derived from indirect methods like gravity inversion, mass conservation, or streamline diffusion. From the compiled points, we calculated the constraint proximity as described earlier.
+
+For each ice shelf we used AntGG-2021 gravity data \citep{scheinertantarctic2024} and Bedmap2 \citep{fretwellbedmap22013} ice surface, ice base, and bed topography to calculated the topography-corrected gravity disturbance, $\delta g_{TC}$, using densities of 917, 1025, and 2670 kg m\textsuperscript{-3} for ice, water, and earth, respectively. We chose not to use Bedmap3 \citep{pritchardbedmap32025} as it included gravity-inversion derived bathymetry models for some shelves. Using our compiled bed measurements, we then used the Constraint Point Minimization method to estimate the regional gravity field. For each shelf, we created grids of constraint proximity, topography-corrected gravity disturbance, and regional field, and then masked those to the ice shelf outlines based on MEaSUREs \citep{mouginotmeasures2017}. To use realistic values of the error and spatial distribution of gravity data, we analyzed a range of published sub-ice shelf bathymetry studies \citep{tintoross2019,yangbathymetry2021,eisermannbathymetric2021,constantinoseafloor2020,jordannew2020,eisermannbathymetry2020, eisermanncoastal2024, hodgsonfuture2019,weigetz2020,cochrandetailed2020, millanconstraining2020, birdgravityderived2025}.
+
+\subsection{Synthetic testing} \label{synthetic_testing}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/fig6.png}
+    \caption{Ross Sea topographic data used for synthetic inversions.
+    \textbf{a)} 500 m IBCSO bathymetry \citep{dorschelinternational2022}, re-gridded at a 2 km spacing,
+    \textbf{b)} difference between \textbf{a} and \textbf{c},
+    \textbf{c)} starting bathymetry model from the interpolation of constraint points, shown by black dots, with smaller dots denoting the constraint outside the ice shelf boundary,
+    \textbf{d)} distance to the nearest IBCSO data point (black dots), giving a median proximity of $\sim$400 m.
+    \textbf{e)} Crystalline basement topography from the ANTOSTRAT shipborne seismic data compilation \citep{brancolinidescriptive1995}. Inset map shows the study site location in the Ross Sea.}
+    \label{fig:model}
+\end{figure}
+
+To assess the performance of the inversion software, showcase its use, and explore the sensitivity of the inversion to certain parameters, we ran a series of tests using a semi-synthetic model. This model is based on bathymetry data from Antarctica's Ross Sea (Figure \ref{fig:model}a), collected using shipborne sonar and compiled by IBCSO \citep{dorschelinternational2022}. In this region, the median distance to the nearest bathymetry data point is $\sim$400 m (Figure \ref{fig:model}d). IBCSO originally gridded the data at 500 m spacing, but for our purposes we filtered and regridded it at 2 km spacing. We forward modeled its gravity effect using a constant density contrast of 1476 kg m\textsuperscript{-3}, based on typical densities of seawater $\sim$1024 kg m\textsuperscript{-3}  and seafloor rock ($\sim$2500 kg m\textsuperscript{-3}) \citep{bambercomparison1994}. This gave us a synthetic "observed" gravity dataset, calculated at 2 km spacing and 1 km observation height.
+
+Across different tests, we used the full-resolution gravity grid, added synthetic noise, or sampled the data along simulated flight lines to mimic an airborne survey. In some cases, we also added a regional gravity component by forward modeling the effect of basement topography using ANTOSTRAT seismic data \citep[Figure \ref{fig:model}e;][]{brancolinidescriptive1995}. Because we know the “true” bathymetry and the “true” regional gravity field in these synthetic setups, we can directly assess how well the inversion performs under different conditions, as well as how reliable our uncertainty estimates are.
+
+We ran five core inversion tests:
+\begin{itemize}
+    \item Test 1: the ideal case, using full-resolution, noise-free gravity data with no regional component.
+    \item Test 2: adds noise to the gravity data.
+    \item Test 3: uses simulated airborne gravity data instead of the full grid.
+    \item Test 4: includes a regional gravity component.
+    \item Test 5: combines all the above factors for a more realistic test case.
+\end{itemize}
+
+We also ran four inversion ensembles, each with 100 runs:
+\begin{itemize}
+    \item Ensemble 1: explores the relationship between the number of constraint points and the variability of the regional field. We test 10 different amounts of the number of constraint points, from 4 points to 650 points, and 10 different levels of the regional gravity field variability, from very low variability ($\sim$4 mGal standard deviation) to a very high variability ($\sim$40 mGal standard deviation).
+    \item Ensembles 2–4: look at how gravity noise and flight line spacing affect results. For these ensembles, we test 10 values of gravity noise, from none to 5 mGal of random noise, and 10 numbers of gravity flight lines, from 6 to 60 lines across the region. These values are tested with no regional gravity field, and medium variability field, and a highly variable field (ensembles 2, 3, and 4, respectively).
+\end{itemize}
+
+To make sure our tests reflect real-world conditions, we set all these parameters (e.g., constraint proximity, gravity noise, and flight line spacing) based on the ranges we found across Antarctica's ice shelves and in published gravity surveys. Each test and ensemble has a corresponding Jupyter notebook, available in the supplementary material.
+
+\subsection{Software implementation}
+The inversion algorithm we use in this study is implemented in Python as the open-source package \textit{Invert4Geom} \citep{invert4geomcommunityinvert4geom2025}, released under the MIT license. It builds on many scientific Python libraries. For gravity modeling, both with prisms and equivalent sources, we use Harmonica \citep{fatiandoaterraprojectharmonica2024, solergradientboosted2021}. For spatial operations like gridding and interpolation, we rely on Verde \citep{uiedaverde2018}. To generate figures and download geospatial data, we use PyGMT and PolarToolkit \citep{uiedapygmt2021, tankersleypolartoolkit2024, polartoolkitcommunitypolartoolkit2025}. We handle least squares regression with SciPy \citep{virtanenscipy2020}, optimize hyperparameters with Optuna \citep{akibaoptuna2019}, and perform uncertainty sampling using UQpy \citep{olivieruqpy2020}.
+
+All of the experiments were run in Jupyter notebooks \citep{perezipython2007}, which are documented to explain the details of using the software. These notebooks were used to create a website; \url{https://mdtanker.github.io/synthetic_bathymetry_inversion/}. The full source code, including all results and figures used in this paper, is publicly available in a GitHub repository, \url{https://github.com/mdtanker/synthetic_bathymetry_inversion}, and the state of the code used in this analysis is preserved at Zenodo \citep{tankersleygravity2025}.
+
+\section{Results}
+
+\subsection{Antarctic ice shelf analysis}
+To assess gravity inversion suitability across Antarctica, we compiled all available bathymetry measurements and created grids of three key variables for each ice shelf: constraint proximity, topography-corrected gravity disturbance, and regional gravity misfit. To avoid bias from the large number of small shelves, we restricted our analysis to the 50 largest ice shelves (those exceeding 1000 km\textsuperscript{2}) out of the 164 named shelves in Antarctica. Among these, the median constraint proximity ranged from 2.5 km (Thwaites) to 32 km (Conger-Glenzer), with an overall mean of 10 km and median of 8 km (Fig. \ref{fig:ice_shelf_stats}c). Most shelves had median proximities between 5 and 10 km. The maximum distance to the nearest constraint ranged from 14 km (Drygalski) to 84 km (Shackleton). The skewness of constraint proximity, which reflects how evenly distributed the constraint points are, ranged from near zero (0.008) for Conger-Glenzer to strongly positive (1.5) for Ronne-Filchner (Fig. \ref{fig:ice_shelf_stats}f, x-axis).
+
+We also evaluated the regional gravity field variability (amplitude of variation) using two measures: the standard deviation of the topography-corrected gravity disturbance and the standard deviation of the regional gravity misfit. We found the former to be a more reliable indicator, as it is less influenced by the number and distribution of constraint points. Although it can be affected by the resolution of the topographic model, our focus is on long-wavelength signals, which are well captured by the BedMap2 topography grids. Across the 50 shelves, regional field variability (based on topography-corrected gravity disturbance) ranged from 7 mGal (Holmes) to 66 mGal (Ekström), with a mean of 23 mGal and median of 18 mGal (Fig. \ref{fig:ice_shelf_stats}d). Most ice shelves exhibited values between 10 and 20 mGal.
+
+To better understand typical survey parameters, we reviewed published studies on airborne gravity data collection over Antarctic shelves. Reported flight line spacings typically range from 5 to 20 km, with 10 km being the most common. Estimating gravity uncertainty, however, is more complicated. Most studies use crossover analysis, but methods vary widely: some report the mean, others the standard deviation or RMS of crossover differences; some apply leveling (of varying orders), while others do not, making comparisons difficult. In general, reported uncertainties range between 1 and 5 mGal. To provide a consistent metric, we used the AntGG-2021 uncertainty grid to calculate the RMS uncertainty across each ice shelf. The lowest shelf-wide RMS uncertainty we found was 3.8 mGal (Pine Island), highlighting the inconsistency in reporting practices.
+
+% Ross,  tinto 2019
+% Amery,  yang 2021
+% Borchgrevink,  eisermann 2021
+% Baudouin,  eisermann 2021
+% George VI,  constantino 2020
+% Thwaites,  tinto and bell 2011, jordan 2020, millan 2017
+% Cook,  constantino and tinto 2023
+% Ninnis,  constantino and tinto 2023
+% Ekstrom,  eisermann 2020
+% Atka,  eisermann 2020
+% Jelbart,  eisermann 2020
+% Fimbul,  eisermann 2020
+% Vigrid,  eisermann 2020
+% Crosson,  jordan 2020, millan 2017
+% Dotson,  jordan 2020, millan 2017
+% Getz,  wei 2020, millan 2020, cochran 2020
+% Totten,  greenbaum 2015, vankova 2023
+% Brunt Stancomb,  hodgson 2019
+% Pine Island,  millan 2017, muto 2013, muto 2016
+% Abbot,  cochran 2014
+% LarsenC,  cochran and bell 2012
+% Nivl,  eisermann 2024
+% Lazarev,  eisermann 2024
+% Venable,  locke et al. 2025
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=.85\textwidth]{figures/fig7.png}
+  \caption[]{Antarctic ice shelf analysis;
+  \textbf{a)} proximity to nearest bed measurements and
+  \textbf{b)} topography-corrected gravity disturbance for all Antarctic ice shelves using AntGG-2021 gravity disturbances \citep{scheinertantarctic2024} and Bedmap2 grids of ice surface, ice base, and bedrock topography \citep{fretwellbedmap22013}. Black outlines in \textbf{a} and \textbf{b} show ice shelf boundaries from MEaSUREs \citep{mouginotmeasures2017}.
+  \textbf{c-d)} histograms of median constraint proximity and standard deviation of topography-corrected gravity disturbance for ice shelves larger than 1000 km\textsuperscript{2}, respectively;
+  \textbf{e)} scatter plot of median constraint proximity and standard deviation of topography-corrected gravity disturbance, with the range of values tested in Ensemble 1 shown as a blue box and values used in Test 5/Ensemble 3, and Ensemble 4 shown as blue and red triangles, respectively.
+  \textbf{f)} scatter plot of skewness of constraint proximity and standard deviation of topography-corrected gravity disturbance. Ice shelves are labeled numerically (see legend for names), and the 24 previously individually-inverted shelves are in red.}
+  \label{fig:ice_shelf_stats}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=.7\textwidth]{figures/fig8.png}
+  \caption{Results of the inversions and uncertainty analyses for each of the five scenarios (each column is a scenario).
+  The \textbf{first row (1a-6a)} shows the inverted bathymetry results, all with the same colorscale,
+  \textbf{second row (1b-6b)} shows the inverted bathymetry error (row 1 minus true bathymetry (Figure \ref{fig:model}a),
+  \textbf{third row (1c-5c)} shows the uncertainty assessment for each inversion. All plots or rows 2 and 3 share the same colorscale to enable direct comparisons between error and uncertainty, and between results of each Test. Last column shows the starting bathymetry model from the interpolation of constraint points, and its error. White dots depict locations of points of known bathymetry depth (constraints). Profile A-A', location in \textbf{1a}, shows the inverted bathymetry for each scenario. Scalebar in \textbf{1a}.}
+    \label{fig:Ross_Sea_inversions}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/fig9.png}
+  \caption[]{Comparison of the five inversion scenario results. Each scenario has an associated color, shown in the legend.
+  \textbf{a)} The RMSE of the inverted bathymetries (triangles) and the RMS of the uncertainty estimates (squares).
+  \textbf{b)} Radially averaged power spectral density (PSD) of bathymetry errors showing the dominant wavelengths of the inversions' errors.
+  \textbf{c)} Results of the damping cross-validations, with optimal found values shown by squares and +/- the estimated standard deviations shown by vertical lines.
+  \textbf{d)} Results of the density contrast optimizations, with optimal found values shown by squares, +/- the estimated standard deviations shown by vertical lines, and the true density contrast shown by the vertical black line. Dashed lines show the results of the alternative optimization approach tested in Tests 4 \& 5.
+  }
+    \label{fig:Ross_Sea_inversions_data}
+\end{figure}
+
+\subsection{Starting model}
+We construct a low-resolution bathymetry model that serves as both the initial model and the basis for generating synthetic gravity data in Tests 1–5. This model is derived by interpolating individual bathymetry point measurements (constraint points). To simulate realistic situations, we include 42 evenly spaced interior constraints representing an over-ice seismic survey, along with a surrounding border of constraints mimicking denser measurements near the ice shelf periphery, such as airborne radar over grounded ice or multibeam bathymetry offshore the calving front (Figure \ref{fig:model}b, small black dots). For this study area, the 42 interior points yield an average spacing of 23 km, and a median constraint proximity of ~8.5 km within the interior region, closely matching the Antarctic-wide median for ice shelves larger than 1000 km\textsuperscript{2} (Figure \ref{fig:ice_shelf_stats}c). The resulting starting bathymetry model has an RMSE of 26 m and a maximum absolute error of 164 m (Figure \ref{fig:model}b). Spectral analysis (Figure \ref{fig:Ross_Sea_inversions_data}b-black line) indicates that the interpolation error is dominated by wavelengths near 40 km, consistent with twice the point spacing.
+
+\subsection{Test 1: Best case scenario}
+\subsubsection{Setup}
+This test represents an idealized, best-case scenario, establishing a baseline for inversion performance. The resulting errors are expected to be minimal and primarily reflect limitations in estimating the two key inversion hyperparameters: the regularization damping parameter and the density contrast. We generate a synthetic gravity disturbance dataset by forward-modeling the full-resolution gravity response of the real bathymetry. No noise or regional gravity component is added. To calculate the gravity misfit used in the inversion, we apply the starting bathymetry model using a prism-layer method with an incorrect density contrast of 1350 kg m\textsuperscript{-3}, while the synthetic data is generated using the true value of 1476 kg m\textsuperscript{-3}.
+
+\subsubsection{Test 1 Results}
+We identify the optimal damping value by performing cross-validation over eight candidate values (0.001 to 0.1), finding an optimal value of approximately 0.01 (Figure \ref{fig:Ross_Sea_inversions_data}c, blue line). Using this damping value, we then find the optimal density contrast by testing 10 values between 1000 and 2400 kg m\textsuperscript{-3}, yielding an optimal value of 1480 kg m\textsuperscript{-3}, just 4 kg m\textsuperscript{-3} above the true value (Figure \ref{fig:Ross_Sea_inversions_data}d-blue line). This optimized inversion (Figure \ref{fig:Ross_Sea_inversions}-1a) achieved an RMSE of 1.8 m and a maximum absolute error of 25 m relative to the true bathymetry (Figure \ref{fig:Ross_Sea_inversions_data}a-blue triangle). The inversion accurately recovered the true bathymetric features with only minor deviations (Figure \ref{fig:Ross_Sea_inversions}-1a \& 1b). The radially averaged power spectral density (Figure \ref{fig:Ross_Sea_inversions_data}b, blue line) shows uniformly low errors across all wavelengths, with slight peaks near 5 km and 80 km.
+
+To assess uncertainty, we performed a Monte Carlo analysis by sampling damping and density contrast values from probability distributions (see Appendix \ref{app:uncertainty_distributions}). Using Latin Hypercube Sampling, we ran 20 inversions. The resulting uncertainty estimate (Figure \ref{fig:Ross_Sea_inversions}-1c) had an RMS of 1.4 m (Figure \ref{fig:Ross_Sea_inversions_data}a-blue square), close to the true inversion RMSE of 1.8 m. Spatial patterns of uncertainty also align well with the actual error distribution (Figure \ref{fig:Ross_Sea_inversions}-1b vs 1c), indicating a well-calibrated uncertainty estimate under ideal conditions.
+
+\subsection{Test 2: Errors in gravity data}
+\subsubsection{Setup}
+In this scenario, we expand upon Test 1 by incorporating observational noise into the synthetic gravity disturbance data to simulate realistic airborne gravity survey conditions. As in Test 1, the baseline gravity disturbance is generated by forward-modeling the true bathymetry. To simulate data collection errors, we add random Gaussian noise with a standard deviation of 3 mGal (Figure \ref{fig:Ross_Sea_02_grav_errors}b), resulting in peak noise amplitudes of $\sim$12 mGal. As standard practice in airborne gravity processing, to mitigate this noise while preserving the underlying gravity signal, we applied Gaussian low-pass filters with widths ranging from 0 to 32 km (in 2 km increments).
+
+For each filter, we computed the RMSE relative to the original noise-free gravity data (Figure \ref{fig:Ross_Sea_02_grav_errors}a). A filter width of 24 km achieved the best balance between noise reduction and signal retention, lowering the RMSE from 3 mGal to 0.61 mGal and reducing the maximum error from $\sim$12 mGal to $\sim$4 mGal with minimal loss of gravity signal (Figure \ref{fig:Ross_Sea_02_grav_errors}c). Following noise reduction, we proceeded as in Test 1: using an incorrect density contrast value, calculating the gravity misfit, and performing both regularization damping cross-validation and density contrast optimization.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/fig10.png}
+    \caption{Errors in the gravity data for Test 2.
+    \textbf{a)} Noise-free gravity disturbance data from forward modeling of the true bathymetry,
+    \textbf{b)} pseudo-random noise added to \textbf{a},
+    \textbf{c)} difference between \textbf{a} and \textbf{d}, representing the data loss from noise and filtering, with the same colorscale as \textbf{b},
+    \textbf{d)} noisy gravity data after low-pass filtering,
+    \textbf{e)} determining the optimal low-pass filter width to reduce noise while minimizing data loss. noise-contaminated gravity disturbance data,}
+    \label{fig:Ross_Sea_02_grav_errors}
+\end{figure}
+
+\subsubsection{Test 2 Results}
+The density contrast optimization identified an optimal value of 1471 kg m\textsuperscript{-3} (Figure \ref{fig:Ross_Sea_inversions_data}d-orange line), 5 kg m\textsuperscript{-3} below the true value. Using this and the optimal damping value, the resulting inversion (Figure \ref{fig:Ross_Sea_inversions}-2a) produced an RMSE of 16 m and a maximum absolute error of 133 m when compared to the true bathymetry (Figure \ref{fig:Ross_Sea_inversions_data}a-orange triangle). This represents a notable increase in error compared to the $\sim$2 m RMSE of the idealized scenario in Test 1. Despite this, the inversion still successfully recovered all major bathymetric features, although it introduced visible short-wavelength noise into the result and increased error content in the 0–15 km wavelength range, relative to the starting model error (Figure \ref{fig:Ross_Sea_inversions_data}b-orange line).
+
+For uncertainty quantification, we again used a Monte Carlo simulation. This time, in addition to sampling the damping and density contrast values, we also added a new realization of Gaussian noise (3 mGal standard deviation) to the gravity data in each iteration. After noise addition, we applied the 24 km Gaussian filter as in the main inversion. The resulting uncertainty estimate (Figure \ref{fig:Ross_Sea_inversions}-2c) had an RMS of 11 m (Figure \ref{fig:Ross_Sea_inversions_data}a-orange square).
+
+\subsection{Test 3: Airborne gravity survey}
+\subsubsection{Setup}
+This scenario builds upon Test 1 by simulating a realistic airborne gravity survey, in contrast to the full-resolution synthetic gravity disturbance data used previously. The synthetic airborne survey follows a typical Antarctic design, found from the analysis of many published Antarctic airborne gravity surveys. From this analysis, we use flight lines spaced 10 km apart, orthogonal tie lines every 50 km, and data points sampled every 500 m along-track at a constant altitude of 1 km. The resulting gravity data have a median proximity of 2.3 km (Figure \ref{fig:Ross_Sea_03_grav_errors}e).
+To generate the input for inversion, we first sample the forward-modeled gravity effect of the true bathymetry (Figure \ref{fig:Ross_Sea_03_grav_errors}a) along the synthetic flight lines. We then interpolate these sampled values to a regular grid using the equivalent source method (see Appendix \ref{app:equivalent_source_interpolation}). The interpolated grid (Figure \ref{fig:Ross_Sea_03_grav_errors}c) shows an RMSE of 0.3 mGal and a maximum error of 4.3 mGal relative to the full-resolution gravity (Figure \ref{fig:Ross_Sea_03_grav_errors}a). The difference with the full-resolution gravity (Figure \ref{fig:Ross_Sea_03_grav_errors}b) highlights localized interpolation errors, primarily near the gravity high and domain edges.
+
+To estimate the gravity data uncertainty introduced by this interpolation, we performed a Monte Carlo simulation of the equivalent source method, sampling the interpolation parameters (e.g., source depth and damping; see Appendix \ref{app:uncertainty_distributions}). The resulting uncertainty estimate (Figure \ref{fig:Ross_Sea_03_grav_errors}d) has a mean of 0.09 mGal, lower than the true error but capturing its general spatial distribution. Using the interpolated gravity data, we followed the same inversion workflow as in Test 1: starting with an incorrect density contrast, computing the gravity misfit, and optimizing the regularization damping and density contrast values.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/fig11.png}
+    \caption{Airborne gravity survey for Test 3.
+    \textbf{a)} Full-resolution gravity disturbance data from forward modeling of the true bathymetry
+    \textbf{b)} absolute difference between \textbf{a} and \textbf{c},
+    \textbf{c)} the equivalent source interpolated airborne gravity disturbance data, sampled along flight paths (black lines in \textbf{a}),
+    \textbf{d)} the estimated uncertainty of the equivalent source interpolation, and
+    \textbf{e)} the distance to the nearest gravity data point.}
+    \label{fig:Ross_Sea_03_grav_errors}
+\end{figure}
+
+\subsubsection{Test 3 Results}
+The density contrast optimization yielded an optimal value of 1464 kg m\textsuperscript{-3} (Figure \ref{fig:Ross_Sea_inversions_data}d-green line), which is 12 kg m\textsuperscript{-3} below the true value. With this and the optimal damping value, the inversion result (Figure \ref{fig:Ross_Sea_inversions}-3a) achieved an RMSE of 9.1 m and a maximum absolute error of 148 m relative to the true bathymetry (Figure \ref{fig:Ross_Sea_inversions_data}a-green triangle). The inversion successfully recovered all major bathymetric features, though it exhibited small localized deviations and greater error at wavelengths below 10 km (Figure \ref{fig:Ross_Sea_inversions_data}b-green line).
+
+To assess uncertainty, we repeated the Monte Carlo analysis as in Test 1, this time including variability in three components: the damping parameter, density contrast, and equivalent source interpolation parameters. The resulting uncertainty estimate (Figure \ref{fig:Ross_Sea_inversions}-3c) had an RMS of 4.6 m (Figure \ref{fig:Ross_Sea_inversions_data}a-green square), and effectively captured the spatial distribution of errors observed in the final inversion (Figure \ref{fig:Ross_Sea_inversions}-3b vs 3c).
+
+\subsection{Test 4: Regional gravity field}
+\subsubsection{Setup}
+This fourth scenario extends Test 1 by incorporating a regional component into the gravity disturbance data. The regional component of the gravity field is generally the long-wavelength component created from subsurface geologic density variations.  To simulate this, we use crystalline basement topography from the ANTOSTRAT shipborne seismic compilation \citep[Figure \ref{fig:model}e;][]{brancolinidescriptive1995}. We forward modeled its gravity effect and normalized the resulting field between 0 and 90 mGal (Figure \ref{fig:Ross_Sea_04_grav_anomalies}f), yielding a standard deviation of approximately 18 mGal. This value was chosen as it matches the median regional field variabilty for Antarctic ice shelves larger than 1000 km\textsuperscript{2} (Figure \ref{fig:ice_shelf_stats}d).
+
+The regional gravity was then added to the forward-modeled gravity effect of the true bathymetry to form the synthetic gravity disturbance data (Figure \ref{fig:Ross_Sea_04_grav_anomalies}a). As in Test 1, we calculated the starting gravity using an incorrect density contrast of 1350 kg m\textsuperscript{-3}, and then computed the gravity misfit (Figure \ref{fig:Ross_Sea_04_grav_anomalies}c). We estimated and removed the regional component from this misfit using the Constraint Point Minimization technique. To interpolate the regional field from the constraint points, we tested multiple methods and found the equivalent source technique to be the most accurate, despite being more computationally demanding than minimum curvature interpolation. During the equivalent source fitting, we applied no damping and optimized the source depth using cross-validation (Figure \ref{fig:Ross_Sea_04_grav_anomalies}h; see Appendix \ref{app:equivalent_source_interpolation}).
+
+Following regional field removal, the residual gravity misfit (Figure \ref{fig:Ross_Sea_04_grav_anomalies}d) was used to find the optimal damping parameter value. To find the optimal density contrast, we used both methods described in Section \ref{density_contrast_estimation}: K-Folds cross-validation with Constraint Point Minimization and a constant regional correction approach. For the cross-validation approach, the regional estimation was repeated for each fold of constraint points. The inversion was then rerun using the optimal density contrast. To isolate the performance of the regional gravity estimation from density contrast estimation errors, we also performed a separate test using the true density contrast value of 1476 kg m\textsuperscript{-3}. This allowed us to directly assess the accuracy of the regional component removal by comparing the estimated field to the known regional input.
+
+\begin{figure}[!ht]
+  \centering
+    \includegraphics[width=.65\textwidth]{figures/fig12.png}
+  \caption{Gravity anomalies for Test 4: regional gravity component.
+  \textbf{a)} Gravity disturbance, the combination of the forward modeled gravity effects of the bathymetry and basement surfaces,
+  \textbf{b)} the forward gravity of the starting bathymetry model,
+  \textbf{c)} the gravity misfit, calculated as the difference between \textbf{a} and \textbf{b},
+  \textbf{d)} the residual component of the gravity misfit, calculated as the difference between \textbf{c} and \textbf{e}, and used as the input to the inversion,
+  \textbf{e)} the regional component of the gravity misfit, estimated with the Constraint Point Minimization technique,
+  \textbf{f)} the true regional component of the misfit, which is attempted to be reproduced by \textbf{e},
+  \textbf{g)} the error in the estimated regional component, calculated as the difference between \textbf{e} and \textbf{f}, \textbf{h)} the determination of the optimal source depth during the fitting of equivalent sources during Constraint Point Minimization. Profile A-A', location in \textbf{a}, shows the values of \textbf{c-f} along the profile. Distance to the nearest constraint (white dots) is shown by gray-scale color above the profile.}
+  \label{fig:Ross_Sea_04_grav_anomalies}
+\end{figure}
+
+\subsubsection{Test 4 Results}
+Using the true density contrast, the estimated regional component (Figure \ref{fig:Ross_Sea_04_grav_anomalies}e) had an RMSE of 0.47 mGal relative to the true regional field (Figure \ref{fig:Ross_Sea_04_grav_anomalies}f). The K-Folds cross-validated density contrast optimization yielded an optimal value of 2099 kg m\textsuperscript{-3} (Figure \ref{fig:Ross_Sea_inversions_data}d-red line), which is 623 kg m\textsuperscript{-3} higher than the true value. Despite this overestimation, the final inversion (Figure \ref{fig:Ross_Sea_inversions}-4a) achieved an RMSE of 7.7 m (Figure \ref{fig:Ross_Sea_inversions_data}a-red triangle) and a maximum absolute error of 32 m. All major bathymetric features were recovered, although errors of up to $\sim$20 m appeared in various locations. These errors predominantly occurred at wavelengths greater than 40 km (Figure \ref{fig:Ross_Sea_inversions_data}b-red line).
+
+To evaluate uncertainty, we ran the same Monte Carlo simulation as in previous tests. The resulting uncertainty estimate (Figure \ref{fig:Ross_Sea_inversions}-4c) had an RMS of 5.1 m (Figure \ref{fig:Ross_Sea_inversions_data}a-red square), lower than the true error, but it successfully captured most regions of elevated error.
+
+\subsection{Test 5: Realistic scenario}
+\subsubsection{Setup}
+This final scenario combines all components from Tests 1–4 to simulate a realistic inversion scenario, incorporating all expected sources of complexity: 1) unknown true density contrast, which must be estimated, 2) errors in gravity disturbance data, 3) gravity data acquired along airborne flight paths, and 4) a regional gravity component that must be estimated and removed. To generate the gravity disturbance dataset, we combined the full-resolution forward-modeled gravity effect of the true bathymetry with the regional gravity field produced by the basement topography. We then added 1 mGal of pseudo-random noise, sampled the data along simulated flight lines, applied a low-pass filter, and re-interpolated it onto a grid using equivalent sources (Appendix \ref{app:equivalent_source_interpolation}). The resulting gravity disturbance data are shown in Figure \ref{fig:Ross_Sea_05_grav_errors}c. All other parameters, such as the number of constraint points, gravity error levels, flight line spacing, and regional field variability, were consistent with those used in previous tests.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/fig13.png}
+    \caption{Errors in the gravity data for Test 5.
+    \textbf{a)} Noise-free full resolution gravity disturbance data from forward modeling of the true bathymetry and basement surfaces,
+    \textbf{b)} observed gravity after noise-contamination, sampling along flight lines (black lines in \textbf{a}), low-pass filtering, and interpolation.
+    \textbf{c)} the difference between \textbf{a} and \textbf{b}, represents the data loss from noise, airborne surveying, filtering, and interpolation,
+    \textbf{d)} estimated uncertainty from equivalent source interpolation, and
+    \textbf{e)} determining the optimal low-pass filter width to reduce noise while minimizing data loss.}
+    \label{fig:Ross_Sea_05_grav_errors}
+\end{figure}
+
+As in Test 2, we applied low-pass filtering to reduce short-wavelength gravity noise. Here, the noise was first added to gridded data, which were then sampled along flight paths. We applied a range of filter widths to the flight-line data and calculated the RMSE between the filtered and noise-free signals. The optimal filter width was 24 km (Figure \ref{fig:Ross_Sea_05_grav_errors}e), representing the best compromise between noise reduction and signal preservation. After interpolation, the resulting dataset had an RMSE of 1.1 mGal relative to the noise-free full-resolution model, and a maximum absolute error of 8.2 mGal. The uncertainty introduced by the interpolation was estimated via a Monte Carlo simulation of the equivalent source fitting parameters (Appendix \ref{app:uncertainty_distributions}). The RMS of this estimated uncertainty was 0.11 mGal (Figure \ref{fig:Ross_Sea_05_grav_errors}d), lower than the actual error but broadly capturing its spatial distribution.
+
+With the interpolated gravity data, we followed the same steps as in Tests 3 and 4: we computed the gravity misfit using an incorrect density contrast, estimated and removed the regional component using the Constraint Point Minimization method, then performed damping cross-validation and density contrast optimization. As before, we also repeated the regional separation using the true density contrast to assess the performance of regional field estimation independently from density estimation.
+
+\begin{figure}[!ht]
+  \centering
+    \includegraphics[width=.6\textwidth]{figures/fig14.png}
+  \caption{Regional gravity estimation for Test 5;
+  \textbf{a)} the true regional gravity from the forward modeling of acoustic basement topography, (Figure \ref{fig:model}e),
+  \textbf{b)} errors in the regional field estimation, as the difference between \textbf{a} and \textbf{c},
+  \textbf{c)} estimated regional gravity field from Constraint Point Minimization,
+  \textbf{d)} the determination of the optimal source depth during the fitting of equivalent sources during Constraint Point Minimization. Profile A-A', location in a, shows the gravity misfit, regional and residual components, and the true regional field along the profile. Distance to the nearest constraint (white dots) is shown by gray-scale color above profile figure.}
+  \label{fig:Ross_Sea_05_grav_anomalies}
+\end{figure}
+
+\subsubsection{Test 5 Results}
+Using the true density contrast, the estimated regional gravity field (Figure \ref{fig:Ross_Sea_05_grav_anomalies}c) had an RMSE of 1.2 mGal compared to the true regional component (Figure \ref{fig:Ross_Sea_05_grav_anomalies}a). Using the K-fold cross-validation approach, the density contrast optimization returned an optimal value of 2017 kg m\textsuperscript{-3} (Figure \ref{fig:Ross_Sea_inversions_data}d-purple line), which is 541 kg m\textsuperscript{-3} higher than the true value. Despite this large discrepancy, the inversion (Figure \ref{fig:Ross_Sea_inversions}-5a) resulted in an RMSE of 23 m with respect to the true bathymetry (Figure \ref{fig:Ross_Sea_inversions}-5b). While the major bathymetric features were well recovered, localized errors up to 100 m were introduced. Overall, the inversion improved upon the starting model, with lower errors at wavelengths greater than 20 km, but slightly higher errors at shorter wavelengths (Figure \ref{fig:Ross_Sea_inversions_data}b-purple line).
+
+We assessed the uncertainty of this inversion using a Monte Carlo simulation that varied four components: damping, density contrast, gravity noise, and interpolation effects (Figure \ref{fig:Ross_Sea_05_sensitivity}). In total, 20 inversions were run, each sampling from the distributions of these parameters. The resulting bathymetry uncertainty (Figure \ref{fig:Ross_Sea_inversions}-5c) had an RMS of 10 m (Figure \ref{fig:Ross_Sea_inversions_data}a-purple square), compared to a true error RMS of 23 m. While the uncertainty values were lower, they correctly identified most regions of elevated error.
+
+To understand the relative contribution of each uncertainty source, we performed additional sensitivity tests, each including only a single parameter (10 runs per test):
+\begin{itemize}
+    \item Damping parameter: RMS 1 m, spatially uniform;
+    \item Interpolation of flight-line data: RMS 4.8 m, with localized high values near topographic ridges and model edges;
+    \item Gravity data: RMS 8.5 m, generally spatially uniform;
+    \item Density contrast: RMS 6.9 m, especially concentrated along topographic ridges.
+\end{itemize}
+
+Among all components, uncertainty from density contrast had the largest effect and dominated the spatial distribution of the total uncertainty (Figure~\ref{fig:Ross_Sea_05_sensitivity}b).
+
+\begin{figure}[!ht]
+  \centering
+    \includegraphics[width=.5\textwidth]{figures/fig15.png}
+  \caption{Sensitivity analysis for Test 5; realistic scenario.
+  \textbf{a)} Deterministic inverted bathymetry error (same as Figure \ref{fig:Ross_Sea_inversions}-5b,
+  \textbf{b)} inversion uncertainty, same as Figure \ref{fig:Ross_Sea_inversions}-5c,
+  \textbf{c)} uncertainty from the damping parameter value,
+  \textbf{d)} uncertainty from the density contrast value,
+  \textbf{e)} uncertainty from the gravity data, and
+  \textbf{f)} uncertainty from the interpolation of flight line data. All plots share the same colorscale.
+  }
+  \label{fig:Ross_Sea_05_sensitivity}
+\end{figure}
+
+\subsection{Ensemble 1 - Comparing the number of constraints vs regional variability}
+As shown in Test 4, accurately estimating the regional component of the gravity misfit is a vital part of the inversion process. The reliability of regional field estimation depends on both the variability of the regional field itself and the number and spatial distribution of constraint points within the inversion domain. To test this, we ran an ensemble of 100 synthetic inversions, covering all combinations of 10 levels of regional field variability and 10 varying amounts of constraint points. Regional field variability, quantified as the standard deviation of the regional misfit, varied linearly from $\sim$4 mGal to $\sim$40 mGal. The number of constraint points (excluding the bordering constraint points) ranged from 4 to 650, logarithmically spaced. This range corresponds to median constraint proximities of 2.5 to 18 km, capturing the conditions encountered on most Antarctic ice shelves larger than 1000 km\textsuperscript{2} (Figure \ref{fig:ice_shelf_stats}e, blue box).
+
+These tests were performed in idealized conditions: full-resolution synthetic gravity data with no added noise or flight line interpolation. To reduce computational cost, we omitted the damping parameter optimization and instead used a constant damping value of 0.025 for all runs. For each inversion, we first estimate the optimal density contrast using 8 trial values ranging from 1400 to 3300 kg m\textsuperscript{-3}, assuming an initial regional field of 0 mGal (Figure \ref{fig:hyperparameters}b). After selecting the best-fitting density contrast, we re-estimate the regional field via Constraint Point Minimization and repeat the inversion. We evaluated the performance of each inversion using two metrics: 1) inverted bathymetry RMSE, between the inverted bathymetry and the true synthetic model, and 2) topographic improvement, the difference between the RMSE of the initial interpolated bathymetry and the RMSE of the inverted bathymetry. This metric indicates how much improvement the gravity inversion offers beyond a simple interpolation of the constraints. A score of 0 implied no net improvement, while a negative score indicates the inversion made the bathymetry worse.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=.95\textwidth]{figures/fig16.png}
+  \caption[]{Ensemble 1; number/proximity of constraint points vs regional gravity field variability.
+  \textbf{a)} Ensemble of inversions colored by each inverted bathymetry's RMSE, and
+  \textbf{b)} by each inversion's topographic improvement, black line is the 0 m contour. Points plotted on \textbf{a} and \textbf{b} represent the predicted values for large (\textgreater 1000 km\textsuperscript{2}) Antarctic ice shelves whose values were within the bounds of Ensemble 1, with values and names in the legend. Red stars and labels indicate shelves with published individual inversions. Red and blue triangles denote the constraint proximity and regional variability used in Ensemble 4 and Test 5/Ensemble 3, respectively. X-axis for \textbf{a} and \textbf{b} is on a linear scale for constraint proximity, but a log scale for the number of interior points.
+  \textbf{c)} Bathymetry RMSE vs number/proximity of constraint points grouped by regional gravity variability, each colored line corresponds to a row of \textbf{a}. Solid and dashed lines are plotted on lower and upper x-axes, respectively.
+  \textbf{d)} Bathymetry RMSE vs regional variability grouped by constraint proximity, each line corresponds to a column of \textbf{a}. Red lines show trend lines for the min and max slopes.
+  \textbf{e)} Histogram of predicted inverted bathymetry RMSE and topographic improvement scores for all 110 ice shelves included in the analysis.
+  }
+  \label{fig:Ross_Sea_ensemble_1}
+\end{figure}
+
+The starting bathymetry RMSE values across Ensemble 1 ranged from 6 to 46 m, while the inverted bathymetry RMSEs ranged from 2 to 121 m. Corresponding topographic improvements ranged from -74 to +32 m. As shown in Figure \ref{fig:Ross_Sea_ensemble_1}a, the best inversion performance was achieved in cases with many constraints (low constraint proximity) and low-variability regional gravity fields, consistent with expectations. Figure \ref{fig:Ross_Sea_ensemble_1}c further illustrates that inversion RMSE decreases exponentially with the number of constraints (solid lines). When plotted against constraint proximity (dashed lines, RMSE also decreases, though more gradually. In both cases, the effect is stronger when the regional field variability is high, indicating that dense constraints are especially important under conditions with highly variable regional fields.
+
+Figure \ref{fig:Ross_Sea_ensemble_1}d reveals a roughly linear increase in inversion RMSE with regional field variability, for all levels of constraint proximity. The slope of this relationship ranges from 0 to 2.2 m RMSE per 1 mGal increase in regional field variability. With few constraints (i.e., high constraint proximity), inversion accuracy is highly sensitive to the variability of the regional field. In contrast, when constraint density is high, the inversion becomes less sensitive to the variability of the regional field.
+
+Figure \ref{fig:Ross_Sea_ensemble_1}b shows that, in most scenarios, the inversion improves topography relative to simple interpolation of constraint points.  However, in the upper-right corner of the parameter space, where constraint proximity is high and regional fields are highly variable, the inversion performs worse than interpolation, resulting in negative topographic improvement. This highlights that errors introduced by poor regional field estimation can outweigh the benefits of inversion in data-sparse geologically complex settings. On the other hand, with many constraints, the initial bathymetry is already relatively accurate, leaving limited room for improvement. In such cases, while the inversions still add value, the gains are modest.
+
+We used these ensemble results to make best-case predictions of inversion RMSE and topographic improvement for 110 Antarctic ice shelves. Remaining ice shelves were not included because their median constraint proximities and/or estimated regional field variability (calculated as the standard deviation of the topography-corrected gravity disturbance) were outside the limits of the values tested in Ensemble 1. To avoid clutter, only ice shelves larger than 1000 km\textsuperscript{2} are shown in Figures \ref{fig:Ross_Sea_ensemble_1}a \& b. These predictions assume perfect gravity data, i.e., full-resolution and noise-free, and should be interpreted as lower bounds of inversion error. Under these ideal conditions, we estimate that 90\% of ice shelves would yield inverted bathymetry RMSEs below $\sim$25 m (Figure \ref{fig:Ross_Sea_ensemble_1}e). Among the largest ice shelves (\textgreater 1000 km\textsuperscript{2}), Thwaites and Pine Island show the lowest predicted errors (2 m and 3 m, respectively), while Riiser-Larsen and Amery show the highest (121 m and 83 m, respectively). In terms of topographic-improvement, we predict that 95\% of ice shelves would benefit from gravity inversion over simple interpolation (Figure \ref{fig:Ross_Sea_ensemble_1}e). The greatest predicted improvements are for Lazarev and Getz (23 m each), while Riiser-Larsen (-75 m) and Amery (-37 m) are predicted to perform worse than interpolation, reinforcing the challenge of resolving bathymetry in regions with sparse constraints and highly-variable regional fields.
+
+\subsection{Gravity line spacing vs noise}
+To evaluate the relative importance of the gravity data errors (e.g., noise, leveling artifacts) and gravity data resolution (i.e., flight line spacing), we ran three ensembles of 100 inversions. Each ensemble tested 10 gravity noise levels (0-5 mGal) and 10 numbers of gravity flight lines (3-30 lines in both E-W and N-S directions), corresponding to average line spacings of 6-60 km, or median proximities to gravity data points of 0.8-8 km. All ensembles used a constant along-line observation spacing of 500 m. The three ensembles differ in regional gravity field variability; Ensemble 2 (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}, column 1) had no regional field, Ensemble 3 (Figure \ref{fig:Ross_Sea_ensemble_2_3_and4}, column 2), had a medium-variability regional field (18 mGal standard deviation), and Ensemble 4 (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}, column 2) had a highly-variable regional field (41 mGal standard deviation). These variabilities span the range estimated across most Antarctic ice shelves (Figure \ref{ice_shelf_analysis}d). All ensembles used the same constraint locations and starting bathymetry as in Tests 1-5. Constraint proximities and regional field variability for these ensembles are shown as triangles in Figure \ref{fig:ice_shelf_stats}e.
+
+Observed gravity was low-pass filtered with an optimal filter width estimated by the same method as Test 5. Ensemble 2 used the true density contrast, while Ensembles 3 and 4 used the density optimization procedure from Ensemble 1. To reduce computational cost, we applied a fixed damping value of 0.025.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=.65\textheight]{figures/fig17.png}
+  \caption[]{Gravity noise vs quantity of gravity data.
+  \textbf{1\textsuperscript{st} column}; Ensemble 2 with a no regional field and
+  \textbf{2\textsuperscript{nd} column}; Ensemble 4 with a high-variability regional field (41 mGal standard deviation).
+  \textbf{a-b)} Grid cell color indicates each inversion's RMSE with the true bathymetry. Cyan line is the 26 m contour corresponding to the RMSE of the starting bathymetry model. X-axis is on a linear scale for line spacing and data proximity, but a logarithmic scale for total flight distance.
+  \textbf{c-d)} ensemble results grouped by average gravity line spacing, each colored line corresponds to a column from the top plot (a-b),
+  \textbf{e-h)} ensemble results grouped by gravity noise level, each colored line corresponds to a column from the top plot (a-b), \textbf{e-f)} x-axis units are flight km on a linear scale, and \textbf{g-h)} x-axis units are median gravity data proximity on a linear scale. For e-f the gray dashed lines show the starting bathymetry RMSE and for c,d,g, and f, the red lines and slope values show the line of best fit and its slope for each subplot. All rows share the same colorscales and y-axes.
+  }
+  \label{fig:Ross_Sea_ensemble_2_and_4}
+\end{figure}
+
+\subsubsection{Ensemble 2 (No regional field)}
+Inverted bathymetry RMSEs ranged from 3 to 49 m, with topographic improvements (relative to the 26 m RMSE starting model) from -23 to 23 m. As expected, inversions with more gravity data and lower noise performed better (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}a lower left). All inversions with median gravity proximity below $\sim$5-6 km (line spacing \textless35 km) outperformed the starting model. Figure \ref{fig:Ross_Sea_ensemble_2_and_4}c shows a strong linear relationship between inversion RMSE and gravity noise for all line spacings. Slopes ranged from 5.3 m RMSE per mGal noise (many flight lines) to 1.7 m RMSE per mGal noise (few flight lines), indicating that reducing noise consistently improves inversion performance.  Grouping results by noise level, we observed an exponential decay in RMSE with increasing amount of gravity data (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}e). Due to the exponential relation between total flight distance and line spacing or gravity data proximity, this equates to a roughly direct linear relation between inversion RMSE and median proximity or flight spacing (Figures \ref{fig:Ross_Sea_ensemble_2_and_4}g). At low noise, RMSE increased $\sim$5 m per km increase in median gravity data proximity. At higher noise, this relation became more exponential: initially, added gravity data greatly improved RMSE, but additional data gave diminishing returns.
+
+\subsubsection{Ensemble 4 (High variability regional field)}
+Results for Ensemble 3 were similar to Ensemble 4, and are described in the \ref{app:ensemble_3}. Inverted bathymetry RMSEs ranged from 12 to 33 m, with topographic improvements from -7 to 14 m. Only inversions with median gravity proximity \textless 7 km (line spacings \textless 50 km) showed improvement over the starting model. The effect of gravity noise was still linear (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}d), but weaker than in Ensemble 2: slopes ranged from 0.2 to 3.5 m RMSE per mGal noise. Similarly, the increase in RMSE with data proximity (Figure \ref{fig:Ross_Sea_ensemble_2_and_4}h) was $\sim$2.5 m per km proximity, reduced from Ensemble 2. These results indicate that a regional field dampens the benefits of additional gravity data or lower noise.
+
+This analysis demonstrates that both reducing gravity noise and increasing flight-line density improve inversion performance. However, their relative benefits diminish in the presence of highly-variable regional fields. In low-regional-field settings, improvements from denser or cleaner data are more pronounced.
+
+\section{Discussion}
+
+Our synthetic inversions and Antarctic ice shelf analysis highlight key factors governing the accuracy of performing gravity inversions for bathymetry.
+
+\subsection{Quality of gravity data}
+Introducing 1 mGal (3 mGal before filtering) of random noise (Test 2) degraded bathymetry accuracy by $\sim$14 m RMSE. Though this sensitivity of gravity noise to inversion performance weakens when gravity coverage is sparse or the regional field is highly-variable (Fig. \ref{fig:Ross_Sea_ensemble_2_and_4}c-d), the relationship remains linear in all cases. In practice, this means every reduction in gravity noise directly improves inversion results, making gravity data quality a top priority, especially for dense surveys over regions with regional gravity fields with low variability, as in these situations, the dominant error source is likely gravity data errors.
+
+\subsection{Quantity of gravity data}
+Simulating an airborne survey (Test 3) added $\sim$7 m RMSE to the inverted bathymetry, notably lower than the effect of typical noise levels. Across Ensembles 2–4, inversion error falls exponentially with increasing total flight distance (Fig. \ref{fig:Ross_Sea_ensemble_2_and_4}e-f), particularly for regional fields with low variability. Practically, this means in regions of limited gravity data, inversion error can be greatly reduced by collecting additional gravity data. However, for regions where sufficient gravity data exists, the benefits of collecting additional data quickly diminish. The point at which there are diminishing benefits is specific to the geometry of an ice shelf, and thus, there is no specific value for optimal flight line spacing. Median gravity data proximity has a robust, nearly linear relation to RMSE in low-noise scenarios (Fig. \ref{fig:Ross_Sea_ensemble_2_and_4}g-h). This means any reduction in median gravity data proximity will result in a direct improvement to the inversion. This improvement is strongest with low noise and regional fields with low variability. Practically, this means collecting additional gravity data will offer significant improvement to inversion performance if it notably reduces overall median gravity proximity (i.e, filling a large data gap). For two shelves with similar geometries, the shelf with the less-variable regional field will benefit more from additional gravity data collection.
+
+\subsection{Importance of constraint points}
+Point measurements of bathymetry beneath and surrounding an ice shelf (constraint points) underpin every stage of our inversion: initial model creation, regional-field estimation, regularization, and density contrast estimation. Even with sparse, noisy gravity data, well‐distributed constraints keep inversion errors low; conversely, with few constraints, inversions only perform well if there is a regional field with exceptionally low variability. Ensemble 1 shows inversion RMSE decays exponentially with the number of constraints (Figure \ref{fig:Ross_Sea_ensemble_1}c), and transitions from linear to exponential dependence on median constraint proximity as regional field variability increases. Practically, this means while any additional constraint point will reduce inversion error, there are only certain situations where additional constraints will offer notable improvement; 1) the addition of that constraint point will notably reduce overall median constraint proximity (i.e. filling a large data gap) or 2) a highly-variable regional gravity field is present. As with gravity flight line spacing, since each ice shelf geometry is unique, we cannot offer guidelines on the ideal number or median proximity of constraint points.
+
+To address this, we identified which Antarctic ice shelves would likely benefit most, or least, from additional bathymetric measurements. The skewness of the constraint proximity values offers insight into the spatial distribution of existing constraints. Low or negative skew suggests that large areas of the shelf are far from existing constraints. Adding a constraint in one of these areas would reduce constraint proximity for a large portion of the ice shelf, thus notably improving inversion performance. High positive skew indicates that only a small portion of the shelf is distant from existing constraints. In these cases, adding a new constraint would have only a minor effect on median constraint proximity and inversion performance. We have calculated the skewness of constraint proximity for all large (\textgreater 1000 km\textsuperscript{2}) Antarctic ice shelves (Figure \ref{fig:ice_shelf_stats}f x-axis). As a demonstration, we have added a single constraint to the largest data gap for two ice shelves, Cosgrove (low skew, +0.32) and Ronne-Filchner (high skew, +1.5), both with similar median constraint proximities. For Cosgrove, the additional point reduced the median constraint proximity by $\sim$1 km ($\sim$10\% improvement), whereas for Ronne-Filchner, the reduction was just 6 m ($\sim$0.1\% reduction) (Figure \ref{fig:example_ice_shelf_constraint_proximity}).
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.4\linewidth]{figures/fig18.png}
+  \caption{The impact of adding a constraint point (green triangle) on median constraint proximity for two ice shelves; Cosgrove (\textbf{a-b)} and Ronne-Filchner (\textbf{c-d}).
+  \textbf{a \& c} shows the current state of each ice shelf's constraint proximity.
+  \textbf{b \& d} show each shelf's constraint proximity recalculated after adding a single constraint point (green triangle). Background shows MODIS-MOA imagery, red line shows ice shelf extent from MEaSURES, and black dots show existing constraint points.}
+  \label{fig:example_ice_shelf_constraint_proximity}
+\end{figure}
+
+From this, we infer that ice shelves with a low skewness in constraint proximity would benefit significantly from each new bathymetry measurement (left side of Figure \ref{fig:ice_shelf_stats}f). Those to benefit the most are likely Conger Glenzer, Rennick, Prince Harald, and Tracy Tremenchus. Conversely, shelves with high skewness will likely only benefit significantly from additional bathymetry measurements if there is a highly-variable regional field (upper right side of Figure \ref{fig:ice_shelf_stats}f). These include Fimbul, Ekstrom, Brunt-Stancomb, and Riiser-Larsen. Shelves which likely will not benefit significantly from additional constraints are those with high skewness and low regional fields (lower right side of Figure \ref{fig:ice_shelf_stats}f), such as Ronne-Filchner, Holmes, Nickerson, Sulzberger, or Thwaites.
+
+
+\subsection{Data collection recommendations}
+Our synthetic tests yield these guidelines:
+\textbf{Regional gravity fields with low variability:}
+\begin{itemize}
+    \item Prioritize filling large bathymetry gaps: add a few well-placed constraint points.
+    \item If constraints are adequate, focus on acquiring initial gravity lines, even at lower precision. Once a minimal gravity grid is in place, shift to improving gravity data quality through increasing numbers of tie lines, reducing flight speed, or re-flying noisy lines.
+\end{itemize}
+
+\textbf{Regional gravity fields with high variability:}
+\begin{itemize}
+    \item Inversion errors are dominated by regional‐field misestimation, so additional gravity data or noise reduction have limited impact.
+    \item Instead, concentrate on bathymetry constraints until median proximity gains plateau, balancing field effort and model improvement.
+\end{itemize}
+
+We recommend using median proximity, rather than point/line spacing or count, to assess and compare spatial coverage of both gravity and bathymetric data. Calculating median constraint proximity for all ice shelves (Figure \ref{fig:ice_shelf_stats}a \& e) has revealed some interesting findings. For example, the Ross Ice Shelf is often viewed as well-constrained concerning bathymetry measurements due to the extensive array of $\sim223$ constraint points measurements evenly distributed across the shelf from the RIGGS survey \citep{bentleyross1984}. Yet, based on the median constraint proximity we calculate (17.3 km), it is in the worst $\sim$5\% of all Antarctic ice shelves (9th out of 164), and also has the 6th highest maximum constraint distance (62 km). This is likely partially due to the roughly circular shape of the Ross Ice Shelf. For shelves which are more elongate, while total area may be similar, all locations are closer to either the grounded ice or the open ocean, where there are more likely to be available bed/bathymetry measurements.
+
+Future work is needed to test the optimal survey designs for constraint points. Measuring constraints on an even grid naturally provides the most uniform spatial coverage, and adding constraints at the locations of maximum data proximity is optimal for reducing median constraint proximity and reducing errors at the locations where they are highest. However, we hypothesize that focusing constraint point placement according to the gravity disturbance data, either at the maxima or minima, or at locations with high gradients, may provide improvement in estimation of the regional gravity field, and thus provide an effective means for reducing inversion errors. In addition to the ice shelves listed in the above section based on their constraint proximity skew, the following shelves have very large median constraint proximities and would benefit greatly from additional constraints: Shackleton, Roi-Baudouin, Wilkins, Ross, and Amery.
+
+\subsection{When are inversions worthwhile?}
+Gravity inversion generally outperforms simple interpolation of constraints, except when combining sparse constraints, high gravity noise, and highly-variable regional gravity fields. By mapping predicted RMSE and topographic improvement for each Antarctic ice shelf, we can identify ideal inversion targets (large positive improvement scores) and shelves where inversion may degrade results (large negative scores). Recently, \citep{charrassinbathymetry2025} have performed the first continent-wide inversion for bathymetry beneath all ice shelves. For shelves which we predict to have a large positive topographic improvement score, the models produced by \citet{charrassinbathymetry2025} are likely improvements over simple interpolation of constraints (Bedmap2). In contrast, shelves with large negative scores, such as Riiser-Larsen, Amery, and Ross, should be interpreted with caution, as the inversion may have introduced more errors than it resolved. This is especially true for shelves without dedicated gravity surveys within the AntGG-2021 compilation used by \citep{charrassinbathymetry2025} (e.g., Riiser-Larsen and Ross). Gravity inversions in Antarctica are typically restricted to the extent of ice shelves. However, from our findings of inversions outperforming interpolation in many settings, we propose that gravity inversion could offer significant improvement to our understanding of subglacial topography, or bathymetry of the open ocean.
+
+\subsection{Uncertainty and parameter sensitivity}
+Our Monte Carlo–based uncertainty estimates match true RMSE within $\sim$5 m for Tests 1–4 and correctly highlight most high‐error areas (e.g., steep ridges). In the semi-realistic Test 5, uncertainties are underestimated but still highlight the most uncertain regions. This provides a useful tool for determining where results are robust or guiding where future data collection efforts should be focused. For Test 5, we were able to partition the inversion uncertainty into components resulting from various parts of the inversion. The component with the lowest uncertainty (\textless 1 m RMS) was the regularization damping parameter, owing to the accurate value found through the cross-validation optimization routine. The 3 mGal of gravity noise resulted in a bathymetry uncertainty RMS of 8.5 m. The bathymetry uncertainty caused by the interpolation of the airborne gravity data gave an RMS of 4.8 m. Lastly, the bathymetry uncertainty attributed to the choice in density contrast value resulted in an RMS of 6.9 m. While this high uncertainty is attributed to the density contrast choice, the density contrast optimization procedure is strongly affected by an incorrectly estimated regional gravity field, as was the case in Test 5. For this reason, a portion of these uncertainties should be attributed to the presence of a regional field. These insights direct efforts toward the most impactful improvements, whether refining inversion parameters, acquiring seafloor density knowledge, or densifying gravity/constraint datasets.
+
+\subsection{Hyperparameter estimation}
+Our cross-validation procedures consistently recovered optimal values for both the damping parameter and the density contrast (Figure \ref{fig:Ross_Sea_inversions_data}c–d). Damping parameter selection was robust across all scenarios, showing little sensitivity to gravity noise, sparse flight-line sampling, or the presence of a regional gravity field. Density contrast optimization also performed well in most cases, accurately recovering the true value despite added gravity noise and flight-line sampling. However, when the regional gravity field was misestimated, the optimized density contrast became biased, tending toward values that were too high. This behavior reflects the trade-off in the inversion process: a higher density contrast can achieve the same gravity misfit with a smaller modification to the topography. Consequently, in the presence of regional signals, the optimization favors larger density contrasts to avoid introducing bathymetric artifacts.
+Importantly, this means that the density contrast optimization does not necessarily identify the true density contrast, but instead selects the value that yields the lowest bathymetric error. This overestimation is evident in Tests 4 and 5 (Figure \ref{fig:Ross_Sea_inversions_data}d, red and purple boxes), where the estimated density contrast was significantly higher than the true value.
+Despite being biased, the optimized density contrast led to better inversion results. In Test 4, for example, using the optimized (but overestimated) density contrast resulted in a lower bathymetric RMSE of 7.7 m, compared to 10 m when using the true density contrast, the same value used to generate the synthetic gravity data. This outcome illustrates that in scenarios with a misestimated regional field, the optimization process prioritizes minimizing inversion error over recovering the physically correct parameter.
+A similar pattern is seen in the ensemble tests. Ensemble 2, which lacked a regional gravity field and thus did not include density contrast optimization, sometimes underperformed relative to Ensembles 3 and 4. Although Ensembles 3 and 4 had more variable regional gravity fields, their inclusion of density contrast optimization allowed them to choose the density contrast that best reduced inversion errors.
+
+% \subsection{Future works}
+% * gravity altitude
+% * gravity flight speed
+% * need a better technique for uncertainty of regional estimation (distance to constraints combined with field amplitude)
+% * estimated spatially-variable survey error based on interpolation of individual crossover errors may be helpful for inversion uncertainty analysis
+% * should test effects of constraint positions on CPM, likely that focusing constraints at places of high amplitude gravity disturbance would benefit regional estimation and drastically reduce inversion uncertainty
+
+\section{Conclusions}
+
+Gravity inversion is a viable technique for understanding the shape of the seafloor beneath floating ice shelves. We present an open-source gravity inversion algorithm specifically designed to model bathymetry and its uncertainty. Using synthetic tests based on real bathymetry data from the Ross Sea, Antarctica, we evaluated the algorithm's performance sensitivity to various factors. Our tests show that the estimation of the regional gravity field is a dominant source of inversion error. However, this error can be significantly reduced with sufficient point measurements of bathymetry. Interpolation errors from standard survey flight-line spacing and typical gravity data uncertainty ($\sim$1 mGal after filtering) introduced additional bathymetric errors of comparable wavelength, but the magnitude of errors from gravity data uncertainty was higher. We demonstrate that our Monte Carlo-based uncertainty assessment effectively estimates both the mean error in the inverted bathymetry and its spatial variability. This approach also highlights which components of the inversion contribute most to the uncertainty, enabling a more nuanced understanding of the often large sub-ice shelf bathymetry errors. Overall, gravity inversion improves upon simple interpolation of sparse bathymetry measurements (e.g., as used in Bedmap2) in nearly all scenarios, except where there are very high variablility regional gravity fields. This indicates that the majority of Antarctic ice shelves, and possibly areas of grounded ice or open ocean, are suitable targets for gravity-based bathymetry modeling. To guide future applications, we estimate for each Antarctic ice shelf the median distance to the nearest bathymetric constraint and the local variability of the regional gravity field. This allows us to predict the best-case inversion errors and identify which shelves are likely to benefit most from additional bathymetry measurements or are currently most suitable for gravity inversions. While we provide general guidelines on data collection, the optimal amount of gravity and constraint data is shelf-specific, due to each shelf's unique geometry and the exponential relation between inversion performance and data density. Since bathymetric point measurements, typically from over-ice seismic surveying, are essential at every step in the inversion procedure, we emphasize the need for expanded efforts to collect them. More broadly, we expect these findings to inform the planning and prioritization of future field campaigns aimed at improving sub-ice shelf bathymetry models.
+
+%% The following commands are for the statements about the availability of data sets and/or software code corresponding to the manuscript.
+%% It is strongly recommended to make use of these sections in case data sets and/or software code have been part of your research, the article is based on.
+
+\codedataavailability{}All code used in this analysis is available at \url{https://github.com/mdtanker/synthetic_bathymetry_inversion} and archived at \citet{tankersleygravity2025}. The underlying inversion code is available at \url{https://github.com/mdtanker/invert4geom}. All plots, data, and results, whether synthetic or real, can be accessed through the Zenodo link or created automatically by running the code. The Jupyter notebooks can be viewed at the following website: \url{https://mdtanker.github.io/synthetic_bathymetry_inversion/}. Plots of distance to the nearest constraints and derived gravity anomalies for all Antarctic ice shelves, CSVs of the constraint points and the gravity anomalies, and netCDFs of nearest constraint distances for each ice shelf, are available in \citet{tankersleygravity2025}.
+
+\appendix
+
+\section{Appendix}
+\subsection{Geophysical inversions}\label{app:inversion}
+
+In general, inversions consist of three components;
+
+\begin{enumerate}
+    \item Forward operator ($f$): This is a mathematical means of linking a physical Earth property to the expected geophysical response.
+    \item Physical Earth property model ($p$): This is a representation of the physical Earth property of interest. While real-world properties are continuous (i.e., a smoothly varying topography), computation often necessitates the discretization of the continuous properties into discrete components. The starting model ($p_0$) typically will include the prior geologic knowledge of the region.
+    \item Fit function ($\phi$): This function describes the similarity between the measured (observed) data and the predicted data (resulting from the forward calculation of the property model ($f(p)$)). The goal of the inversion is to minimize this function so that $f(p)$ is as close to the observed data as possible while maintaining realistic characteristics.
+\end{enumerate}
+
+Here, a mathematical derivation of a generalized discrete inversion problem is shown. The inversion problem can be framed as finding the set of physical parameters ($p$) which when modeled with the forward operator ($f$) produce predicted data ($\vv{d}^{pred}$) as close to the observed data ($\vv{d}^{obs}$), as possible. This inversion is discrete because the topography is represented with a series of grid cells, instead of a continuous function. The difference between the observed and predicted data gives the misfit $\vv{m}$, where
+
+\begin{equation} \label{eq:misfit2}
+    \vv{m} \quad = \quad \vv{d}^{obs} - \vv{d}^{pred} \quad = \quad \vv{d}^{obs} - \vv{f}(p).
+\end{equation}
+
+Here, the $\ell^2$-norm (mean squared error) of the gravity misfit is the metric used to define the \textit{closeness} between the predicted and observed data, where
+
+\begin{equation}
+    ||\vv{m}||_2 =  \sqrt{\sum_{i=1}^N [d_i^{obs} - \vv{f_i}(p)]^2},
+\end{equation}
+
+where $N$ is the number of observed data points.
+
+This is defined as the \textit{fit function}, $\phi(p)$.  The fit function can also be expressed as
+
+\begin{equation}\label{eq:fit_func}
+    \phi(p) \quad = \quad \vv{m}\cdot\vv{m} \quad = \quad [\vv{d}^{obs} - \vv{f}(p)]\cdot[\vv{d}^{obs} - \vv{f}(p)].
+\end{equation}
+
+In this context, the inversion problem is to determine a vector of parameters $\tilde{p}$ of length $M$ which minimizes $\phi(p)$. This minimum occurs where the gradient of $\phi(p)$ at the vector $\tilde{p}$ has zero length.  The gradient of  $\phi(p)$ evaluated at any $p$ is an M-dimensional vector is defined as
+\begin{equation}\label{eq:gradient}
+    \nabla\phi(p) = \left[\begin{array}{ccc}
+    \dfrac{\partial \phi(p)}{\partial p_{1}}  \\
+    \dfrac{\partial \phi(p)}{\partial p_{2}}  \\
+    \vdots \\
+    \dfrac{\partial \phi(p)}{\partial p_{M}}
+\end{array}\right].
+\end{equation}
+
+Evaluating the gradient at the i\textsuperscript{th} element, using Equation \ref{eq:fit_func} gives
+
+\begin{equation} \label{eq:partial_deriv_phi}
+\begin{aligned}
+    \dfrac{\partial \phi(p)}{\partial p_i} &=
+    \dfrac{\partial}{\partial p_i} \sum_j{
+    [d_j^{obs} - f_j(p)]\cdot[d_j^{obs} - f_j(p)]
+    } \\
+    &= \sum_j{\dfrac{\partial}{\partial p_i}
+    [d_j^{obs} - f_j(p)]\cdot[d_j^{obs} - f_j(p)]
+    } \\
+    &= -2\sum_j{\dfrac{\partial f_j(p)}{\partial p_i}\cdot[d_j^{obs} - f_j(p)]
+    }
+\end{aligned}
+\end{equation}
+
+Substituting Equation \ref{eq:partial_deriv_phi} into the elements of Equation \ref{eq:gradient} gives
+
+\begin{equation}
+    \nabla\phi(p) =
+     -2 \mathbb{J}(p)  [\vv{d}^{obs} - \vv{f}(p)],
+\end{equation}
+
+\noindent
+where $p$ is the parameter vector of dimension $M$, $\vv{d}^{obs}$ is the observed data vector of dimension $N$ and $\mathbb{J}$ is the Jacobian matrix of dimension $M \times N$, and is given by
+
+\begin{equation}
+\mathbb{J}(p) =
+\begin{bmatrix}
+    \dfrac{\partial f_1(p)}{\partial p_1} &
+        \ldots &
+        \dfrac{\partial f_N(p)}{\partial p_1}
+    \\
+    \vdots & \ddots & \vdots
+    \\
+    \dfrac{\partial f_1(p)}{\partial p_M} &
+        \ldots &
+        \dfrac{\partial f_N(p)}{\partial p_M}
+\end{bmatrix}
+\label{eq:jacobian}
+\end{equation}
+
+Each element of the Jacobian matrix is given by
+
+\begin{equation}
+\mathbb{J}_{ij} =
+    \dfrac{\partial f_j(p)}{\partial p_i},
+\label{eq:jacobian_element}
+\end{equation}
+
+\noindent
+which is the partial derivative of the j\textsuperscript{th} predicted data with respect to the i\textsuperscript{th} physical parameter. The \textit{Jacobian} ($\mathbb{J}$) is a sensitivity matrix that describes how much the predicted data changes for an infinitesimal change in the physical parameter. For example, in the case of a gravity inversion attempting to recover the density of subsurface cubes, if the model consists of 100 cubes, and there are 10 observation points, the Jacobian would be a $100 \times 10$ matrix and $\mathbb{J}_{1,1}$ (the first entry) would be the 1st cube's gravitational derivative with respect to density at the first observation point. The Jacobian, therefore, describes how sensitive each pair of cubes and observations is to a change in density. \\
+
+Once the Jacobian is created, a matrix equation of the form $Ax=b$ is set up, where $A$ is the Jacobian, $x$ is the unknown variable, and $b$ is the data misfit.
+\begin{equation} \label{eq:matrix_eq}
+    \mathbb{J} \vv{x} = \vv{m}
+\end{equation}
+
+A solution to this linear equation can be found directly, by finding the inverse or pseudo-inverse matrix of the Jacobian, or iteratively via a least-squares solver \citep{jacobygravity2009}. The solution gives the correction which, when applied to the physical parameters of interest, minimizes the misfit between the observed data and the starting model.
+
+The derivative of the forward operator with respect to the parameter of interest determines the linearity of an inversion. For a gravity inversion attempting to recover rock density, the derivative of gravity with respect to density is constant, and thus the inversion is considered linear \citep{asterparameter2018}. Conversely, a gravity inversion attempting to recover the topography of a surface, or the thickness of a layer, is non-linear since the vertical derivative of gravity (derivative with respect to depth) is dependent on the depth. Non-linear inversions cannot be solved directly, with matrix inversion \citep{jacobygravity2009}. They must be linearized, which is the purpose of the Jacobian matrix. The Jacobian enables a minimum-norm solution to be found with an iterative solver, where at each iteration, the calculated corrections ($\vv{x}$) are applied to the starting model, the residuals ($\vv{m}$) are recalculated, the Jacobian is updated, and Equation \ref{eq:matrix_eq} is solved again, giving a new set of corrections. This is repeated until $\phi(p)$ is suitably low.
+
+\subsection{Gravity reduction}\label{app:reduction}
+For a geometric gravity inversion, we need to process the gravity data (Figure \ref{fig:workflow}a) to isolate the gravity signal resulting from the topography of interest. This involves initial processing of the measured gravity data, such as drift corrections, flight line leveling, and accounting for tidal effects, aircraft maneuvers, and the effects of measuring gravity on a moving platform (E\"{o}tv\"{o}s correction) \citep{hinzenew2005, hinzegravity2013}. This results in \textit{observed gravity} data, which we take to be the signal that is produced by 1) the gravitational attraction of all massive bodies in Earth and 2) the rotation of the Earth. Observed gravity is defined as;
+
+\begin{equation}
+    g_{obs}(q) = \gamma(q) + \delta g(q),
+\end{equation}
+
+\noindent
+where, for an observation point $q$, $g_{obs}(q)$ is the observed gravity, $\gamma(q)$ is the attraction of the simplified theoretical model of the Earth (the \textit{normal} Earth, Figure \ref{fig:terrain_effects}a) and $\delta g(q)$, the gravity disturbance, encompasses the gravity effects of all deviations between the \textit{normal} Earth and the real Earth.
+
+To calculate the gravity effect of the normal Earth at each observation, $\gamma(q)$, we use the analytical solution of the gravity effect of the WGS84 ellipsoid \citep{liellipsoid2001}, implemented within the Python package Boule \citep{fatiandoaterraprojectboule2024}. Once removed from the observed gravity, we are left with the gravity disturbance, $\delta g(q)$. For further discussion on the derivation of the gravity disturbance and the relation to the free-air anomaly, see \citet{blakelypotential1995}. From here on, we omit the $(q)$ for clarity.
+
+The gravity disturbance consists of two components;
+\begin{equation} \label{eq:disturbance_components}
+    \delta g = g_{TME} + g_{subsurface},
+\end{equation}
+
+\noindent
+where $g_{TME}$ is the \textit{terrain mass effect} and $g_{subsurface}$ is the gravity effect of anomalous subsurface geologic bodies (gray bodies in Figure \ref{fig:terrain_effects}). The terrain mass effect reflects all topographic deviations between the \textit{normal} Earth and the real Earth. The \textit{normal} Earth model is shown in Figure \ref{fig:terrain_effects}a, as defined by air above the ellipsoid and crust below. A simplified model of the true Earth is shown in Figure \ref{fig:terrain_effects}b, and contains air, ice, water, crust, and various geologic bodies within the crust. These masses are separated in Figure \ref{fig:terrain_effects}c into components above and below the ellipsoid. From this, the masses that are anomalous with respect to the \textit{normal} Earth can be distinguished, as shown in Figure \ref{fig:terrain_effects}d. These anomalous masses include water, ice, and crust above the ellipsoid, and air, ice, water, and geologic bodies below the ellipsoid. The gravitational effect of these anomalous masses can be approximated by assuming each mass's density and setting it relative to the density of the component of the \textit{normal} Earth that the mass is replacing \ref{fig:terrain_effects}d.\\
+
+$g_{TME}$ can be separated into its components, as defined by;
+
+\begin{equation} \label{eq:terrain_mass_effect}
+    g_{TME} = g_{ice{\_}surface} + g_{water{\_}surface} + g_{rock{\_}surface}.
+\end{equation}
+
+Each component of the terrain mass effect can be calculated using a layer of prisms, as shown in Figure \ref{fig:terrain_effects}e-g.
+
+\begin{enumerate}
+    \item $g_{ice{\_}surface}$; prisms between the ice surface and the ellipsoid are assigned densities of $\rho_{ice} - \rho_{air}$ for prisms above the ellipsoid, and $\rho_{air} - \rho_{ice}$ for prisms below the ellipsoid (Figure \ref{fig:terrain_effects}e).
+    \item $g_{water{\_}surface}$; prisms between the water surface (ice base) and the ellipsoid are assigned densities of $\rho_{water} - \rho_{ice}$ for prisms above the ellipsoid, and $\rho_{ice} - \rho_{water}$ for prisms below the ellipsoid (Figure \ref{fig:terrain_effects}f).
+    \item $g_{rock{\_}surface}$; prisms between the rock surface (topography onshore and bathymetry offshore) and the ellipsoid are assigned densities of $\rho_{earth} - \rho_{water}$ for prisms above the ellipsoid, and $\rho_{water} - \rho_{earth}$ for prisms below the ellipsoid (Figure \ref{fig:terrain_effects}g).
+\end{enumerate}
+
+This configuration of prisms correctly discretizes the terrain mass effect because the ice surface is equal to the water surface in areas of no ice thickness, and the water surface is equal to the rock surface in areas of no water thickness. Due to this, the overlap between the three sets of prisms, shown in Figure \ref{fig:terrain_effects}h, gives the appropriate densities, as defined in Figure \ref{fig:terrain_effects}d. From these three sets of prisms, the terrain mass effect can be calculated at the gravity observation points using the analytical solutions of \citet{nagygravitational2000}.\\
+
+Subtracting this terrain mass effect from the gravity disturbance yields the topography-corrected disturbance, $\delta g_{TC}$. In theory, this the topography-corrected disturbance is the gravity effect caused by, and only by, anomalous subsurface bodies, which have a density contrast different from the assumed density contrast of the crust (gray bodies in Figure \ref{fig:terrain_effects}). In reality, there is an additional component resulting from inaccurate topographic data used in the terrain mass effect calculation. In most geophysical applications, this component is sufficiently small to be ignored. However, for the case of a bathymetry inversion, this is the component of interest which is used as input to the inversion.
+
+\subsection{Gravity misfit}\label{app:misfit}
+In this gravity inversion, as implemented in \textit{Invert4Geom}, the gravity misfit is defined as the topography-corrected disturbance ($\delta g_{TC}$) calculated from the initial bathymetry model, $p_0$.
+
+\begin{equation} \label{eq:inversion_misfit2}
+\begin{aligned}
+    {m} &= \delta g_{TC}(p_0) \\
+    &= \delta g - g_{TME}(p_0).
+\end{aligned}
+\end{equation}
+
+Substituting Equation \ref{eq:disturbance_components} for $\delta g$ gives;
+
+\begin{equation} \label{eq:inversion_misfit3}
+    {m} = g_{TME} + g_{subsurface} - g_{TME}(p_0),
+\end{equation}
+
+\noindent
+and substituting in the expanded forms of $g_{TME}$ gives;
+
+\begin{equation} \label{eq:inversion_misfit4}
+\begin{aligned}
+    {m} &= (g_{ice{\_}surface} + g_{water{\_}surface} + g_{rock{\_}surface}) + g_{subsurface} - (g_{ice{\_}surface} + g_{water{\_}surface} + f(p_0)) \\
+    &= g_{subsurface} + g_{rock{\_}surface} - f(p_0).
+\end{aligned}
+\end{equation}
+
+\noindent
+where $f(p_0)$ is the forward gravity effect of the initial bathymetry model. This starting bathymetry model should contain all available knowledge of the density distribution of the seafloor and its depth. If there is no available information on depth, a flat starting model must be created at a reasonable depth. If there is no available information on the seafloor density, a reasonable value must be chosen, or the optimal density value can be inferred from the data, as described in Section \ref{hyperparameters}. Note that in geometric inversions for subsurface layers (Moho, basement), there is an additional parameter that must be chosen, the reference level for the prism layer. For bathymetry inversions, since the input anomaly is the topography-corrected disturbance, the reference level should be set to 0 meters (the ellipsoid surface).
+
+Before the inversion, we need to separate the gravity misfit, $m$, into a regional, $m_{reg}$, and a residual component $m_{res}$. ${m}_{reg}$ is equivalent to $g_{subsurface}$, and is the gravity effect of subsurface geologic variations (gray bodies in Figure \ref{fig:terrain_effects}). $m_{res}$ is equivalent to $g_{rock{\_}surface} - f(p_0)$, defined as the gravity effect resulting from inaccuracies between the true bathymetry and the starting bathymetry model.
+
+\subsection{Discretization and edge effects}\label{app:discretization}
+
+There are several options for discretizing a topographic surface, representing a density contrast between two materials, as a series of adjacent vertical right-rectangular prisms (Figure \ref{fig:discretization}). The most conceptually simple method is two use two layers of prisms, one to represents the true density and geometry of the material on either side of the surface (Figure \ref{fig:discretization}b). In this method, the topographic surface is represented by the bottoms of the upper prism layer and the tops of the lower prism layer. Alternatively, the density contrast can be represented by a single layer of prisms either above or below the surface, ending at an arbitrary reference, typically the minimum or maximum value of the surface (Figure \ref{fig:discretization}c-d). For this, the prism’s density values are relative to the medium on the other side of the surface (i.e., if prisms are below the surface, their densities are $\rho_{below} - \rho_{above}$). The last option is to choose a flat reference level ($z\_ref$; typically the mean value of the surface or sea level) and create one layer of prisms between this and the surface (Figure \ref{fig:discretization}e). Prisms above the reference level are assigned a positive density contrast ($\Delta{\rho} = \rho_{below} − \rho_{above}$), and prisms below the surface a negative density contrast ($\Delta{\rho} = \rho_{above} − \rho_{below}$). All of these methods result in similar forward gravity calculations. Note that the absolute density option (Figure \ref{fig:discretization}b) has twice as many prisms as the other options, significantly increasing its computational expense, regardless of whether or not a buffer zone is used.
+
+Any forward gravity calculation of a layer of prisms will include gravitational edge effects. These effects are typically a decay in the gravitational field towards the edges of the prism model due to the void space (density of 0) beyond the edge of the model. The magnitude of decay is dependent on both the average thickness and density of prisms near the edge. Thicker and or denser prisms create a larger contrast with the void space, resulting in a greater amount of decay. Therefore, the absolute density method of discretization (Figure \ref{fig:discretization}b) produces the largest edge effects due to the high-density values and large total thickness of the prisms. The relative density methods (Figure \ref{fig:discretization}c-d) produce a smaller edge effect, since the prisms are only above or below the surface, reducing their total thickness. The density values are also less than in the absolute density method. The reference surface method (Figure \ref{fig:discretization}e) produces the smallest edge effects due to both a) the mean prism thickness being smaller (depending on the chosen reference level value), and b) positive and negative density prisms having opposite edge effects, partially canceling each other out. Note that with a reference level completely above or below the surface, this reference method becomes identical to methods c) and d) of Figure \ref{fig:discretization}. \\
+
+A buffer zone can be used to reduce the impact of these edge effects by calculating forward gravity confined to an inner region, while the prism model extends beyond. This limits the majority of the edge effects to outside the region of calculation. Too large of a buffer zone will add an unnecessary amount of computation (more prisms), while too small a zone will introduce unacceptably large edge effects to the calculations.
+
+\subsection{Annulus approximation}\label{app:annulus}
+
+A vertical prism can be approximated as a sector of an annulus (a cylindrical shell). This approximation greatly simplifies the calculation of the vertical derivative of the prisms' gravity. The vertical component of gravity of an entire annulus is defined by
+
+\begin{equation} \label{eq:annulus_gravity}
+\delta g = 2 \pi G \rho (R - r + \sqrt{r^2 + h^2} - \sqrt{R^2 + h^2)}
+\end{equation}
+
+\noindent
+where $\rho$ is the density, $G$ is the gravitational constant, $r$ and $R$ are the inner and outer radii, respectively, and $h$ is the average height of the cylinder \citep{hammerterrain1939}. $r$, $R$, and $h$ are relative to the observation point, located in the center bottom of the annulus. \citet{mccubbineairborne2016} provides an adaptation of Equation \ref{eq:annulus_gravity} which isolates the gravity of just a portion of this annulus. This is accomplished by adding factor $f$, relating the area of the annulus to the area of a sector of it:
+
+\begin{equation}
+f = \frac{\alpha^2}{\pi(R^2 - r^2)}
+\end{equation}
+
+\noindent
+where
+
+\begin{equation}
+r = \sqrt{x^2+y^2} - \sqrt{\frac{\alpha^2}{2}}
+\end{equation}
+
+\begin{equation}
+R = \sqrt{x^2+y^2} + \sqrt{\frac{\alpha^2}{2}}
+\end{equation}
+
+\noindent
+where $\alpha$ is the prism width, $x$, $y$, and $z$ are coordinates of the prism center, relative to the observation point. This factor $f$ is then multiplied by Equation$\sim$\ref{eq:annulus_gravity} to give the vertical component of gravity for a section of an annulus, $\delta g_{annulus} = f \delta g$.
+
+Taking the derivative of this with respect to h gives
+
+\begin{equation} \label{eq:vertical_derivative_annulus}
+\dfrac{\partial g}{\partial h} = 2 f \pi G \rho h (
+    \dfrac{1}{\sqrt{r^2 + h^2}} - \dfrac{1}{\sqrt{R^2 + h^2}} ).
+\end{equation}
+
+While the approximation of a prism as a section of an annulus introduces some errors, the calculation is efficient and simple to implement.
+
+\subsection{Uncertainty quantification}\label{app:uncertainties}
+During the calculation of cell-wise statistics of the inversion ensembles resulting from the Monte Carlo analysis, the statistics can be weighted by the inverse square of each inverted bathymetry's root mean square difference with the constraint point depths, if they are available (Figure \ref{fig:Monte_Carlo_workflow}d). This reduces the bias of inversions in the ensemble, which performed poorly, as defined by not adhering to the constraints \citep{schnaidtbootstrap2015}.
+
+\subsection{Estimating parameter probability distributions}\label{app:uncertainty_distributions}
+\subsubsection{Test 1: Best case scenario}
+In Test 1, two parameters were included in the Monte Carlo analysis: 1) the damping parameter and 2) the density contrast. For the damping parameter, we use a standard deviation (0.24) calculated from half of the standard deviation of the damping values in the cross-validation (Figure \ref{fig:Ross_Sea_inversions_data}c-blue), omitting any outliers (|Z score| > 2). Similarly, the density contrast optimization resulted in a well-defined best solution, so for its probability distribution we manually chose a standard deviation of 5 kg m\textsuperscript{-3} and a mean of the best-found value, 1480 kg m\textsuperscript{-3} (Figure \ref{fig:Ross_Sea_inversions_data}d-orange).
+
+% \subsubsection{Test 2: Errors in constraint point depths}
+% In Test 2 three parameters were included in the Monte Carlo analysis; 1) the damping parameter, 2) the density contrast, and 3) the constraint point depths. As in Test 1, we manually chose a standard deviation of 0.05 for the damping parameter and 5 kg m\textsuperscript{-3} for the density contrast (Figure \ref{fig:Ross_Sea_inversions_data}c\&c-orange). Each constraint point depth is sampled from a probability distribution with a mean of the reported depth (already contaminated with 5\% depth noise) and a standard deviation set to 5\% of the reported depth.
+
+\subsubsection{Test 2: Errors in gravity data}
+In Test 2, three parameters were included in the Monte Carlo analysis: 1) the damping parameter, 2) the density contrast, and 3) the gravity data points. For the damping parameter, we use a standard deviation (0.24) calculated from half of the standard deviation of the damping values in the cross-validation (Figure \ref{fig:Ross_Sea_inversions_data}c-green, omitting any outliers (|Z score| > 2) ). As in Test 1, we manually chose a standard deviation of 5 kg m\textsuperscript{-3} for the density contrast (Figure \ref{fig:Ross_Sea_inversions_data}d-green). Each gravity observation point is sampled from a probability distribution with a mean of the point's value (contaminated with noise) and a standard deviation of 3 mGal.
+
+\subsubsection{Test 3: Airborne gravity survey}
+In Test 3, three parameters were included in the Monte Carlo analysis: 1) the damping parameter, 2) the density contrast, and 3) the gravity data points. For the damping parameter, we use a standard deviation (0.24) calculated from half of the standard deviation of the damping values in the cross-validation (Figure \ref{fig:Ross_Sea_inversions_data}c-red), omitting any outliers (|Z score| > 2). We manually chose a standard deviation of 20 kg m\textsuperscript{-3} for the density contrast (Figure \ref{fig:Ross_Sea_inversions_data}d-red). Each gravity observation point is sampled from a probability distribution with a mean of the point's value (the equivalent source gridded value) and a standard deviation. The standard deviation is unique for each point and was determined from a Monte Carlo analysis of the equivalent source gridding technique. For this, the source depth and damping parameters were each sampled from their respective probability distributions and an ensemble of interpolated gravity data was created. The optimal values for source depth and damping found from the equivalent source gridding (Appendix \ref{app:equivalent_source_interpolation}) were used as the means of each probability distribution, $\sim$10 km and $\sim$0.002, respectively. A standard deviation of 2.5 km (25\% of 10 km) was used for the source depth, and a standard deviation of $\sim$3 (the absolute value of the optimal damping value's base 10 exponent) was used for the base 10 exponent of the damping value. An ensemble of 10 equivalent source interpolated gravity disturbance grids was created with the source depth and damping values sampled from their uncertainties. This resulted in a gravity uncertainty, shown in Figure \ref{fig:Ross_Sea_03_grav_errors}d, with a mean of $\sim$0.1 mGal and a maximum value of 0.8 mGal. Comparing this with the true error in the gravity data (Figure \ref{fig:Ross_Sea_03_grav_errors}b) shows that this uncertainty technique performed well for estimated both the mean value and the spatial distribution of the gravity errors.
+
+\subsubsection{Test 4: Regional gravity field}
+In Test 4, two parameters were included in the Monte Carlo analysis: 1) the damping parameter and 2) the density contrast. For the damping parameter, we use a standard deviation (0.24) calculated from half of the standard deviation of the damping values in the cross-validation (Figure \ref{fig:Ross_Sea_inversions_data}c-purple), omitting any outliers (|Z score| > 2). The density contrast optimization resulted in a poorly defined best solution (Figure \ref{fig:Ross_Sea_inversions_data}d-purple), so we use a large standard deviation of 500 kg m\textsuperscript{-3} for sampling the density contrast values.
+
+\subsubsection{Test 5: Realistic scenario}
+In Test 5 three parameters were included in the Monte Carlo analysis; 1) the damping parameter, 2) the density contrast, and 3) the gravity data. The damping parameter was assigned an standard deviation of 0.24, calculated from half the standard deviation of the cross-validation results (Figure \ref{fig:Ross_Sea_inversions_data}c-brown), the density contrast was assigned a standard deviation of 500 kg m\textsuperscript{-3}, the gravity data were assigned a constant standard deviation of 3 mGal.
+
+\subsection{Equivalent source interpolation}\label{app:equivalent_source_interpolation}
+\subsubsection{Test 3: Airborne gravity survey}
+In Test 3, the full-resolution gravity data is sampled along the paths of an airborne survey. We then use equivalent sources to interpolate this data back to a full grid. We block-mean the data at a 2 km spacing to reduce aliasing effects due to oversampling along flight lines \citep{uiedaverde2018}. Two parameters are needed to fit the equivalent sources: the source depth and a damping value. The optimal value for each of these can be estimated through a cross-validated optimization. For each set of parameter values, a five-fold cross-validation is performed where the scoring metric is the mean of the five scores, and each score is the RMSE between the gridded gravity data and the fold's omitted gravity data. To find the set of parameter values that gives the optimal score, we perform 12 trials of parameter values with dampings between 1e-3 and 10 and source depths (relative to observation heights) between 100 m and 100 km. This resulted in an optimal source depth of $\sim$10 km and a damping of $\sim$0.002. We use these fitted sources to predict the gravity data across the entire grid, with a 2 km spacing (same as the spacing of the forward-modeled gravity effect of the true bathymetry).
+
+\subsubsection{Test 4: Regional gravity field}
+In Test 4, we introduced a regional component to the observed gravity data. To estimate and remove this component, we use Constraint Point Minimization, which requires interpolation of the gravity data. For this, we use the equivalent source technique and find the optimal source depth with the same cross-validated optimization as above. For this application, we use no damping. We perform 20 trials of source depth values (relative to observation heights) between 100 m and 400 km. We use these fitted sources to predict the gravity data across the entire grid, with a 2 km spacing (Figure \ref{fig:Ross_Sea_04_grav_anomalies}d). Once the optimal density contrast value was found, we repeated this procedure and found the optimal equivalent source depth to be $\sim$214 km.
+
+\subsubsection{Test 5: Realistic scenario}
+In Test 5, the same cross-validated optimization as Test 3 was used to determine optimal parameter values for interpolating the flight line data. This resulted in an optimal source depth and damping of 57 km and 1.54e-20, respectively. With the optimal density value, the optimal equivalent source depth and damping parameters for the regional estimation, found with the same technique as Test 4, were found to be $\sim$10 km and 0.0002, respectively.
+
+\subsubsection{Ensemble 3 (Medium variability regional field)}\label{app:ensemble_3}
+Inverted bathymetry RMSEs ranged from 9 to 31 m, with topographic improvements from -5 to 17 m. Only inversions with median gravity proximity \textless 8 km (line spacings \textless 50 km) showed improvement over the starting model. The effect of gravity noise was still linear (Figure \ref{fig:Ross_Sea_ensemble_2_3_and4}e), but weaker than in Ensemble 2: slopes ranged from 0.3 to 4.2 m RMSE per mGal noise. Similarly, the increase in RMSE with data proximity (Figure \ref{fig:Ross_Sea_ensemble_2_3_and4}k) was $\sim$2.6 m per km proximity, reduced from Ensemble 2.
+
+\noappendix       %% use this to mark the end of the appendix section. Otherwise the figures might be numbered incorrectly (e.g. 10 instead of 1).
+
+%% Regarding figures and tables in appendices, the following two options are possible depending on your general handling of figures and tables in the manuscript environment:
+
+%% Option 1: If you sorted all figures and tables into the sections of the text, please also sort the appendix figures and appendix tables into the respective appendix sections.
+%% They will be correctly named automatically.
+
+%% Option 2: If you put all figures after the reference list, please insert appendix tables and figures after the normal tables and figures.
+%% To rename them correctly to A1, A2, etc., please add the following commands in front of them:
+
+\appendixfigures  %% needs to be added in front of appendix figures
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=.75\textwidth]{figures/figA1.png}
+  \caption[]{Ensembles 2-4; gravity noise vs quantity of gravity data, with varying levels of regional field variability.
+  \textbf{1\textsuperscript{st} column}; Ensemble 2 with a no regional field,
+  \textbf{2\textsuperscript{nd} column}; Ensemble 3 with a medium-variability regional field (18 mGal standard deviation), and
+  \textbf{3\textsuperscript{rd} column}; Ensemble 4 with a high-variability regional field (41 mGal standard deviation).
+  1\textsuperscript{st} row; \textbf{a-c)} Grid cell color indicates each inversion's RMSE with the true bathymetry. Cyan line is the 26 m contour corresponding to the RMSE of the starting bathymetry model. X-axis is on a linear scale for line spacing and data proximity, but a logarithmic scale for total flight distance.
+  2\textsuperscript{nd} row; \textbf{d-f)} ensemble results grouped by average gravity line spacing, each colored line corresponds to a column from the top plot (a-c),
+  3textsuperscript{rd} and 4\textsuperscript{th} rows; \textbf{g-l)} ensemble results grouped by gravity noise level, each colored line corresponds to a column from the top plot (a-c), \textbf{g-i)} x-axis units are flight km on a linear scale, and \textbf{j-l)} x-axis units are median gravity data proximity on a linear scale. For rows 2-4 the gray dashed lines show the starting bathymetry RMSE and for rows 2 and 4, the red lines and slope values show the line of best fit and its slope for each subplot. All rows share the same colorscales and y-axes.
+  }
+  \label{fig:Ross_Sea_ensemble_2_3_and4}
+\end{figure}
+
+\appendixtables   %% needs to be added in front of appendix tables
+
+%% Please add \clearpage between each table and/or figure. Further guidelines on figures and tables can be found below.
+
+\authorcontribution{MT, HH, FCT, and KT designed the experiments, and MT carried them out. MT wrote the inversion code, with contributions from FCT. MT prepared the manuscript with contributions from all coauthors.} %% this section is mandatory
+
+
+\competinginterests{The authors declare that they have no conflict of interest.} %% this section is mandatory even if you declare that no competing interests are present
+
+
+% \disclaimer{TEXT} %% optional section
+
+\begin{acknowledgements}
+The authors would like to acknowledge informative discussions with Jenny Black, Leo Uieda, Santiago Soler, Robin Bell, Andrew Hoffman, and Caitlin Dieck Locke, which helped develop the inversion algorithm or shape the manuscript. We are extremely grateful to the developers and maintainers of open-source software used throughout this research, without which this work would not have been possible. M. Tankersley was supported partly by Antarctica New Zealand, the New Zealand Ministry of Business and Innovation, and Employment through the Antarctic Science Platform contract (ANTA1801), Antarctic Ice Dynamics Project (ASP021-01), and the National Science Foundation through award 2002346.
+\end{acknowledgements}
+
+
+
+
+%% REFERENCES
+
+%% The reference list is compiled as follows:
+
+% \begin{thebibliography}{}
+
+% \bibitem[AUTHOR(YEAR)]{LABEL1}
+% REFERENCE 1
+
+% \bibitem[AUTHOR(YEAR)]{LABEL2}
+% REFERENCE 2
+
+% \end{thebibliography}
+
+%% Since the Copernicus LaTeX package includes the BibTeX style file copernicus.bst,
+%% authors experienced with BibTeX only have to include the following two lines:
+%%
+\bibliographystyle{copernicus}
+\bibliography{references.bib}
+%%
+%% URLs and DOIs can be entered in your BibTeX file as:
+%%
+%% URL = {http://www.xyz.org/$\sim$jones/idx_g.htm}
+%% DOI = {10.5194/xyz}
+
+
+%% LITERATURE CITATIONS
+%%
+%% command                        & example result
+%% \citet{jones90}|               & Jones et al. (1990)
+%% \citep{jones90}|               & (Jones et al., 1990)
+%% \citep{jones90,jones93}|       & (Jones et al., 1990, 1993)
+%% \citep[p.$\sim$32]{jones90}|        & (Jones et al., 1990, p.$\sim$32)
+%% \citep[e.g.,][]{jones90}|      & (e.g., Jones et al., 1990)
+%% \citep[e.g.,][p.$\sim$32]{jones90}| & (e.g., Jones et al., 1990, p.$\sim$32)
+%% \citeauthor{jones90}|          & Jones et al.
+%% \citeyear{jones90}|            & 1990
+
+
+
+%% FIGURES
+
+%% When figures and tables are placed at the end of the MS (article in one-column style), please add \clearpage
+%% between bibliography and first table and/or figure as well as between each table and/or figure.
+
+% The figure files should be labelled correctly with Arabic numerals (e.g. fig01.jpg, fig02.png).
+
+
+%% ONE-COLUMN FIGURES
+
+%%f
+%\begin{figure}[t]
+%\includegraphics[width=8.3cm]{FILE NAME}
+%\caption{TEXT}
+%\end{figure}
+%
+%%% TWO-COLUMN FIGURES
+%
+%%f
+%\begin{figure*}[t]
+%\includegraphics[width=12cm]{FILE NAME}
+%\caption{TEXT}
+%\end{figure*}
+%
+%
+%%% TABLES
+%%%
+%%% The different columns must be seperated with a & command and should
+%%% end with \\ to identify the column brake.
+%
+%%% ONE-COLUMN TABLE
+%
+%%t
+%\begin{table}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{table}
+%
+%%% TWO-COLUMN TABLE
+%
+%%t
+%\begin{table*}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{table*}
+%
+%%% LANDSCAPE TABLE
+%
+%%t
+%\begin{sidewaystable*}[t]
+%\caption{TEXT}
+%\begin{tabular}{column = lcr}
+%\tophline
+%
+%\middlehline
+%
+%\bottomhline
+%\end{tabular}
+%\belowtable{} % Table Footnotes
+%\end{sidewaystable*}
+%
+%
+%%% MATHEMATICAL EXPRESSIONS
+%
+%%% All papers typeset by Copernicus Publications follow the math typesetting regulations
+%%% given by the IUPAC Green Book (IUPAC: Quantities, Units and Symbols in Physical Chemistry,
+%%% 2nd Edn., Blackwell Science, available at: http://old.iupac.org/publications/books/gbook/green_book_2ed.pdf, 1993).
+%%%
+%%% Physical quantities/variables are typeset in italic font (t for time, T for Temperature)
+%%% Indices which are not defined are typeset in italic font (x, y, z, a, b, c)
+%%% Items/objects which are defined are typeset in roman font (Car A, Car B)
+%%% Descriptions/specifications which are defined by itself are typeset in roman font (abs, rel, ref, tot, net, ice)
+%%% Abbreviations from 2 letters are typeset in roman font (RH, LAI)
+%%% Vectors are identified in bold italic font using \vec{x}
+%%% Matrices are identified in bold roman font
+%%% Multiplication signs are typeset using the LaTeX commands \times (for vector products, grids, and exponential notations) or \cdot
+%%% The character * should not be applied as mutliplication sign
+%
+%
+%%% EQUATIONS
+%
+%%% Single-row equation
+%
+%\begin{equation}
+%
+%\end{equation}
+%
+%%% Multiline equation
+%
+%\begin{align}
+%& 3 + 5 = 8\\
+%& 3 + 5 = 8\\
+%& 3 + 5 = 8
+%\end{align}
+%
+%
+%%% MATRICES
+%
+%\begin{matrix}
+%x & y & z\\
+%x & y & z\\
+%x & y & z\\
+%\end{matrix}
+%
+%
+%%% ALGORITHM
+%
+%\begin{algorithm}
+%\caption{...}
+%\label{a1}
+%\begin{algorithmic}
+%...
+%\end{algorithmic}
+%\end{algorithm}
+%
+%
+%
+%%% PHYSICAL UNITS
+%%%
+%%% Please use \unit{} and apply the exponential notation
+
+
+\end{document}
