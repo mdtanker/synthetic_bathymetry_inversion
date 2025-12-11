@@ -8,6 +8,8 @@ results/Ross_Sea/*
 results/Ross_Sea/ensembles/*
 !results/Ross_Sea/ensembles/.gitkeep
 
+paper/final_figures/figures.zip
+
 # temp files
 tmp_outputs/*
 !tmp_outputs/.gitkeep
